@@ -167,28 +167,25 @@ class MainHomePage extends StatelessWidget {
               ]),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(color:MainColorData.white),
-            child: FutureBuilder<String>(
-              future: DefaultAssetBundle.of(context)
-                  .loadString('assets/articles.json'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  final List<Article> articles = parseArticles(snapshot.data);
-                  return SizedBox(
-                    height:MainSizeData.SIZE_300,
-                    child: ListView.builder(
-                      itemCount: articles.length,
-                      itemBuilder: (context, index) {
-                        return _buildArticleItem(context, articles[index]);
-                      },
-                    ),
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+          FutureBuilder<String>(
+            future: DefaultAssetBundle.of(context)
+                .loadString('assets/articles.json'),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final List<Article> articles = parseArticles(snapshot.data);
+                return SizedBox(
+                  height:MainSizeData.SIZE_300,
+                  child: ListView.builder(
+                    itemCount: articles.length,
+                    itemBuilder: (context, index) {
+                      return _buildArticleItem(context, articles[index]);
+                    },
+                  ),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
           )
         ]),
       ),

@@ -123,6 +123,11 @@ class _OtpFormState extends State<OtpForm> {
               height: MainSizeData.SIZE_50,
               width: MainSizeData.SIZE_50,
               child: TextFormField(
+                onChanged: (value){
+                  if(value.length == 1){
+                    FocusScope.of(context).nextFocus();
+                  }
+                },
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline6,
                 keyboardType: TextInputType.number,
@@ -136,6 +141,11 @@ class _OtpFormState extends State<OtpForm> {
               height: MainSizeData.SIZE_50,
               width: MainSizeData.SIZE_50,
               child: TextFormField(
+                onChanged: (value){
+                  if(value.length == 1){
+                    FocusScope.of(context).nextFocus();
+                  }
+                },
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline6,
                 keyboardType: TextInputType.number,
@@ -149,6 +159,11 @@ class _OtpFormState extends State<OtpForm> {
               height: MainSizeData.SIZE_50,
               width: MainSizeData.SIZE_50,
               child: TextFormField(
+                onChanged: (value){
+                  if(value.length == 1){
+                    FocusScope.of(context).nextFocus();
+                  }
+                },
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline6,
                 keyboardType: TextInputType.number,
@@ -162,6 +177,11 @@ class _OtpFormState extends State<OtpForm> {
               height: MainSizeData.SIZE_50,
               width: MainSizeData.SIZE_50,
               child: TextFormField(
+                onChanged: (value){
+                  if(value.length == 1){
+                    FocusScope.of(context).nextFocus();
+                  }
+                },
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline6,
                 keyboardType: TextInputType.number,

@@ -41,7 +41,7 @@ class MainRouteHelper {
           page: () => LoginPage(),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
-          // binding: MainLoginBinding(),
+          binding: MainLoginBinding(),
         ),
         GetPage(
             name: MainConstantRoute.verifyOtp,

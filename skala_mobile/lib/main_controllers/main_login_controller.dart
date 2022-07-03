@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 
 class MainLoginController extends GetxController{
@@ -10,6 +11,13 @@ class MainLoginController extends GetxController{
 
   void onDoneLoading() {
      Get.offNamed(MainConstantRoute.mainLogin);
+  }
+  
+  bool login(String noWhatshapp){
+    if(noWhatshapp == "085801482929"){
+      return true;
+    }
+    return false;
   }
 
   @override

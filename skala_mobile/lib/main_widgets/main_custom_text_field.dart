@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
+import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({this.label, this.hint, this.margin, Key? key})
+  const CustomTextField(
+      {this.label,
+      this.hint,
+      this.margin,
+      this.controller,
+      this.errorMessage,
+      Key? key})
       : super(key: key);
 
   final String? label;
   final String? hint;
-
+  final TextEditingController? controller;
   final EdgeInsets? margin;
+  final String? errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,14 @@ class CustomTextField extends StatelessWidget {
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(height: MainSizeData.SIZE_8),
-          TextField(
+          TextFormField(
+            controller: controller,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return errorMessage;
+              }
+              return null;
+            },
             cursorColor: MainColorData.black,
             style: const TextStyle(
                 fontSize: MainSizeData.SIZE_16,

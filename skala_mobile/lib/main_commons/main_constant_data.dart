@@ -8,5 +8,8 @@ class MainConstantData {
   static const String login = "Login";
   static const String resending = "Kirim Ulang";
   static const String verifyOtp = "Verifikasi Otp";
+  static const String whatshappRequired = "* No Whatshapp tidak boleh kosong";
+  static const String wrongWhatshapp = "No Whatshapp yang anda masukkan tidak terdaftar";
+  static const String required = "* Form Wajib Diisi!";
 
 }

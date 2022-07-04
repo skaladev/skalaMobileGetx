@@ -11,9 +11,7 @@ import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final loginController = Get.find<MainLoginController>();
-  final TextEditingController _controller = TextEditingController();
+  final controller = Get.find<MainLoginController>();
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -45,9 +43,9 @@ class LoginPage extends StatelessWidget {
             height: MainSizeData.SIZE_60,
           ),
           Form(
-            key: _formKey,
+            key: controller.loginFormKey,
             child: CustomTextField(
-              controller: _controller,
+              controller: controller.noWhatshappController,
               errorMessage: MainConstantData.required,
               label: "No Whatshapp",
               hint: "no.whatshapp",
@@ -55,14 +53,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           MainCustomRoundedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  final isSuccesLogin = loginController.login(_controller.text);
-                  if(isSuccesLogin){
-                    Get.toNamed(MainConstantRoute.verifyOtp);
-                  }
-                }
-              },
+              onPressed:controller.login,
               margin: EdgeInsets.symmetric(
                   vertical: MainSizeData.SIZE_24,
                   horizontal: MainSizeData.SIZE_14),

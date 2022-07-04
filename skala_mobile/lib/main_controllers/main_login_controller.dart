@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 
 class MainLoginController extends GetxController {
@@ -35,7 +34,7 @@ class MainLoginController extends GetxController {
     if(loginFormKey.currentState!.validate()){
       checkLogin(noWhatshappController.text).then((auth){
         if(auth){
-          Get.toNamed(MainConstantData.verifyOtp);
+          Get.toNamed(MainConstantRoute.verifyOtp);
            Get.snackbar('Login', 'Verifikasi Otp Telah dikirimkan');
         }else{
            Get.snackbar('Login', 'Login Gagal');

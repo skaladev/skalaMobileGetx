@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
+import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
@@ -44,6 +45,12 @@ class MainRouteHelper {
           binding: MainLoginBinding(),
         ),
         GetPage(
+            name: MainConstantRoute.mainRegister,
+            page: () => MainRegisterPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainRegisterBinding()),
+        GetPage(
             name: MainConstantRoute.verifyOtp,
             page: () => MainVerifyOtpPage(),
             alignment: Alignment.center,
@@ -60,11 +67,6 @@ class MainRouteHelper {
           alignment: Alignment.center,
           transition: Transition.fadeIn,
         ),
-        GetPage(
-            name: MainConstantRoute.mainRegister,
-            page: () => MainRegisterPage(),
-            alignment: Alignment.center,
-            transition: Transition.fadeIn),
         GetPage(
             name: MainConstantRoute.mainNotifikasi,
             page: () => MainNotifikasiPage(),

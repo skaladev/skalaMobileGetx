@@ -15,8 +15,9 @@ class MainSplashRoute extends StatelessWidget {
           backgroundColor: MainColorData.white,
           body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                const SizedBox(height: MainSizeData.SIZE_120),
                 Container(
                   height: MainSizeData.imageHeight200,
                   width: MainSizeData.imageWidth200,
@@ -25,7 +26,6 @@ class MainSplashRoute extends StatelessWidget {
                     image: AssetImage('assets/images/logo_skala.png'),
                   )),
                 ),
-                const SizedBox(height: MainSizeData.SIZE_8),
                 Text(
                   MainConstantData.appNames.toUpperCase(),
                   style: TextStyle(

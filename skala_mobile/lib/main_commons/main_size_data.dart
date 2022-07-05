@@ -44,6 +44,7 @@ class MainSizeData {
   static const double imageHeight70 = 70.0;
   static const double imageHeight80 = 80.0;
   static const double imageHeight100 = 100.0;
+  static const double imageHeight130 = 130.0;
   static const double imageHeight200 = 200.0;
   static const double imageHeight250 = 250.0;
   static const double imageHeight300 = 300.0;
@@ -59,6 +60,7 @@ class MainSizeData {
   static const double imageWidth70 = 70.0;
   static const double imageWidth80 = 80.0;
   static const double imageWidth100 = 100.0;
+  static const double imageWidth130 = 130.0;
   static const double imageWidth200 = 200.0;
   static const double imageWidth250 = 250.0;
 

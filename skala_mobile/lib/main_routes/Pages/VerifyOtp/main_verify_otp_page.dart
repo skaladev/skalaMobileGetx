@@ -87,7 +87,7 @@ class MainVerifyOtpPage extends StatelessWidget {
               child: MainCustomRoundedButton(
                 text: MainConstantData.verifyOtp,
                 onPressed: () {
-                   Get.toNamed(MainConstantRoute.bottomNavigationBar);
+                   Get.offAllNamed(MainConstantRoute.bottomNavigationBar);
                 },
                 margin: EdgeInsets.symmetric(vertical: MainSizeData.iconSize20),
               ),

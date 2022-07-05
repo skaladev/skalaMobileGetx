@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
-class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidget{
-  final AppBar appBar;
-  final String? title;
-  final TextStyle? titleStyle;
-  final bool isIconEnabled;
-  final Function()? onPressed;
-  final Widget? action;
+class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidget {
   const MainCustomAppBarTitle(
-      {required this.appBar,
+      {
+      this.appBar,
       this.title,
       this.onPressed,
       this.isIconEnabled = true,
@@ -18,7 +13,12 @@ class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidg
       this.action,
       Key? key})
       : super(key: key);
-
+  final AppBar? appBar;
+  final String? title;
+  final TextStyle? titleStyle;
+  final bool isIconEnabled;
+  final Function()? onPressed;
+  final Widget? action;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -54,6 +54,7 @@ class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidg
       actions: action != null ? [action!] : null,
     );
   }
-    @override
-  Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
+
+  @override
+  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 }

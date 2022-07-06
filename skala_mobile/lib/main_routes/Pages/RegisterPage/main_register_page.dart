@@ -85,6 +85,7 @@ class MainRegisterPage extends StatelessWidget {
                 Row(children: [
                   MainCustomRadioButtom(
                     label: "JENIS KELAMIN",
+                    margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12,vertical: MainSizeData.SIZE_10),
                   ),
                 ]),
                 SizedBox(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
+import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
@@ -10,6 +11,7 @@ import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
 import 'package:skala_mobile/main_routes/Pages/RegisterPage/main_register_page.dart';
 import 'package:skala_mobile/main_routes/Pages/VerifyOtp/main_verify_otp_page.dart';
 import 'package:skala_mobile/main_routes/main_bottom_navbar.dart';
@@ -71,6 +73,14 @@ class MainRouteHelper {
             name: MainConstantRoute.mainNotifikasi,
             page: () => MainNotifikasiPage(),
             alignment: Alignment.center,
-            transition: Transition.fadeIn)
+            transition: Transition.fadeIn),
+        GetPage(
+          name: MainConstantRoute.mainEditProfile,
+          page: ()=> MainEditProfilePage(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding: MainEditProfileBinding(),
+        )
+          
       ];
 }

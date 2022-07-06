@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
+import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/widgets/main_profile_photo_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 
 class MainProfilePage extends StatelessWidget {
   const MainProfilePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,19 +22,22 @@ class MainProfilePage extends StatelessWidget {
           titleStyle: const TextStyle(
               color: MainColorData.black,
               fontSize: MainSizeData.fontSize16,
-              fontWeight: FontWeight.w400),
+              fontWeight: FontWeight.bold),
           action: IconButton(
             icon: SvgPicture.asset(
               'assets/icons/ic_signout.svg',
               height: MainSizeData.SIZE_14,
               width: MainSizeData.SIZE_16,
             ),
-            onPressed: () {},
+            onPressed: () {
+            
+            },
           ),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
+            padding:
+                const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -59,7 +63,6 @@ class MainProfilePage extends StatelessWidget {
                   height: MainSizeData.SIZE_10,
                   thickness: MainSizeData.SIZE_4,
                 ),
-                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -74,7 +77,9 @@ class MainProfilePage extends StatelessWidget {
                       width: MainSizeData.SIZE_80,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                            Get.toNamed(MainConstantRoute.mainEditProfile);
+                        },
                         icon: Icon(
                           Icons.edit,
                           size: MainSizeData.SIZE_25,

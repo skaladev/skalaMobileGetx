@@ -6,8 +6,9 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class MainCustomDatePickerWidget extends StatefulWidget {
-  const MainCustomDatePickerWidget({Key? key, this.label,}) : super(key: key);
+  const MainCustomDatePickerWidget({Key? key, this.label,this.margin}) : super(key: key);
   final String? label;
+  final EdgeInsets? margin;
   @override
   State<MainCustomDatePickerWidget> createState() => _MainCustomDatePickerWidgetState();
 }
@@ -16,8 +17,8 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
   DateTime? _dateTime;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+    return Container(
+      margin: widget.margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

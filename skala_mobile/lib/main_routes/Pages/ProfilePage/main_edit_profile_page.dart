@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
+import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_widgets/main_action_button_outline_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_datepicker_widget.dart';
@@ -20,6 +21,7 @@ class MainEditProfilePage extends StatefulWidget {
 }
 
 class _MainEditProfilePageState extends State<MainEditProfilePage> {
+  final _mainValidatorHelper = MainValidatorHelper();
   final List<String> items = [
     'Item1',
     'Item2',
@@ -51,12 +53,14 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
           child: Column(
             children: [
               CustomTextField(
+                validator:_mainValidatorHelper.validateBasic ,
                 label: "NAMA LENGKAP",
                 margin: EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,
                     vertical: MainSizeData.SIZE_10),
               ),
               CustomTextField(
+                validator: _mainValidatorHelper.validateNIK,
                 label: "NIK",
                 margin: EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,
@@ -75,12 +79,14 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                     vertical: MainSizeData.SIZE_10),
               ),
               CustomTextField(
+                validator: _mainValidatorHelper.validatePhoneNumber,
                 label: "NO.HANDPHONE",
                 margin: EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,
                     vertical: MainSizeData.SIZE_10),
               ),
               CustomTextField(
+                validator: _mainValidatorHelper.validateEmail,
                 label: "EMAIL",
                 margin: EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,
@@ -103,6 +109,7 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                 ),
               ),
               CustomTextField(
+                validator: _mainValidatorHelper.validateBasic,
                 label: "PEKERJAAN",
                 margin: EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,

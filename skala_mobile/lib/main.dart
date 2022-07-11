@@ -8,12 +8,13 @@ import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_theme_data.dart';
 import 'package:skala_mobile/main_helpers/main_route_helper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await dot_env.load();
+  await dotenv.load();
   Intl.defaultLocale = 'id_ID';
   await initializeDateFormatting('id_ID').then(
     (_) => runApp(

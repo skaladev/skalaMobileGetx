@@ -5,7 +5,9 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {this.label,
+      {
+      required this.validator,
+      this.label,
       this.hint,
       this.margin,
       this.controller,
@@ -18,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final EdgeInsets? margin;
   final String? errorMessage;
+  final String Function(String) validator;
 
   @override
   Widget build(BuildContext context) {

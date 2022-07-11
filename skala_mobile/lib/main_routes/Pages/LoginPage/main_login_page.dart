@@ -6,12 +6,14 @@ import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_controllers/main_login_controller.dart';
+import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_widgets/main_already_have_an_account_check.dart';
 import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
   final controller = Get.find<MainLoginController>();
+  final _mainValidatorHelper = MainValidatorHelper();
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -45,10 +47,11 @@ class LoginPage extends StatelessWidget {
           Form(
             key: controller.loginFormKey,
             child: CustomTextField(
-              controller: controller.noWhatshappController,
+              validator: _mainValidatorHelper.validatePhoneNumber,
+              controller: controller.noWhatshapp,
               errorMessage: MainConstantData.required,
               label: "No Whatshapp",
-              hint: "no.whatshapp",
+              hint: "62xxxxxxxxxxx",
               margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_24),
             ),
           ),

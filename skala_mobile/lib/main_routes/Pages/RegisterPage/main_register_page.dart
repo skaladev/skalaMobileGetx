@@ -8,6 +8,7 @@ import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_controllers/main_register_controller.dart';
+import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_widgets/main_already_have_an_account_check.dart';
 import 'package:skala_mobile/main_widgets/main_custom_datepicker_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_radio_button.dart';
@@ -16,6 +17,7 @@ import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 
 class MainRegisterPage extends StatelessWidget {
   final controller = Get.find<MainRegisterController>();
+  final _mainValidatorHelper = MainValidatorHelper();
   MainRegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class MainRegisterPage extends StatelessWidget {
                   height: MainSizeData.SIZE_40,
                 ),
                 CustomTextField(
+                  validator: _mainValidatorHelper.validatePhoneNumber,
                   controller: controller.noWhatshappController,
                   errorMessage: MainConstantData.required,
                   label: "NO WHATSAPP",
@@ -65,6 +68,7 @@ class MainRegisterPage extends StatelessWidget {
                   height: MainSizeData.SIZE_16,
                 ),
                 CustomTextField(
+                  validator: _mainValidatorHelper.validateBasic,
                   controller: controller.namaLengkapController,
                   errorMessage: MainConstantData.required,
                   label: "NAMA LENGKAP",

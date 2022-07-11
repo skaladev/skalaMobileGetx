@@ -11,5 +11,5 @@ class MainConstantData {
   static const String whatshappRequired = "* No Whatshapp tidak boleh kosong";
   static const String wrongWhatshapp = "No Whatshapp yang anda masukkan tidak terdaftar";
   static const String required = "* Tidak Boleh Kosong!";
-
+  static const String somethingWentWrong = "Maaf,terjadi kesalahan,...\nSilahkan coba beberapa saat lagi!!";
 }

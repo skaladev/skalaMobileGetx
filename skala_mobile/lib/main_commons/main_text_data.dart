@@ -13,4 +13,9 @@ class MainTextData {
   static const String sendOtp = "Kode Otp Telah dikirim ke nomor whatsapp anda";
   static const String endOtp = "Kode akan berakhir pada ";
   static const String otpNotRecieved = "Kode Otp belum diterima ?";
+  static const String textPleaseFillFirst = "Harap diisi terlebih dahulu";
+  static const String textInputCorrectPhoneNumberFormat = "Silahkan masukkan format nomor hp yang benar";
+  static const String textPleaseInputNumber = "Masukkan angka";
+  static const String textDescriptionWarningNikLength = "Panjang NIK harus 16 digit";
+  static const String textInputCorrectEmailFormat = "Silahkan masukkan email yang benar";
 }

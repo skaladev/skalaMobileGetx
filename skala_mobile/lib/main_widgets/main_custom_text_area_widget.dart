@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
-import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {
-      required this.validator,
-      this.label,
-      this.hint,
-      this.margin,
-      this.controller,
-      this.errorMessage,
-      this.minLines,
-      this.maxLength,
-      this.maxLines,
-      Key? key})
-      : super(key: key);
-
+class TextArea extends StatelessWidget {
+  const TextArea({
+    this.label,
+    this.hint,
+    this.margin,
+    this.controller,
+    this.errorMessage,
+    Key? key,
+  }) : super(key: key);
   final String? label;
   final String? hint;
   final TextEditingController? controller;
   final EdgeInsets? margin;
   final String? errorMessage;
-  final String Function(String) validator;
-  final int? maxLength;
-  final int? minLines;
-  final int? maxLines;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,17 +31,10 @@ class CustomTextField extends StatelessWidget {
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(height: MainSizeData.SIZE_8),
-          TextFormField(
+          TextField(
             controller: controller,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return errorMessage;
-              }
-              return null;
-            },
-            maxLength: maxLength,
-            minLines: minLines,
-            cursorColor: MainColorData.black,
+            keyboardType: TextInputType.multiline,
+            maxLines: 4,
             style: const TextStyle(
                 fontSize: MainSizeData.SIZE_16,
                 color: MainColorData.black,

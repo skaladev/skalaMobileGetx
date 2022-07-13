@@ -31,12 +31,14 @@ class CustomDropdownButton2 extends StatelessWidget {
   final Offset? offset;
   final String? label;
   final EdgeInsets? margin;
+  final String Function(String)? validator;
 
   const CustomDropdownButton2({
     required this.hint,
     required this.value,
     required this.dropdownItems,
     required this.onChanged,
+    this.validator,
     this.selectedItemBuilder,
     this.hintAlignment,
     this.valueAlignment,

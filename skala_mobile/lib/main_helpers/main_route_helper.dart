@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/route_manager.dart';
+import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
@@ -9,6 +10,7 @@ import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
@@ -80,7 +82,14 @@ class MainRouteHelper {
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainEditProfileBinding(),
-        )
+        ),
+        GetPage(
+          name: MainConstantRoute.mainAddKonsultasi,
+          page: ()=> MainAddKonsultasiPage(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding:  MainAddKosultasiBinding()
+          )
           
       ];
 }

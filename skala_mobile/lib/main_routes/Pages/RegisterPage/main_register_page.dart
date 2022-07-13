@@ -81,7 +81,7 @@ class MainRegisterPage extends StatelessWidget {
                 ),
                 MainCustomDatePickerWidget(
                   label: "TANGGAL LAHIR",
-                  // margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+                  margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
                 ),
                 SizedBox(
                   height: MainSizeData.SIZE_10,

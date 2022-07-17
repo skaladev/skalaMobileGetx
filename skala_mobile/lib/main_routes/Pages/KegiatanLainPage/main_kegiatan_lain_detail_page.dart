@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
-import 'package:skala_mobile/main_helpers/main_article.dart';
+import 'package:skala_mobile/main_models/main_kegiatan_detail_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
-import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 
-class ArticleDetailPage extends StatelessWidget {
-  final Article? article;
-  const ArticleDetailPage({this.article, Key? key}) : super(key: key);
+class KegiatanLainDetailPage extends StatelessWidget {
+  final KegiatanLainArticle? kegiatanLainArticle;
+  const KegiatanLainDetailPage({Key? key, this.kegiatanLainArticle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ArticleDetailPage extends StatelessWidget {
       backgroundColor: MainColorData.white,
       appBar: MainCustomAppBarTitle(
         appBar: AppBar(),
-        title: "Berita",
+        title: 'Kegiatan Lain',
         titleStyle: const TextStyle(
           color: MainColorData.black,
           fontSize: MainSizeData.SIZE_16,
@@ -35,7 +36,7 @@ class ArticleDetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(MainSizeData.SIZE_20),
                   image: DecorationImage(
                       image: NetworkImage(
-                        article?.urlToImage ?? "",
+                        kegiatanLainArticle?.urlToImage ?? "",
                       ),
                       fit: BoxFit.cover),
                 ),
@@ -46,7 +47,7 @@ class ArticleDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          article?.title ?? "",
+                          kegiatanLainArticle?.title ?? "",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -57,16 +58,16 @@ class ArticleDetailPage extends StatelessWidget {
                           color: Colors.grey,
                         ),
                         Text(
-                          'Date: ${article?.publishedAt ?? ""}',
+                          'Date: ${kegiatanLainArticle?.publishedAt ?? ""}',
                         ),
                         SizedBox(height: 10),
-                        Text('Author: ${article?.author ?? ""}'),
+                        Text('Author: ${kegiatanLainArticle?.author ?? ""}'),
                         Divider(color: Colors.grey),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text(
-                              article?.content ?? "",
+                              kegiatanLainArticle?.content ?? "",
                               style: TextStyle(
                                   color: MainColorData.black,
                                   fontSize: 16,
@@ -75,6 +76,11 @@ class ArticleDetailPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 10),
+                        // MainCustomRoundedButton(
+                        //   margin: EdgeInsets.zero,
+                        //   text: 'Read More',
+                        //   onPressed: () {},
+                        // ),
                       ]))
             ],
           ),

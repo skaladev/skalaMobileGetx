@@ -4,8 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
-import 'package:skala_mobile/main_helpers/main_article.dart';
-import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
+import 'package:skala_mobile/main_models/main_kegiatan_detail_model.dart';
+import 'package:skala_mobile/main_routes/Pages/KegiatanLainPage/main_kegiatan_lain_detail_page.dart';
 
 class MainKegiatanLainPage extends StatelessWidget {
   const MainKegiatanLainPage({Key? key}) : super(key: key);
@@ -56,13 +56,13 @@ class MainKegiatanLainPage extends StatelessWidget {
                 .loadString('assets/articles.json'),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                final List<Article> articles = parseArticles(snapshot.data);
+                final List<KegiatanLainArticle> articleKegiatanLain = parseKegiatanLain(snapshot.data);
                 return SizedBox(
                   height: MainSizeData.SIZE_450,
                   child: ListView.builder(
-                    itemCount: articles.length,
+                    itemCount: articleKegiatanLain.length,
                     itemBuilder: (context, index) {
-                      return _buildArticleItem(context, articles[index]);
+                      return _buildArticleKegiatanLainItem(context, articleKegiatanLain[index]);
                     },
                   ),
                 );
@@ -77,13 +77,13 @@ class MainKegiatanLainPage extends StatelessWidget {
   }
 }
 
-Widget _buildArticleItem(BuildContext context, Article article) {
+Widget _buildArticleKegiatanLainItem(BuildContext context, KegiatanLainArticle articleKegiatanLain) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0),
     child: GestureDetector(
       onTap: () {
-        Get.to(ArticleDetailPage(
-          article: article,
+        Get.to(KegiatanLainDetailPage(
+         kegiatanLainArticle: articleKegiatanLain,
         ));
       },
       child: Card(
@@ -106,7 +106,7 @@ Widget _buildArticleItem(BuildContext context, Article article) {
                         image: DecorationImage(
                           fit: BoxFit.fill,
                           image: NetworkImage(
-                            article.urlToImage,
+                            articleKegiatanLain.urlToImage,
                           ),
                         )),
                   ),
@@ -122,10 +122,10 @@ Widget _buildArticleItem(BuildContext context, Article article) {
                               Title(
                                   color: MainColorData.black,
                                   child: Text(
-                                    (article.title),
+                                    (articleKegiatanLain.title),
                                   )),
                               SizedBox(height: MainSizeData.SIZE_4),
-                              Text(article.author),
+                              Text(articleKegiatanLain.author),
                             ])))
               ]),
         ),

@@ -1,16 +1,21 @@
 # skala_mobile
 
-A new Flutter project.
+<div id="top"></div>
 
+## Built With
+  *[Flutter](https://flutter.dev/)
+  *[Getx](https://pub.dev/packages/get)
+  
 ## Getting Started
+1. Download or clone this repo by using the link below:
+   ```sh
+   git clone git@github.com:skaladev/skalaMobileGetx.git
+   ```
+2. Go to project root and execute the following command in console to get the required dependencies
+   ```sh
+   flutter clean
+   ```
+   ```sh
+   flutter pub get
+   ```
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

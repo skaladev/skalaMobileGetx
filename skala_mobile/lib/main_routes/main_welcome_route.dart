@@ -134,8 +134,8 @@ class MainWelcomeRoute extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_90),
               child: ElevatedButton(
                   onPressed: () {
-                    // Get.toNamed(MainConstantRoute.mainLogin);
-                    Get.toNamed(MainConstantRoute.bottomNavigationBar);
+                    Get.toNamed(MainConstantRoute.mainLogin);
+                    // Get.toNamed(MainConstantRoute.bottomNavigationBar);
                   },
                   child: Text(
                     'Mulai',

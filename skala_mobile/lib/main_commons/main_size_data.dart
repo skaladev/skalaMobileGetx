@@ -84,11 +84,12 @@ class MainSizeData {
   static const double imageErrorSize50 = 50.0;
   static const double imageErrorSize70 = 70.0;
 
-
   //sizedBox
   static const double SIZE_0 = 0.0;
+  static const double SIZE_1 = 1;
   static const double SIZE_2 = 2;
   static const double SIZE_4 = 4;
+  static const double SIZE_5 = 5;
   static const double SIZE_6 = 6;
   static const double SIZE_8 = 8;
   static const double SIZE_10 = 10;

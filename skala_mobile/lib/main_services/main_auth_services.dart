@@ -9,7 +9,8 @@ class MainAuthServices {
   Future<MainLoginModel> login({
     String? noHp,
   }) async {
-    final res = await _api.post('/login',
+    final res = await _api.post(
+      '/login',
       data: FormData.fromMap({
         'phone': noHp,
       }),
@@ -19,11 +20,13 @@ class MainAuthServices {
 
   Future<VerifyOtpModel> verifyOTP({
     String? code,
-  })async {
-    final res = await _api.post('/verify-otp',
-      data: FormData.fromMap({'otp':code}),
+  }) async {
+    final res = await _api.post(
+      '/verify-otp',
+      data: FormData.fromMap({
+        'otp': code,
+      }),
     );
     return VerifyOtpModel.fromJson(res.data);
   }
 }
-

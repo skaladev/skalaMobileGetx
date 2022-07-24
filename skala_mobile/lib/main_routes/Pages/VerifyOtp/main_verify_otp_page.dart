@@ -10,14 +10,17 @@ import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_commons/main_text_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
+import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
+import 'package:skala_mobile/main_widgets/main_custom_text_field_otp_widget.dart';
 
 class MainVerifyOtpPage extends StatelessWidget {
   MainVerifyOtpPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
+  final _mainValidatorHelper = MainValidatorHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -80,20 +83,9 @@ class MainVerifyOtpPage extends StatelessWidget {
                 SizedBox(height: MainSizeData.SIZE_16),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_80),
-                  child: TextFormField(
+                  child: TextFieldOtp(
                     controller: _codeController,
-                    onChanged: (value) {
-                      if (value.length == 4) {
-                        FocusScope.of(context).nextFocus();
-                      }
-                    },
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline6,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(4),
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
+                    validator: _mainValidatorHelper.validateBasic,
                   ),
                 ),
                 const SizedBox(height: MainSizeData.SIZE_16),

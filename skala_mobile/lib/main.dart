@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/route_manager.dart';
 import 'package:hive/hive.dart';
@@ -11,14 +12,11 @@ import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_theme_data.dart';
 import 'package:skala_mobile/main_helpers/main_route_helper.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  final directory = await  getApplicationDocumentsDirectory();
+  final directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   await Hive.openBox(MainConstantData.mainBox);
   Intl.defaultLocale = 'id_ID';
@@ -34,6 +32,8 @@ Future<void> main() async {
       DeviceOrientation.portraitDown,
     ],
   );
+
+  MainInitialBinding().dependencies();
 }
 
 class MyApp extends StatelessWidget {
@@ -41,10 +41,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final MainThemeData mainThemeData = MainThemeData();
     final MainRouteHelper routeHelper = MainRouteHelper();
-    
+
     return GetMaterialApp(
       title: MainConstantData.appName,
-      builder:  EasyLoading.init(),
+      builder: EasyLoading.init(),
       theme: mainThemeData.lightTheme,
       debugShowCheckedModeBanner: false,
       darkTheme: mainThemeData.darkTheme,
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       initialRoute: MainConstantRoute.initiateRoute,
       transitionDuration: const Duration(milliseconds: 200),
       defaultTransition: Transition.rightToLeftWithFade,
-      initialBinding: MainInitialBinding(),
+      // initialBinding: MainInitialBinding(),
       getPages: routeHelper.getRoute(),
     );
   }

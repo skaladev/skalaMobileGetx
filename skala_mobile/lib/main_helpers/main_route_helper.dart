@@ -10,6 +10,7 @@ import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
 import 'package:skala_mobile/main_bloc/auth/auth_cubit.dart';
+import 'package:skala_mobile/main_bloc/konsultasi/konsultasi_cubit.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
@@ -69,7 +70,12 @@ class MainRouteHelper {
             transition: Transition.fadeIn),
         GetPage(
             name: MainConstantRoute.bottomNavigationBar,
-            page: () => MainBottomNavbar(),
+            page: () =>bloc.MultiBlocProvider(
+                  providers: [
+                   bloc.BlocProvider(create: (context) => KonsultasiCubit()),
+                  ],
+                  child: MainBottomNavbar(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainButtomNavigationBinding()),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:skala_mobile/main_commons/main_constant_key.dart';
 
@@ -23,5 +24,24 @@ void blocHelperListenner({
       break;
     default:
       break;
+  }
+}
+
+Widget loadData(
+  LoadStatus? load, {
+    required String? errorMessage,
+    required Widget child,
+    Widget? loading,
+    Widget? error,
+  }
+){
+  switch (load!){
+    case LoadStatus.initial:
+    case LoadStatus.loading:
+    return Center (child: loading ?? const CircularProgressIndicator());
+    case LoadStatus.error:
+    return Center (child: error ?? Text(errorMessage ?? 'Error'));
+    case LoadStatus.success:
+    return child;
   }
 }

@@ -1,6 +1,3 @@
-
-
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +7,28 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_controllers/main_app_controller.dart';
 import 'package:skala_mobile/main_controllers/main_welcome_controller.dart';
 import 'package:skala_mobile/main_helpers/main_exit_app_helper.dart';
+import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_widgets/main_scroll_body_widget.dart';
 
-class MainWelcomeRoute extends StatelessWidget {
+class MainWelcomeRoute extends StatefulWidget {
+  @override
+  State<MainWelcomeRoute> createState() => _MainWelcomeRouteState();
+}
+
+class _MainWelcomeRouteState extends State<MainWelcomeRoute> {
+  final _prefs = Prefs();
   final MainAppController _mainAppController = Get.find<MainAppController>();
+
   final MainExitAppHelper _mainExitAppHelper = MainExitAppHelper();
+
   final MainWelcomeController _mainWelcomeController =
       Get.find<MainWelcomeController>();
+
+  @override
+  void initState() {
+    _prefs.isWelcome = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +64,9 @@ class MainWelcomeRoute extends StatelessWidget {
                           element.description,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: MainSizeData.SIZE_12,
-                            fontWeight: FontWeight.w200,
-                            color: MainColorData.black
-                          ) ,
+                              fontSize: MainSizeData.SIZE_12,
+                              fontWeight: FontWeight.w200,
+                              color: MainColorData.black),
                         )
                       ],
                     ),
@@ -133,29 +144,29 @@ class MainWelcomeRoute extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_90),
               child: ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed(MainConstantRoute.mainLogin);
-                    // Get.toNamed(MainConstantRoute.bottomNavigationBar);
-                  },
-                  child: Text(
-                    'Mulai',
-                    style: TextStyle(
-                      fontSize: MainSizeData.fontSize14,
-                      fontWeight: FontWeight.bold,
-                      color: MainColorData.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: MainColorData.green_dop,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_28,
-                      vertical: MainSizeData.SIZE_12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(MainSizeData.SIZE_8),
-                    ),
+                onPressed: () {
+                  Get.toNamed(MainConstantRoute.mainLogin);
+                  // Get.toNamed(MainConstantRoute.bottomNavigationBar);
+                },
+                child: Text(
+                  'Mulai',
+                  style: TextStyle(
+                    fontSize: MainSizeData.fontSize14,
+                    fontWeight: FontWeight.bold,
+                    color: MainColorData.white,
                   ),
                 ),
+                style: ElevatedButton.styleFrom(
+                  primary: MainColorData.green_dop,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MainSizeData.SIZE_28,
+                    vertical: MainSizeData.SIZE_12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(MainSizeData.SIZE_8),
+                  ),
+                ),
+              ),
             )
           ],
         ),

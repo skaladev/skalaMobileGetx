@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
@@ -8,6 +9,7 @@ import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
+import 'package:skala_mobile/main_bloc/auth/auth_cubit.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
@@ -43,7 +45,10 @@ class MainRouteHelper {
         ),
         GetPage(
           name: MainConstantRoute.mainLogin,
-          page: () => LoginPage(),
+          page: () => bloc.BlocProvider(
+            create: (context) => AuthCubit(),
+            child: LoginPage(),
+          ),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainLoginBinding(),
@@ -56,7 +61,10 @@ class MainRouteHelper {
             binding: MainRegisterBinding()),
         GetPage(
             name: MainConstantRoute.verifyOtp,
-            page: () => MainVerifyOtpPage(),
+            page: () => bloc.BlocProvider(
+                  create: (context) => AuthCubit(),
+                  child: MainVerifyOtpPage(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn),
         GetPage(
@@ -78,18 +86,16 @@ class MainRouteHelper {
             transition: Transition.fadeIn),
         GetPage(
           name: MainConstantRoute.mainEditProfile,
-          page: ()=> MainEditProfilePage(),
+          page: () => MainEditProfilePage(),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainEditProfileBinding(),
         ),
         GetPage(
-          name: MainConstantRoute.mainAddKonsultasi,
-          page: ()=> MainAddKonsultasiPage(),
-          alignment: Alignment.center,
-          transition: Transition.fadeIn,
-          binding:  MainAddKosultasiBinding()
-          )
-          
+            name: MainConstantRoute.mainAddKonsultasi,
+            page: () => MainAddKonsultasiPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainAddKosultasiBinding())
       ];
 }

@@ -6,11 +6,16 @@ import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
+import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/widgets/main_profile_photo_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
+import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
 
 class MainProfilePage extends StatelessWidget {
-  const MainProfilePage({Key? key}) : super(key: key);
+  final _prefs = Prefs();
+
+  MainProfilePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -29,8 +34,16 @@ class MainProfilePage extends StatelessWidget {
               height: MainSizeData.SIZE_14,
               width: MainSizeData.SIZE_16,
             ),
-            onPressed: () {
-            
+            onPressed: () async {
+              final res = await showDialog(
+                context: context,
+                builder: (ctx) => const ConfirmDialogWidget(title: 'Logout ?'),
+              );
+              if (res == true) {
+                await _prefs.clear();
+                _prefs.isWelcome = true;
+                Get.offAllNamed(MainConstantRoute.mainLogin);
+              }
             },
           ),
         ),
@@ -78,7 +91,7 @@ class MainProfilePage extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () {
-                            Get.toNamed(MainConstantRoute.mainEditProfile);
+                          Get.toNamed(MainConstantRoute.mainEditProfile);
                         },
                         icon: Icon(
                           Icons.edit,

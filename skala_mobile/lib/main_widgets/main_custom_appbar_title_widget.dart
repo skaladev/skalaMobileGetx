@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
-class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidget {
+class MainCustomAppBarTitle extends StatelessWidget
+    implements PreferredSizeWidget {
   const MainCustomAppBarTitle(
-      {
-      this.appBar,
+      {this.appBar,
       this.title,
       this.onPressed,
       this.isIconEnabled = true,
@@ -33,7 +34,8 @@ class MainCustomAppBarTitle extends StatelessWidget implements PreferredSizeWidg
                 ),
                 onPressed: onPressed ??
                     () {
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
+                      Get.back();
                     },
               ),
             )

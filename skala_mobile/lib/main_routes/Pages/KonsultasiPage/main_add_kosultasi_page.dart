@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -22,6 +24,7 @@ class MainAddKonsultasiPage extends StatefulWidget {
 class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
   final _mainValidatorHelper = MainValidatorHelper();
   final List<String> items = ['Kategori 1', 'Kategori 2', 'Kategori 3'];
+  Uint8List? _image;
 
   String? selectedValue;
 
@@ -87,13 +90,18 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
                 ),
                 onPressed: () async {
                   final ImagePicker _picker = ImagePicker();
-                  final XFile? imagePicker = await _picker.pickImage(
+                  final XFile? image = await _picker.pickImage(
                       source: ImageSource.gallery,
                       maxHeight: 480,
                       maxWidth: 640,
                       imageQuality: 50);
+                  final img = await image?.readAsBytes();
+                  setState(() {
+                    _image=img;
+                  });
                 },
               ),
+                if (_image != null) Image.memory(_image!),
               MainCustomRoundedButton(
                   onPressed: () {},
                   margin: EdgeInsets.symmetric(

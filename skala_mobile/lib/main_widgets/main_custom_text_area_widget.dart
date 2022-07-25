@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
+import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 
 class TextArea extends StatelessWidget {
   const TextArea({
@@ -31,7 +32,13 @@ class TextArea extends StatelessWidget {
                 fontWeight: FontWeight.w500),
           ),
           SizedBox(height: MainSizeData.SIZE_8),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (value?.isEmpty ?? true) {
+                return 'Harap diisi terlebih dahulu';
+              }
+              return null;
+            },
             controller: controller,
             keyboardType: TextInputType.multiline,
             maxLines: 4,

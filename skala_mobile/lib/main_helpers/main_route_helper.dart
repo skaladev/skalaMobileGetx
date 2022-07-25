@@ -99,7 +99,10 @@ class MainRouteHelper {
         ),
         GetPage(
             name: MainConstantRoute.mainAddKonsultasi,
-            page: () => MainAddKonsultasiPage(),
+            page: () => bloc.BlocProvider(
+                  create: (context) => KonsultasiCubit(),
+                  child: MainAddKonsultasiPage(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainAddKosultasiBinding())

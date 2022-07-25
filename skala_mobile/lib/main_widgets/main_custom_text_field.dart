@@ -5,8 +5,7 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {
-      required this.validator,
+      {required this.validator,
       this.label,
       this.hint,
       this.margin,
@@ -46,8 +45,8 @@ class CustomTextField extends StatelessWidget {
           TextFormField(
             controller: controller,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return errorMessage;
+              if (value?.isEmpty ?? true) {
+                return errorMessage ?? 'Harap diisi terlebih dahulu';
               }
               return null;
             },

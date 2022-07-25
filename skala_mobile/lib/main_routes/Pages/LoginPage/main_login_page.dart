@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
             load: state.load,
             message: state.message,
             onSuccess: () {
-              Get.offAndToNamed(MainConstantRoute.verifyOtp);
+              Get.toNamed(MainConstantRoute.verifyOtp);
               Get.snackbar('Login', 'Verifikasi Otp Telah dikirimkan');
             },
           );

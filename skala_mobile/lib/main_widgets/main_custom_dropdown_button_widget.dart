@@ -6,7 +6,7 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 class CustomDropdownButton2 extends StatelessWidget {
   final String hint;
   final String? value;
-  final List<String> dropdownItems;
+  final List<String>? dropdownItems;
   final ValueChanged<String?>? onChanged;
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
@@ -32,11 +32,12 @@ class CustomDropdownButton2 extends StatelessWidget {
   final String? label;
   final EdgeInsets? margin;
   final String Function(String)? validator;
+  final List<DropdownMenuItem<String>>? customBuilder;
 
   const CustomDropdownButton2({
     required this.hint,
     required this.value,
-    required this.dropdownItems,
+    this.dropdownItems,
     required this.onChanged,
     this.validator,
     this.selectedItemBuilder,
@@ -64,6 +65,7 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.offset,
     this.label,
     this.margin,
+    this.customBuilder,
 
     Key? key,
   }) : super(key: key);
@@ -100,8 +102,8 @@ class CustomDropdownButton2 extends StatelessWidget {
                 ),
               ),
               value: value,
-              items: dropdownItems
-                  .map((item) => DropdownMenuItem<String>(
+              items: customBuilder?? dropdownItems
+                  ?.map((item) => DropdownMenuItem<String>(
                         value: item,
                         child: Container(
                           alignment: valueAlignment,

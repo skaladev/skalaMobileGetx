@@ -23,9 +23,13 @@ class MainKonsultasiPage extends StatefulWidget {
 }
 
 class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
+  void _fetch() {
+    context.read<KonsultasiCubit>().getList();
+  }
+
   @override
   void initState() {
-    context.read<KonsultasiCubit>().getList();
+    _fetch();
     super.initState();
   }
 
@@ -78,16 +82,25 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
       ),
     );
   }
-}
 
-Widget _buildKonsultasiItem(
-    BuildContext context, KonsultasiModelData? konsultasiDummy) {
+  Widget _buildKonsultasiItem(
+    BuildContext context,
+    KonsultasiModelData? konsultasiDummy) {
   return MainConsultationCard(
       title: konsultasiDummy?.title,
       date: konsultasiDummy?.date?.toString(),
-      onPressed: () {
-        Get.to(MainKonsultasiDetailPage(
-          konsultasi: konsultasiDummy,
-        ));
+      onPressed: () async {
+        final res = await Get.to(() => BlocProvider.value(
+              value: context.read<KonsultasiCubit>(),
+              child: MainKonsultasiDetailPage(
+                konsultasiDummy?.id,
+              ),
+            ));
+        if (res == true) {
+          _fetch();
+        }
       });
 }
+}
+
+

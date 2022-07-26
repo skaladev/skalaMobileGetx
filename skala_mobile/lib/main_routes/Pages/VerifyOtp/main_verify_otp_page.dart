@@ -28,14 +28,12 @@ class MainVerifyOtpPage extends StatelessWidget {
       listenWhen: ((previous, current) => current is AuthVerifyOtp),
       listener: (context, state) {
         if (state is AuthVerifyOtp) {
-          if (state is AuthVerifyOtp) {
-            blocHelperListenner(
-              load: state.load,
-              onSuccess: () {
-                Get.offAllNamed(MainConstantRoute.bottomNavigationBar);
-              },
-            );
-          }
+          blocHelperListenner(
+            load: state.load,
+            onSuccess: () {
+              Get.offAllNamed(MainConstantRoute.bottomNavigationBar);
+            },
+          );
         }
       },
       child: Scaffold(
@@ -82,7 +80,8 @@ class MainVerifyOtpPage extends StatelessWidget {
                 // ),
                 SizedBox(height: MainSizeData.SIZE_16),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_80),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: MainSizeData.SIZE_80),
                   child: TextFieldOtp(
                     controller: _codeController,
                     validator: _mainValidatorHelper.validateBasic,
@@ -117,7 +116,11 @@ class MainVerifyOtpPage extends StatelessWidget {
                   child: MainCustomRoundedButton(
                     text: MainConstantData.verifyOtp,
                     onPressed: () {
-                      Get.offAllNamed(MainConstantRoute.bottomNavigationBar);
+                      if (_formKey.currentState?.validate() == true) {
+                        context
+                            .read<AuthCubit>()
+                            .verifyOTP(code: _codeController.text);
+                      }
                     },
                     margin:
                         EdgeInsets.symmetric(vertical: MainSizeData.iconSize20),

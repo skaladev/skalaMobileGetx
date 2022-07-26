@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:skala_mobile/main_helpers/main_dio_helper.dart';
 import 'package:skala_mobile/main_models/main_kategori_model.dart';
+import 'package:skala_mobile/main_models/main_konsultasi_detail_model.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_model.dart';
 
 class KonsultasiServices {
@@ -14,6 +15,11 @@ class KonsultasiServices {
   Future<KategoriModel> getCategory() async {
     final res = await _api.get('/feedbacks/labels');
     return KategoriModel.fromJson(res.data);
+  }
+
+  Future<KonsultasiDetail>getDetail(String id) async{
+    final res = await _api.get('/feedbacks/mobile/$id');
+    return KonsultasiDetail.fromJson(res.data);
   }
 
   Future<bool> createKonsultasi({

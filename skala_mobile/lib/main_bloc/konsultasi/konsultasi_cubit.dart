@@ -38,6 +38,22 @@ class KonsultasiCubit extends Cubit<KonsultasiState>{
     }
   }
 
+  Future<void> getDetail(String id)async{
+    emit(KonsultasiDetailFetch.loading());
+    try {
+      final res = await _konsultasiService.getDetail(id);
+      print(res.toJson());
+      if(res.message?.toLowerCase().contains('succes')??false){
+        emit(KonsultasiDetailFetch.success(data:res));
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(KonsultasiDetailFetch.error(msg: 'Gagal'));
+      
+    }
+  }
+
   Future<void> createKonsultasi({
     String? categoryId,
     String? title,

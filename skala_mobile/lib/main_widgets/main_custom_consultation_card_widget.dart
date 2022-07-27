@@ -10,6 +10,7 @@ class MainConsultationCard extends StatelessWidget {
     this.date,
     this.time,
     this.description,
+    this.onDelete,
     required this.onPressed,
   }) : super(key: key);
   final String? title;
@@ -17,6 +18,7 @@ class MainConsultationCard extends StatelessWidget {
   final String? time;
   final String? description;
   final Function onPressed;
+  final Function? onDelete;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,29 +45,41 @@ class MainConsultationCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
-                    date ?? '',
-                    style: const TextStyle(
-                        color: MainColorData.grey,
-                        fontSize: MainSizeData.SIZE_10,
-                        fontWeight: FontWeight.w500),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          date ?? '',
+                          style: const TextStyle(
+                              color: MainColorData.grey,
+                              fontSize: MainSizeData.SIZE_10,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          width: MainSizeData.SIZE_8,
+                        ),
+                        Text(
+                          time ?? '',
+                          style: const TextStyle(
+                              color: MainColorData.grey,
+                              fontSize: MainSizeData.SIZE_10,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          width: MainSizeData.SIZE_20,
+                        ),
+                        Container(
+                          child: StatusSection(status: 'diterima') ,
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    width: MainSizeData.SIZE_8,
-                  ),
-                  Text(
-                    time ?? '',
-                    style: const TextStyle(
-                        color: MainColorData.grey,
-                        fontSize: MainSizeData.SIZE_10,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    width: MainSizeData.SIZE_20,
-                  ),
-                  Container(
-                    child: StatusSection(status: 'diterima') ,
-                  )
+                  if(onDelete !=null)
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Colors.red,
+                      onPressed: ()=>onDelete!()
+                    )
                 ],
               ),
               const SizedBox(

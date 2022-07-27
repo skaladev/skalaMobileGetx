@@ -2,6 +2,7 @@
 
 import 'package:skala_mobile/main_commons/main_constant_key.dart';
 import 'package:skala_mobile/main_models/main_kategori_model.dart';
+import 'package:skala_mobile/main_models/main_konsultasi_detail_model.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_model.dart';
 
 abstract class KonsultasiState {}
@@ -102,6 +103,71 @@ class KonsultasiCreate extends KonsultasiState {
         );
 
   KonsultasiCreate.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}
+
+class KonsultasiDetailFetch extends KonsultasiState {
+  final LoadStatus? load;
+  final String? message;
+  final KonsultasiDetail? data;
+
+  KonsultasiDetailFetch({
+    this.load,
+    this.message,
+    this.data,
+  });
+
+  KonsultasiDetailFetch.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  KonsultasiDetailFetch.success({
+    String? msg,
+    KonsultasiDetail? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+          data: data,
+        );
+
+  KonsultasiDetailFetch.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}
+
+class KonsultasiDelete extends KonsultasiState {
+  final LoadStatus? load;
+  final String? message;
+
+  KonsultasiDelete({
+    this.load,
+    this.message,
+  });
+
+  KonsultasiDelete.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  KonsultasiDelete.success({
+    String? msg,
+    KategoriModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
+
+  KonsultasiDelete.error({required String msg})
       : this(
           load: LoadStatus.error,
           message: msg,

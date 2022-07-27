@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skala_mobile/main_bloc/konsultasi/konsultasi_cubit.dart';
+import 'package:skala_mobile/main_bloc/konsultasi/kosultasi_state.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
+import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_dummy_model.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
 
-class MainKonsultasiDetailPage extends StatelessWidget {
+class MainKonsultasiDetailPage extends StatefulWidget {
   final KonsultasiModelData? konsultasi;
-  const MainKonsultasiDetailPage({Key? key,this.konsultasi}) : super(key: key);
+  const MainKonsultasiDetailPage(
+    this.id, {
+    Key? key,
+    this.konsultasi,
+  }) : super(key: key);
 
+  final int? id;
+
+  @override
+  State<MainKonsultasiDetailPage> createState() =>
+      _MainKonsultasiDetailPageState();
+}
+
+class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
+    @override
+  void initState() {
+    context.read<KonsultasiCubit>().getDetail(widget.id.toString());
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,21 +42,37 @@ class MainKonsultasiDetailPage extends StatelessWidget {
         appBar: AppBar(),
         title: "Konsultasi",
         titleStyle: const TextStyle(
-          color: MainColorData.black,
-          fontSize: MainSizeData.SIZE_16,
-          fontWeight: FontWeight.bold
-        ),
+            color: MainColorData.black,
+            fontSize: MainSizeData.SIZE_16,
+            fontWeight: FontWeight.bold),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            MainConsultationCard(
-              date: konsultasi?.date.toString() ??"",
-              title: konsultasi?.title.toString() ?? "",
-              onPressed: (){}
-            )
-          ],
-        ),
+      body: BlocBuilder<KonsultasiCubit, KonsultasiState>(
+        buildWhen: (previous, current) => current is KonsultasiDetailFetch,
+        builder: (context, state) {
+          if (state is KonsultasiDetailFetch) {
+            return loadData(
+              state.load,
+              errorMessage: state.message,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: state.data?.data
+                          ?.map(
+                            (e) => MainConsultationCard(
+                              date: e.date?.toString() ?? "",
+                              title: e.title?.toString() ?? "",
+                              description: e.description,
+                              time: e.time,
+                              onPressed: () {},
+                            ),
+                          )
+                          .toList() ??
+                      [],
+                ),
+              ),
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }

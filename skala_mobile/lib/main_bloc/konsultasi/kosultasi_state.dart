@@ -142,3 +142,34 @@ class KonsultasiDetailFetch extends KonsultasiState {
           message: msg,
         );
 }
+
+class KonsultasiDelete extends KonsultasiState {
+  final LoadStatus? load;
+  final String? message;
+
+  KonsultasiDelete({
+    this.load,
+    this.message,
+  });
+
+  KonsultasiDelete.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  KonsultasiDelete.success({
+    String? msg,
+    KategoriModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
+
+  KonsultasiDelete.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}

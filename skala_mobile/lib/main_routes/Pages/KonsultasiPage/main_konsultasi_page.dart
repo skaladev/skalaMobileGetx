@@ -13,6 +13,7 @@ import 'package:skala_mobile/main_models/main_konsultasi_dummy_model.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_model.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_konsultasi_detail_page.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
+import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
 
 class MainKonsultasiPage extends StatefulWidget {
@@ -46,7 +47,18 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      body: BlocBuilder<KonsultasiCubit, KonsultasiState>(
+      body: BlocConsumer<KonsultasiCubit, KonsultasiState>(
+        listenWhen:(previous,current) => current is KonsultasiDelete,
+        listener : (context,state){
+          if(state is KonsultasiDelete){
+            blocHelperListenner(
+              load: state.load,
+              onSuccess: (){
+                _fetch();
+              }
+            );
+          }
+        },
         buildWhen: (previous, current) => current is KonsultasiFetch,
         builder: (context, state) {
           if (state is KonsultasiFetch) {
@@ -89,6 +101,17 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
   return MainConsultationCard(
       title: konsultasiDummy?.title,
       date: konsultasiDummy?.date?.toString(),
+      onDelete: ()async{
+        final res = await showDialog(
+          context: context,
+          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Konsultasi ?'),
+        );
+        if(res == true){
+          context
+            .read<KonsultasiCubit>()
+            .delete(konsultasiDummy?.id.toString() ?? '');
+        }
+      },
       onPressed: () async {
         final res = await Get.to(() => BlocProvider.value(
               value: context.read<KonsultasiCubit>(),

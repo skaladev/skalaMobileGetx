@@ -12,6 +12,11 @@ class KonsultasiServices {
     return KonsultasiModel.fromJson(res.data);
   }
 
+  Future<bool> delete(String id)async{
+    final res =await _api.delete('/feedbacks/mobile/$id');
+    return res.data?['message'] == 'Success';
+  }
+
   Future<KategoriModel> getCategory() async {
     final res = await _api.get('/feedbacks/labels');
     return KategoriModel.fromJson(res.data);

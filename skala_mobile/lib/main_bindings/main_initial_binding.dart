@@ -14,9 +14,9 @@ class MainInitialBinding implements Bindings {
     // Get.put(MainLoginController(), permanent: true);
     // Get.put(MainWelcomeController(), permanent: true);
 
-    Get.lazyPut(() => MainHiveController());
+    // Get.lazyPut(() => MainHiveController());
     Get.lazyPut(() => MainAppController());
-    Get.lazyPut(() => MainLoginController());
-    Get.lazyPut(() => MainWelcomeController());
+    // Get.lazyPut(() => MainLoginController());
+    // Get.lazyPut(() => MainWelcomeController());
   }
 }

@@ -18,6 +18,7 @@ import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 class MainRegisterPage extends StatelessWidget {
   final controller = Get.find<MainRegisterController>();
   final _mainValidatorHelper = MainValidatorHelper();
+  String _jenisKelamin = "M";
   MainRegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -81,7 +82,8 @@ class MainRegisterPage extends StatelessWidget {
                 ),
                 MainCustomDatePickerWidget(
                   label: "TANGGAL LAHIR",
-                  margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
                 ),
                 SizedBox(
                   height: MainSizeData.SIZE_10,
@@ -89,7 +91,11 @@ class MainRegisterPage extends StatelessWidget {
                 Row(children: [
                   MainCustomRadioButtom(
                     label: "JENIS KELAMIN",
-                    margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12,vertical: MainSizeData.SIZE_10),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                    groupValue: _jenisKelamin,
+                    onChanged: (value){},
                   ),
                 ]),
                 SizedBox(

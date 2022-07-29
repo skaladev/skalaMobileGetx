@@ -96,7 +96,10 @@ class MainRouteHelper {
             transition: Transition.fadeIn),
         GetPage(
           name: MainConstantRoute.mainEditProfile,
-          page: () => MainEditProfilePage(),
+          page: () => bloc.BlocProvider(
+            create: (context)=>RefCubit(),
+            child: MainEditProfilePage(),
+          ),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainEditProfileBinding(),

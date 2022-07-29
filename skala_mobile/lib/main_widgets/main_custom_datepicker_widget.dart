@@ -6,15 +6,16 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class MainCustomDatePickerWidget extends StatefulWidget {
-  const MainCustomDatePickerWidget({Key? key, this.label,this.margin}) : super(key: key);
+  const MainCustomDatePickerWidget({Key? key, this.label,this.margin,this.date,this.onChanged}) : super(key: key);
   final String? label;
   final EdgeInsets? margin;
+  final DateTime? date;
+  final void Function(DateTime? value)?onChanged;
   @override
   State<MainCustomDatePickerWidget> createState() => _MainCustomDatePickerWidgetState();
 }
 
 class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget> {
-  DateTime? _dateTime;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,15 +35,15 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
                   side: BorderSide(
-                      color: _dateTime == null
+                      color: widget.date == null
                           ? MainColorData.grey
                           : MainColorData.green_dop,
                       width: 1)),
               trailing: Icon(
                 Icons.calendar_today,
-                color: _dateTime == null ? MainColorData.grey : MainColorData.green_dop,
+                color: widget.date == null ? MainColorData.grey : MainColorData.green_dop,
               ),
-              title: _dateTime == null
+              title: widget.date == null
                   ? Text(
                       'Select Date',
                       style: const TextStyle(
@@ -51,7 +52,7 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
                           fontWeight: FontWeight.w400),
                     )
                   : Text(
-                      '${_dateTime?.day}/${_dateTime?.month}/${_dateTime?.year}'),
+                      '${widget.date?.day}/${widget.date?.month}/${widget.date?.year}'),
               onTap: () async {
                 DateTime? date = await showDatePicker(
                     context: context,
@@ -73,10 +74,8 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
                         child: child!,
                       );
                     });
-                if (date != null) {
-                  setState(() {
-                    _dateTime = date;
-                  });
+                if (date != null && widget.onChanged !=null) {
+                  widget.onChanged!(date);
                 }
               })
         ],

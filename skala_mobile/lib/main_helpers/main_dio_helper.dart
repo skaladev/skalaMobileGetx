@@ -18,7 +18,7 @@ class MainDioHelper {
   Dio getDio({bool isBaseUrl = true}) {
     final BaseOptions option = BaseOptions(
       // baseUrl: isBaseUrl ? dotenv.env['BASE_URL'].toString():'',
-      baseUrl: 'https://api-skala.herokuapp.com/api',
+      baseUrl: 'https://apiskala.herokuapp.com/api',
       connectTimeout: 30000,
       receiveTimeout: 30000,
       contentType: 'application/json',

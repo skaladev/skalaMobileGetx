@@ -25,4 +25,40 @@ class ProfileCubit extends Cubit<ProfileState>{
       emit(ProfileFetch.error(msg: 'Gagal'));
     }
   }
+
+  Future<void> updateProfile({
+    String? id,
+    String? name,
+    String? nik,
+    String? gender,
+    String? tanggalLahir,
+    String? regency,
+    String? district,
+    String? subDistrict,
+    String? profession,
+    String? image,
+  }) async {
+    emit(ProfileUpdate.loading());
+    try {
+      final res = await _profileService.updateProfile(
+        id: id,
+        name: name,
+        nik: nik,
+        gender: gender,
+        tanggalLahir: tanggalLahir,
+        regency: regency,
+        district:district,
+        subDistrict: subDistrict,
+        profession: profession,
+        // image: image
+      );
+      if(res){
+        emit(ProfileUpdate.success());
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(ProfileUpdate.error(msg: 'Gagal'));
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:skala_mobile/main_bloc/profile/profile_cubit.dart';
 import 'package:skala_mobile/main_bloc/ref/ref_cubit.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
@@ -29,9 +30,12 @@ class MainEditProfilePage extends StatefulWidget {
 
 class _MainEditProfilePageState extends State<MainEditProfilePage> {
   final _formKey = GlobalKey<FormState>();
+  final String? id = Get.arguments?['id'];
   final _namaController = TextEditingController();
+  final _nikController = TextEditingController();
+  final _noWhashappController = TextEditingController();
   final _mainValidatorHelper = MainValidatorHelper();
-  String _jenisKelamin = 'M';
+  String _jenisKelamin = 'F';
   DateTime? _tanggalLahir;
   final _professionController = TextEditingController();
   String? _province;
@@ -44,6 +48,12 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
   @override
   void initState() {
     context.read<RefCubit>().getProvince();
+    _jenisKelamin =
+        (Get.arguments?['jenisKelamin'] ?? 'M') == 'Laki-laki' ? 'M' : 'F';
+    _namaController.text = Get.arguments?['nama'] ?? '';
+    _professionController.text = Get.arguments?['pekerjaan'] ?? '';
+    _nikController.text = Get.arguments?['nik'] ?? '';
+    _noWhashappController.text = Get.arguments?['phone'] ?? '';
     super.initState();
   }
 
@@ -51,6 +61,8 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
   void dispose() {
     _namaController.dispose();
     _professionController.dispose();
+    _nikController.dispose();
+    _noWhashappController.dispose();
     super.dispose();
   }
 
@@ -65,113 +77,135 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
             fontSize: MainSizeData.fontSize16,
             fontWeight: FontWeight.bold),
       ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MainSizeData.SIZE_12,
-                vertical: MainSizeData.SIZE_14),
-            child: Column(
-              children: [
-                CustomTextField(
-                  validator: _mainValidatorHelper.validateBasic,
-                  label: "NAMA LENGKAP",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                CustomTextField(
-                  validator: _mainValidatorHelper.validateNIK,
-                  label: "NIK",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                MainCustomRadioButtom(
-                  label: "JENIS KELAMIN",
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: MainSizeData.SIZE_12,
-                    vertical: MainSizeData.SIZE_10,
+      body: BlocListener<ProfileCubit, ProfileState>(
+        listenWhen: (previous, current) => current is ProfileUpdate,
+        listener: (context, state) {
+          if (state is ProfileUpdate) {
+            blocHelperListenner(
+              load: state.load,
+              onSuccess: () {
+                Get.back(result: true);
+              },
+            );
+          }
+        },
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MainSizeData.SIZE_12,
+                  vertical: MainSizeData.SIZE_14),
+              child: Column(
+                children: [
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateBasic,
+                    label: "NAMA LENGKAP",
+                    controller: _namaController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
                   ),
-                  groupValue: _jenisKelamin,
-                  onChanged: (value) {
-                    if (value?.isNotEmpty ?? false) {
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateNIK,
+                    label: "NIK",
+                    controller: _nikController ,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                  MainCustomRadioButtom(
+                    label: "JENIS KELAMIN",
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: MainSizeData.SIZE_12,
+                      vertical: MainSizeData.SIZE_10,
+                    ),
+                    groupValue: _jenisKelamin,
+                    onChanged: (value) {
+                      if (value?.isNotEmpty ?? false) {
+                        setState(() {
+                          _jenisKelamin = value!;
+                        });
+                      }
+                    },
+                  ),
+                  MainCustomDatePickerWidget(
+                    label: "TANGGAL LAHIR",
+                    date: _tanggalLahir,
+                    onChanged: (value){
                       setState(() {
-                        _jenisKelamin = value!;
+                        _tanggalLahir = value;
                       });
-                    }
-                  },
-                ),
-                MainCustomDatePickerWidget(
-                  label: "TANGGAL LAHIR",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                CustomTextField(
-                  validator: _mainValidatorHelper.validatePhoneNumber,
-                  label: "NO.HANDPHONE",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                CustomTextField(
-                  validator: _mainValidatorHelper.validateEmail,
-                  label: "EMAIL",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                BlocBuilder<RefCubit, RefState>(
-                  buildWhen: (previous, current) => current is ProvinceFetch,
-                  builder: (context, state) {
-                    if (state is ProvinceFetch) {
-                      return loadData(
-                        state.load,
-                        errorMessage: state.message,
-                        child: Center(
-                          child: CustomDropdownButton2(
-                            label: "Provinsi",
-                            hint: 'Provinsi',
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: MainSizeData.SIZE_12,
-                                vertical: MainSizeData.SIZE_10),
-                            value: _province,
-                            customBuilder: state.data?.data
-                                    ?.map((e) => DropdownMenuItem<String>(
-                                          value: e.id?.toString(),
-                                          child: Text(
-                                            e.name ?? '-',
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                                fontSize: MainSizeData.SIZE_14,
-                                                color: MainColorData.black,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ))
-                                    .toList() ??
-                                [],
-                            onChanged: (value) {
-                              setState(() {
-                                _province = value;
-                                _regency = null;
-                                _district = null;
-                                _subDistrict = null;
-                                context
-                                    .read<RefCubit>()
-                                    .getRegency(_province ?? '');
-                              });
-                            },
+                    },
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validatePhoneNumber,
+                    label: "NO.HANDPHONE",
+                    controller: _noWhashappController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                  // CustomTextField(
+                  //   validator: _mainValidatorHelper.validateEmail,
+                  //   label: "EMAIL",
+                  //   margin: EdgeInsets.symmetric(
+                  //       horizontal: MainSizeData.SIZE_12,
+                  //       vertical: MainSizeData.SIZE_10),
+                  // ),
+                  BlocBuilder<RefCubit, RefState>(
+                    buildWhen: (previous, current) => current is ProvinceFetch,
+                    builder: (context, state) {
+                      if (state is ProvinceFetch) {
+                        return loadData(
+                          state.load,
+                          errorMessage: state.message,
+                          child: Center(
+                            child: CustomDropdownButton2(
+                              label: "Provinsi",
+                              hint: 'Provinsi',
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: MainSizeData.SIZE_12,
+                                  vertical: MainSizeData.SIZE_10),
+                              value: _province,
+                              customBuilder: state.data?.data
+                                      ?.map((e) => DropdownMenuItem<String>(
+                                            value: e.id?.toString(),
+                                            child: Text(
+                                              e.name ?? '-',
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                  fontSize:
+                                                      MainSizeData.SIZE_14,
+                                                  color: MainColorData.black,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ))
+                                      .toList() ??
+                                  [],
+                              onChanged: (value) {
+                                setState(() {
+                                  _province = value;
+                                  _regency = null;
+                                  _district = null;
+                                  _subDistrict = null;
+                                  context
+                                      .read<RefCubit>()
+                                      .getRegency(_province ?? '');
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                ),
-                 BlocBuilder<RefCubit, RefState>(
+                        );
+                      }
+                      return const SizedBox();
+                    },
+                  ),
+                  BlocBuilder<RefCubit, RefState>(
                     buildWhen: (previous, current) => current is RegencyFetch,
                     builder: (context, state) {
                       if (_province?.isEmpty ?? true) return const SizedBox();
@@ -220,7 +254,7 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                       return const SizedBox();
                     },
                   ),
-                   BlocBuilder<RefCubit, RefState>(
+                  BlocBuilder<RefCubit, RefState>(
                     buildWhen: (previous, current) => current is DistrictFetch,
                     builder: (context, state) {
                       if (_regency?.isEmpty ?? true) return const SizedBox();
@@ -316,40 +350,57 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                       return const SizedBox();
                     },
                   ),
-                // Center(
-                //   child: CustomDropdownButton2(
-                //     label: "KECAMATAN",
-                //     hint: 'Kecamatan',
-                //     margin: EdgeInsets.symmetric(
-                //         horizontal: MainSizeData.SIZE_12,
-                //         vertical: MainSizeData.SIZE_10),
-                //     dropdownItems: items,
-                //     value: selectedValue,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         selectedValue = value;
-                //       });
-                //     },
-                //   ),
-                // ),
-                CustomTextField(
-                  validator: _mainValidatorHelper.validateBasic,
-                  label: "PEKERJAAN",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                ),
-                SizedBox(
-                  height: MainSizeData.SIZE_12,
-                ),
-                MainCustomRoundedButton(
-                  onPressed: () {},
-                  text: "SIMPAN",
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12,
-                      vertical: MainSizeData.SIZE_10),
-                )
-              ],
+                  // Center(
+                  //   child: CustomDropdownButton2(
+                  //     label: "KECAMATAN",
+                  //     hint: 'Kecamatan',
+                  //     margin: EdgeInsets.symmetric(
+                  //         horizontal: MainSizeData.SIZE_12,
+                  //         vertical: MainSizeData.SIZE_10),
+                  //     dropdownItems: items,
+                  //     value: selectedValue,
+                  //     onChanged: (value) {
+                  //       setState(() {
+                  //         selectedValue = value;
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateBasic,
+                    label: "PEKERJAAN",
+                    controller: _professionController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                  SizedBox(
+                    height: MainSizeData.SIZE_12,
+                  ),
+                  MainCustomRoundedButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        context.read<ProfileCubit>().updateProfile(
+                              name: _namaController.text,
+                              nik: _nikController.text,
+                              gender: _jenisKelamin,
+                              tanggalLahir:
+                                  '${_tanggalLahir?.year}-${_tanggalLahir?.month}-${_tanggalLahir?.day}',
+                              regency: _regency,
+                              district: _district,
+                              subDistrict: _subDistrict,
+                              profession: _professionController.text,
+                              id: id,
+                            );
+                      }
+                    },
+                    text: "SIMPAN",
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  )
+                ],
+              ),
             ),
           ),
         ),

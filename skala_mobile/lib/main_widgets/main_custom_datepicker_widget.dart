@@ -57,7 +57,7 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
                 DateTime? date = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
+                    firstDate: DateTime(1945),
                     lastDate: DateTime(2050),
                     currentDate: DateTime.now(),
                     initialEntryMode: DatePickerEntryMode.calendar,

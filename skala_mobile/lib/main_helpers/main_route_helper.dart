@@ -85,19 +85,22 @@ class MainRouteHelper {
             binding: MainButtomNavigationBinding()),
         GetPage(
           name: MainConstantRoute.article,
-          page: () => ArticleDetailPage(),
+          page: () => const ArticleDetailPage(),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
         ),
         GetPage(
             name: MainConstantRoute.mainNotifikasi,
-            page: () => MainNotifikasiPage(),
+            page: () => const MainNotifikasiPage(),
             alignment: Alignment.center,
             transition: Transition.fadeIn),
         GetPage(
           name: MainConstantRoute.mainEditProfile,
-          page: () => bloc.BlocProvider(
-            create: (context)=>RefCubit(),
+          page: () => bloc.MultiBlocProvider(
+            providers: [
+              bloc.BlocProvider(create: (context)=> RefCubit()),
+              bloc.BlocProvider(create: (context)=> ProfileCubit()),
+            ],
             child: MainEditProfilePage(),
           ),
           alignment: Alignment.center,

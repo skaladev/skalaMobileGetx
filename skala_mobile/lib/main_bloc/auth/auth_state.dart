@@ -67,3 +67,32 @@ class AuthVerifyOtp extends AuthState {
           message: msg,
         );
 }
+
+class AuthRegister extends AuthState{
+  final LoadStatus? load;
+  final String? message;
+
+  AuthRegister({
+    this.load,
+    this.message,
+  });
+
+  AuthRegister.loading({
+    String? msg,
+  }): this(
+    load: LoadStatus.loading,
+    message: msg,
+  );
+
+  AuthRegister.success({
+    String?msg,
+  }): this(
+    load: LoadStatus.success,
+    message: msg
+  );
+
+  AuthRegister.error({required String msg}): this(
+    load: LoadStatus.error,
+    message: msg
+  );
+}

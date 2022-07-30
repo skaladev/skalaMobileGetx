@@ -15,6 +15,7 @@ import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 
 class LoginPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final controller = Get.find<MainLoginController>();
   final _mainValidatorHelper = MainValidatorHelper();
   LoginPage({Key? key}) : super(key: key);
@@ -62,10 +63,11 @@ class LoginPage extends StatelessWidget {
               height: MainSizeData.SIZE_60,
             ),
             Form(
-              key: controller.loginFormKey,
+              key: _formKey,
               child: CustomTextField(
                 validator: _mainValidatorHelper.validatePhoneNumber,
-                controller: controller.noWhatshapp..text = '6285801482929',
+                // controller: controller.noWhatshapp..text = '6285801482929',
+                controller: controller.noWhatshapp,
                 errorMessage: MainConstantData.required,
                 label: "No Whatshapp",
                 hint: "62xxxxxxxxxxx",
@@ -73,9 +75,8 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             MainCustomRoundedButton(
-                // onPressed:controller.login,
                 onPressed: () {
-                  if (controller.loginFormKey.currentState?.validate() ==
+                  if (_formKey.currentState?.validate() ==
                       true) {
                     context.read<AuthCubit>().login(
                           noHp: controller.noWhatshapp.text,

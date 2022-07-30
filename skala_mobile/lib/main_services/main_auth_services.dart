@@ -29,4 +29,22 @@ class MainAuthServices {
     );
     return VerifyOtpModel.fromJson(res.data);
   }
+
+  Future<bool> register({
+    String? phone,
+    String? name,
+    String? gender,
+    String? tanggalLahir,
+  }) async {
+    final res = await _api.post(
+      '/register',
+      data: FormData.fromMap({
+        'phone': phone,
+        'name': name,
+        'gender': gender,
+        'date_of_birth': tanggalLahir,
+      }),
+    );
+    return res.data?['message'] == 'Success';
+  }
 }

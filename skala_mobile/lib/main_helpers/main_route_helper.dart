@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 
@@ -58,7 +59,10 @@ class MainRouteHelper {
         ),
         GetPage(
             name: MainConstantRoute.mainRegister,
-            page: () => MainRegisterPage(),
+            page: () => bloc.BlocProvider(
+                  create: (context) => AuthCubit(),
+                  child: MainRegisterPage(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainRegisterBinding()),

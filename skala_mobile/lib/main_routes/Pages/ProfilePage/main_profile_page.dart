@@ -111,8 +111,21 @@ class _MainProfilePageState extends State<MainProfilePage> {
                             width: MainSizeData.SIZE_80,
                           ),
                           IconButton(
-                              onPressed: () {
-                                Get.toNamed(MainConstantRoute.mainEditProfile);
+                              onPressed: () async{
+                                final res = await Get.toNamed(
+                                  MainConstantRoute.mainEditProfile,
+                                  arguments: {
+                                    'id': state.data?.data?.id?.toString(),
+                                    'nama' :state.data?.data?.name,
+                                    'jenisKelamin':state.data?.data?.gender,
+                                    'tanggalLahir': state.data?.data?.dateOfBirth,
+                                    'pekerjaan':state.data?.data?.profession,
+                                  }
+                                );
+                                if(res ==true){
+                                  if(!mounted) return;
+                                  context.read<ProfileCubit>().getProfile();
+                                }
                               },
                               icon: Icon(
                                 Icons.edit,
@@ -205,22 +218,6 @@ class _MainProfilePageState extends State<MainProfilePage> {
                           ),
                           SizedBox(height: MainSizeData.SIZE_12),
                           Text(
-                            "EMAIL",
-                            style: TextStyle(
-                                fontSize: MainSizeData.fontSize12,
-                                fontWeight: FontWeight.bold,
-                                color: MainColorData.green_dop),
-                          ),
-                          SizedBox(height: MainSizeData.SIZE_10),
-                          Text(
-                            "FANDYAHMAD@REFACTORY.ID",
-                            style: TextStyle(
-                                fontSize: MainSizeData.fontSize12,
-                                fontWeight: FontWeight.bold,
-                                color: MainColorData.grey75),
-                          ),
-                          SizedBox(height: MainSizeData.SIZE_12),
-                          Text(
                             "ALAMAT",
                             style: TextStyle(
                                 fontSize: MainSizeData.fontSize12,
@@ -229,7 +226,8 @@ class _MainProfilePageState extends State<MainProfilePage> {
                           ),
                           SizedBox(height: MainSizeData.SIZE_10),
                           Text(
-                            state.data?.data?.regency ?? '-',
+                            '${state.data?.data?.district ?? ''} , ${state.data?.data?.regency ?? ''}',
+                            // state.data?.data?.district ?? '-',
                             style: TextStyle(
                                 fontSize: MainSizeData.fontSize12,
                                 fontWeight: FontWeight.bold,

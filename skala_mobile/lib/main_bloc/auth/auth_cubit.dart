@@ -46,4 +46,28 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthVerifyOtp.error(msg: 'Gagal'));
     }
   }
+
+  Future<void> register({
+    String? phone,
+    String? name,
+    String? gender,
+    String? tanggalLahir,
+  }) async {
+    emit(AuthRegister.loading());
+    try {
+      final res = await _authService.register(
+        phone: phone,
+        name: name,
+        gender: gender,
+        tanggalLahir: tanggalLahir,
+      );
+      if (res) {
+        emit(AuthRegister.success());
+      }
+    } catch (e, trace) {
+      print(e);
+      print(trace);
+      emit(AuthRegister.error(msg: 'Gagal'));
+    }
+  }
 }

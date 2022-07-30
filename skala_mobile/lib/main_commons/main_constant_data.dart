@@ -2,7 +2,7 @@ class MainConstantData {
   static const String appName = 'SKALA';
   static const String mainBox = 'mainBox';
   static const String appNames = "Sistem Informasi Kota Layak Anak";
-  static String copyright = "Copyright © ${DateTime.now().year} Sekala";
+  static String copyright = "Copyright © ${DateTime.now().year} Skala";
   static const String appText =
       "Dinas Pemberdayaan Perempuan, Perlindungan Anak dan Pemberdayaan Masyarakarat (DP3APM) Kota Surakarta";
   static const String login = "Login";

@@ -38,12 +38,16 @@ class KonsultasiModelData {
     this.title,
     this.date,
     this.time,
+    this.label,
+    this.status,
   });
 
   final int? id;
   final String? title;
   final DateTime? date;
   final String? time;
+  final String? label;
+  final String? status;
 
   factory KonsultasiModelData.fromJson(Map<String, dynamic> json) =>
       KonsultasiModelData(
@@ -51,6 +55,8 @@ class KonsultasiModelData {
         title: json["title"],
         date: DateTime.parse(json["date"]),
         time: json["time"],
+        label: json["label"],
+        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,5 +65,7 @@ class KonsultasiModelData {
         "date":
             "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
         "time": time,
+        "label": label,
+        "status": status
       };
 }

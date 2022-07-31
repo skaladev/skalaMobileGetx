@@ -1,4 +1,4 @@
-package com.example.skala_mobile
+package com.surakarta.skala
 
 import io.flutter.embedding.android.FlutterActivity
 

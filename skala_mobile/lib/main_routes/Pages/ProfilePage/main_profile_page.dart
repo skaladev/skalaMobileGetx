@@ -13,6 +13,7 @@ import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/widgets/main_profile_photo_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
+import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainProfilePage extends StatefulWidget {
   MainProfilePage({Key? key}) : super(key: key);
@@ -111,19 +112,19 @@ class _MainProfilePageState extends State<MainProfilePage> {
                             width: MainSizeData.SIZE_80,
                           ),
                           IconButton(
-                              onPressed: () async{
+                              onPressed: () async {
                                 final res = await Get.toNamed(
-                                  MainConstantRoute.mainEditProfile,
-                                  arguments: {
-                                    'id': state.data?.data?.id?.toString(),
-                                    'nama' :state.data?.data?.name,
-                                    'jenisKelamin':state.data?.data?.gender,
-                                    'tanggalLahir': state.data?.data?.dateOfBirth,
-                                    'pekerjaan':state.data?.data?.profession,
-                                  }
-                                );
-                                if(res ==true){
-                                  if(!mounted) return;
+                                    MainConstantRoute.mainEditProfile,
+                                    arguments: {
+                                      'id': state.data?.data?.id?.toString(),
+                                      'nama': state.data?.data?.name,
+                                      'jenisKelamin': state.data?.data?.gender,
+                                      'tanggalLahir':
+                                          state.data?.data?.dateOfBirth,
+                                      'pekerjaan': state.data?.data?.profession,
+                                    });
+                                if (res == true) {
+                                  if (!mounted) return;
                                   context.read<ProfileCubit>().getProfile();
                                 }
                               },
@@ -262,4 +263,5 @@ class _MainProfilePageState extends State<MainProfilePage> {
         },
       ),
     );
-  }}
+  }
+}

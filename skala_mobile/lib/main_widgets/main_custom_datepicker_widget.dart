@@ -58,7 +58,7 @@ class _MainCustomDatePickerWidgetState extends State<MainCustomDatePickerWidget>
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1945),
-                    lastDate: DateTime(2050),
+                    lastDate: DateTime.now(),
                     currentDate: DateTime.now(),
                     initialEntryMode: DatePickerEntryMode.calendar,
                     initialDatePickerMode: DatePickerMode.day,

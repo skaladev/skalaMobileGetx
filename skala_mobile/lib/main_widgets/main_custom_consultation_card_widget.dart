@@ -11,12 +11,16 @@ class MainConsultationCard extends StatelessWidget {
     this.time,
     this.description,
     this.onDelete,
+    this.status,
+    this.label,
     required this.onPressed,
   }) : super(key: key);
   final String? title;
   final String? date;
   final String? time;
   final String? description;
+  final String? status;
+  final String? label;
   final Function onPressed;
   final Function? onDelete;
   @override
@@ -39,7 +43,7 @@ class MainConsultationCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: MainSizeData.SIZE_20, vertical: MainSizeData.SIZE_20),
+              horizontal: MainSizeData.SIZE_20, vertical: MainSizeData.SIZE_10),
           child: description == null ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,7 +73,7 @@ class MainConsultationCard extends StatelessWidget {
                           width: MainSizeData.SIZE_20,
                         ),
                         Container(
-                          child: StatusSection(status: 'diterima') ,
+                          child: StatusSection(status: status == 'Answered' ? 'Terkirim' : '') ,
                         ),
                       ],
                     ),
@@ -82,13 +86,21 @@ class MainConsultationCard extends StatelessWidget {
                     )
                 ],
               ),
-              const SizedBox(
-                height: MainSizeData.SIZE_8,
-              ),
               Text(
                 title!.toUpperCase(),
                 style: const TextStyle(
                   color: MainColorData.black,
+                  fontSize: MainSizeData.SIZE_14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+                height: MainSizeData.SIZE_10,
+              ),
+              Text(
+                label!.toLowerCase(),
+                style: const TextStyle(
+                  color: MainColorData.grey,
                   fontSize: MainSizeData.SIZE_14,
                   fontWeight: FontWeight.w700,
                 ),
@@ -120,7 +132,7 @@ class MainConsultationCard extends StatelessWidget {
                     width: MainSizeData.SIZE_20,
                   ),
                   Container(
-                    child: StatusSection(status: 'diterima') ,
+                    child: StatusSection(status: status == "Unaswered" ? 'Dibalas' : '') ,
                   )
                 ],
               ),
@@ -173,10 +185,10 @@ class StatusSection extends StatelessWidget {
   }
 
   Color? statusColor() {
-    switch (status.toLowerCase()) {
-      case 'diterima':
+    switch (status) {
+      case 'Terkirim':
         return MainColorData.green;
-      case 'ditolak':
+      case 'Dibalas':
         return MainColorData.redEF;
     }
   }

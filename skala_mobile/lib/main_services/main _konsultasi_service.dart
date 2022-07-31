@@ -12,8 +12,8 @@ class KonsultasiServices {
     return KonsultasiModel.fromJson(res.data);
   }
 
-  Future<bool> delete(String id)async{
-    final res =await _api.delete('/feedbacks/mobile/$id');
+  Future<bool> delete(String id) async {
+    final res = await _api.delete('/feedbacks/mobile/$id');
     return res.data?['message'] == 'Success';
   }
 
@@ -22,7 +22,7 @@ class KonsultasiServices {
     return KategoriModel.fromJson(res.data);
   }
 
-  Future<KonsultasiDetail>getDetail(String id) async{
+  Future<KonsultasiDetail> getDetail(String id) async {
     final res = await _api.get('/feedbacks/mobile/$id');
     return KonsultasiDetail.fromJson(res.data);
   }
@@ -41,6 +41,19 @@ class KonsultasiServices {
         'description': description,
         if (image?.isNotEmpty ?? false)
           'image': await MultipartFile.fromFile(image!),
+      }),
+    );
+    return res.data?['message'] == 'Success';
+  }
+
+  Future<bool> giveRating({
+    int? consultationId,
+    int? rating,
+  }) async {
+    final res = await _api.post(
+      'feedbacks/mobile/rating/$consultationId',
+      data: FormData.fromMap({
+        'rating': rating,
       }),
     );
     return res.data?['message'] == 'Success';

@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:skala_mobile/main_bloc/konsultasi/konsultasi_cubit.dart';
 import 'package:skala_mobile/main_bloc/konsultasi/kosultasi_state.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
@@ -85,7 +86,43 @@ class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          showRating();
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                "Masukkan Penilaian Konsultasi",
+                                style: TextStyle(
+                                    color: MainColorData.green_dop,
+                                    fontSize: 14),
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [buildRating()],
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      context 
+                                        .read<KonsultasiCubit>()
+                                        .ratingKonsultasi(
+                                          consultationId: widget.id,
+                                          rating: rating.toInt(),
+                                        );
+                                    },
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Get.back();
+                                      },
+                                      child: Text(
+                                        'OK',
+                                        style: TextStyle(
+                                            fontSize: MainSizeData.SIZE_14,
+                                            color: MainColorData.green_dop),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          );
                         },
                         child: Text(
                           'Rating',
@@ -118,29 +155,6 @@ class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
           () {
             this.rating = rating;
           },
-        ),
-      );
-  void showRating() => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            "Masukkan Penilaian Konsultasi",
-            style: TextStyle(color: MainColorData.green_dop, fontSize: 14),
-          ),
-          content: Column(
-            mainAxisSize:MainAxisSize.min,
-            children: [
-              buildRating()
-            ],
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'OK',
-                  style: TextStyle(fontSize: MainSizeData.SIZE_14, color: MainColorData.green_dop),
-                ))
-          ],
         ),
       );
 }

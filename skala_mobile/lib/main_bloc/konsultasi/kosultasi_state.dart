@@ -173,3 +173,34 @@ class KonsultasiDelete extends KonsultasiState {
           message: msg,
         );
 }
+
+class KonsultasiRating extends KonsultasiState {
+  final LoadStatus? load;
+  final String? message;
+
+  KonsultasiRating({
+    this.load,
+    this.message,
+  });
+
+  KonsultasiRating.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  KonsultasiRating.success({
+    String? msg,
+    KategoriModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
+
+  KonsultasiRating.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}

@@ -170,21 +170,30 @@ class HeaderWithSearchBox extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: MainSizeData.SIZE_100,
+            bottom: MainSizeData.SIZE_90,
             left: MainSizeData.SIZE_30,
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Hi FVNDAY',
-                    style: TextStyle(
-                      color: MainColorData.white,
-                      fontSize: MainSizeData.SIZE_16,
-                      fontWeight: FontWeight.w500,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                    Text(
+                      'Selamat Datang,',
+                      style: TextStyle(
+                        color: MainColorData.white,
+                        fontSize: MainSizeData.SIZE_16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                     Text(
+                      'Di Aplikasi Kota Layak Anak Surakarta',
+                      style: TextStyle(
+                        color: MainColorData.white,
+                        fontSize: MainSizeData.SIZE_16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  
+              ],
+              // text:
             ),
           ),
           Positioned(

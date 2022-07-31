@@ -101,4 +101,22 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
       emit(KonsultasiCreate.error(msg: 'Gagal'));
     }
   }
+
+  Future<void> ratingKonsultasi({
+    int? consultationId,
+    int? rating,
+  })async{
+    emit(KonsultasiRating.loading());
+    try {
+      final res = await _konsultasiService.giveRating(
+        consultationId: consultationId,
+        rating: rating
+      );
+      if(res){
+        emit(KonsultasiRating.success());
+      }
+    } catch (e) {
+      emit(KonsultasiRating.error(msg: 'Gagal'));
+    }
+  }
 }

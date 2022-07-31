@@ -73,7 +73,7 @@ class MainConsultationCard extends StatelessWidget {
                           width: MainSizeData.SIZE_20,
                         ),
                         Container(
-                          child: StatusSection(status: status == 'Answered' ? 'Terkirim' : '') ,
+                          child: StatusSection(status: status == 'Answered' ? 'Dibalas' : 'Menunggu') ,
                         ),
                       ],
                     ),
@@ -132,7 +132,7 @@ class MainConsultationCard extends StatelessWidget {
                     width: MainSizeData.SIZE_20,
                   ),
                   Container(
-                    child: StatusSection(status: status == "Unaswered" ? 'Dibalas' : '') ,
+                    child: StatusSection(status: status == "Unaswered" ? 'Belum Dibalas' : 'Menunggu') ,
                   )
                 ],
               ),
@@ -189,7 +189,9 @@ class StatusSection extends StatelessWidget {
       case 'Terkirim':
         return MainColorData.green;
       case 'Dibalas':
-        return MainColorData.redEF;
+        return MainColorData.blue01;
+      case 'Menunggu':
+        return MainColorData.orangeFC;
     }
   }
 }

@@ -85,7 +85,38 @@ class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          showRating();
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text(
+                                "Masukkan Penilaian Konsultasi",
+                                style: TextStyle(
+                                    color: MainColorData.green_dop,
+                                    fontSize: 14),
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [buildRating()],
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      context
+                                          .read<KonsultasiCubit>()
+                                          .ratingKonsultasi(
+                                            consultationId: widget.id,
+                                            rating: rating.toInt(),
+                                          );
+                                    },
+                                    child: Text(
+                                      'OK',
+                                      style: TextStyle(
+                                          fontSize: MainSizeData.SIZE_14,
+                                          color: MainColorData.green_dop),
+                                    ))
+                              ],
+                            ),
+                          );
                         },
                         child: Text(
                           'Rating',
@@ -118,29 +149,6 @@ class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
           () {
             this.rating = rating;
           },
-        ),
-      );
-  void showRating() => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            "Masukkan Penilaian Konsultasi",
-            style: TextStyle(color: MainColorData.green_dop, fontSize: 14),
-          ),
-          content: Column(
-            mainAxisSize:MainAxisSize.min,
-            children: [
-              buildRating()
-            ],
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'OK',
-                  style: TextStyle(fontSize: MainSizeData.SIZE_14, color: MainColorData.green_dop),
-                ))
-          ],
         ),
       );
 }

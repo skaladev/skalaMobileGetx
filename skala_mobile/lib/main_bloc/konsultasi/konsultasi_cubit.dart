@@ -11,13 +11,10 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
     emit(KonsultasiFetch.loading());
     try {
       final res = await _konsultasiService.getList();
-      print(res.toJson());
       if (res.message?.toLowerCase().contains('success') ?? false) {
         emit(KonsultasiFetch.success(data: res));
       }
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
       emit(KonsultasiFetch.error(msg: 'Gagal'));
     }
   }
@@ -29,9 +26,7 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
       if (res) {
         emit(KonsultasiDelete.success());
       }
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
       emit(KonsultasiDelete.error(msg: 'Gagal'));
     }
   }
@@ -40,13 +35,10 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
     emit(KategoriFetch.loading());
     try {
       final res = await _konsultasiService.getCategory();
-      print(res.toJson());
       if (res.message?.toLowerCase().contains('success') ?? false) {
         emit(KategoriFetch.success(data: res));
       }
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
       emit(KategoriFetch.error(msg: 'Gagal'));
     }
   }
@@ -55,13 +47,10 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
     emit(KonsultasiDetailFetch.loading());
     try {
       final res = await _konsultasiService.getDetail(id);
-      print(res.toJson());
       if (res.message?.toLowerCase().contains('succes') ?? false) {
         emit(KonsultasiDetailFetch.success(data: res));
       }
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
       emit(KonsultasiDetailFetch.error(msg: 'Gagal'));
     }
   }
@@ -74,7 +63,6 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
   }) async {
     emit(KonsultasiCreate.loading());
     try {
-      print(image);
       if (image != null) {
         final res = await _konsultasiService.createKonsultasi(
           categoryId: categoryId,
@@ -95,9 +83,25 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
           emit(KonsultasiCreate.success());
         }
       }
-    } catch (e, trace) {
-      print(e);
-      print(trace);
+    } catch (e) {
+      emit(KonsultasiCreate.error(msg: 'Gagal'));
+    }
+  }
+
+  Future<void> ratingKonsultasi({
+    int? consultationId,
+    int? rating,
+  }) async {
+    emit(KonsultasiCreate.loading());
+    try {
+      final res = await _konsultasiService.giveRating(
+        consultationId: consultationId,
+        rating: rating,
+      );
+      if (res) {
+        emit(KonsultasiCreate.success());
+      }
+    } catch (e) {
       emit(KonsultasiCreate.error(msg: 'Gagal'));
     }
   }

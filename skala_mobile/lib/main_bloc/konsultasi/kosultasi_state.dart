@@ -1,5 +1,3 @@
-
-
 import 'package:skala_mobile/main_commons/main_constant_key.dart';
 import 'package:skala_mobile/main_models/main_kategori_model.dart';
 import 'package:skala_mobile/main_models/main_konsultasi_detail_model.dart';
@@ -42,7 +40,6 @@ class KonsultasiFetch extends KonsultasiState {
           message: msg,
         );
 }
-
 
 class KategoriFetch extends KonsultasiState {
   final LoadStatus? load;
@@ -168,6 +165,37 @@ class KonsultasiDelete extends KonsultasiState {
         );
 
   KonsultasiDelete.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}
+
+class KonsultasiRating extends KonsultasiState {
+  final LoadStatus? load;
+  final String? message;
+
+  KonsultasiRating({
+    this.load,
+    this.message,
+  });
+
+  KonsultasiRating.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  KonsultasiRating.success({
+    String? msg,
+    KategoriModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
+
+  KonsultasiRating.error({required String msg})
       : this(
           load: LoadStatus.error,
           message: msg,

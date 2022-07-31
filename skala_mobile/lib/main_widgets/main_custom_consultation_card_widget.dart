@@ -73,7 +73,7 @@ class MainConsultationCard extends StatelessWidget {
                           width: MainSizeData.SIZE_20,
                         ),
                         Container(
-                          child: StatusSection(status: status == 'Answered' ? 'Terkirim' : '') ,
+                          child: StatusSection(status: status == 'Answered' ? 'Terkirim' : 'Dibalas') ,
                         ),
                       ],
                     ),
@@ -132,7 +132,7 @@ class MainConsultationCard extends StatelessWidget {
                     width: MainSizeData.SIZE_20,
                   ),
                   Container(
-                    child: StatusSection(status: status == "Unaswered" ? 'Dibalas' : '') ,
+                    child: StatusSection(status: status == "Unaswered" ? 'Dibalas' : 'Dibalas') ,
                   )
                 ],
               ),

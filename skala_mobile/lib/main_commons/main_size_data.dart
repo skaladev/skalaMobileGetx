@@ -118,6 +118,10 @@ class MainSizeData {
   static const double SIZE_90 = 90;
   static const double SIZE_100 = 100;
   static const double SIZE_120 = 120;
+  static const double SIZE_130 = 130;
+  static const double SIZE_140 = 140;
+  static const double SIZE_150 = 150;
+  static const double SIZE_160 = 160;
   static const double SIZE_170 = 170;
   static const double SIZE_180 = 180;
   static const double SIZE_190 = 190;

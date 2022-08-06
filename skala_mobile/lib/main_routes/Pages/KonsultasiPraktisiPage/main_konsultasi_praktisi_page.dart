@@ -78,7 +78,7 @@ class MainKonsultasiPraktisiPage extends StatelessWidget {
                 height: MainSizeData.SIZE_14,
               ),
                Text(
-                'Kategori',
+                'Daftar Konsultasi',
                 style: const TextStyle(
                     color: MainColorData.grey,
                     fontSize: MainSizeData.SIZE_14,

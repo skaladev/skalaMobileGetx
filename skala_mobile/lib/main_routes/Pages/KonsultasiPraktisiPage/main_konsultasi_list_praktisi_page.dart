@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
+import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_card_praktisi.dart';
@@ -19,23 +21,24 @@ class MainKonsultasiListPraktisi extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [MainCustomCardPraktisi(
-            itemName: "Aksal Syah Falah.P.Si",
-            itemCategory: "Kesehatan Mental",
-            itemImage: 'assets/images/example_praktisi.jpg',
-            onPressed: (){},
-          ),
-          MainCustomCardPraktisi(
-            itemName: "Aksal Syah Falah.P.Si",
-            itemCategory: "Kesehatan Mental",
-            itemImage: 'assets/images/example_praktisi.jpg',
-            onPressed: (){},
-          ),
+          children: [
+            MainCustomCardPraktisi(
+              itemName: "Aksal Syah Falah.P.Si",
+              itemCategory: "Kesehatan Mental",
+              itemImage: 'assets/images/example_praktisi.jpg',
+              onPressed: () {
+                Get.toNamed(MainConstantRoute.mainKonsultasiPraktisiBio);
+              },
+            ),
+            MainCustomCardPraktisi(
+              itemName: "Aksal Syah Falah.P.Si",
+              itemCategory: "Kesehatan Mental",
+              itemImage: 'assets/images/example_praktisi.jpg',
+              onPressed: () {},
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

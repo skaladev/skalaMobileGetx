@@ -11,4 +11,5 @@ class MainConstantRoute {
   static const String mainEditProfile = '/editProfile';
   static const String mainAddKonsultasi = '/addKonsultasi';
   static const String mainListPraktisi =  '/listPraktisi';
+  static const String mainKonsultasiPraktisiBio = '/konsultasiPraktisiBio';
 }

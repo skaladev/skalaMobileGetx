@@ -6,6 +6,7 @@ import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_bio_binding.dart';
+import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
 import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
@@ -20,6 +21,7 @@ import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_det
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
@@ -133,6 +135,13 @@ class MainRouteHelper {
         GetPage(
           name: MainConstantRoute.mainKonsultasiPraktisiBio, 
           page: ()=>MainKonsultasiPraktisiBio(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding: MainKosultasiPraktisiBioBinding()
+          ),
+        GetPage(
+          name: MainConstantRoute.mainKonsultasiPraktisiForm, 
+          page: ()=>MainKonsultasiPraktisiForm(),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainKosultasiPraktisiFormBinding()

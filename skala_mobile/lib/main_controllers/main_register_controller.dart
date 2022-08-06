@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 
 class MainRegisterController extends GetxController{

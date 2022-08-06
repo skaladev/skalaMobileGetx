@@ -7,7 +7,7 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
     Key? key,
     required this.itemName,
     required this.itemKategori,
-    required this.itemSK,
+    this.itemSK,
     required this.itemImage,
     this.itemExperience,
     required this.size,
@@ -15,7 +15,7 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
   final String itemName;
   final String itemKategori;
   final String itemImage;
-  final String itemSK;
+  final String? itemSK;
   final String? itemExperience;
   final Size size;
   @override
@@ -122,7 +122,7 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: MainSizeData.SIZE_14),
                             child: Text(
-                              itemSK,
+                              itemSK ?? '',
                               style: TextStyle(
                                   fontSize: MainSizeData.fontSize12,
                                   fontWeight: FontWeight.bold,

@@ -8,12 +8,12 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 class MainCustomCard extends StatelessWidget {
   const MainCustomCard({
     Key? key,
-    required this.itemCount,
+     this.itemCount,
     required this.itemTitle,
     required this.onTap,
   }) : super(key: key);
 
-  final String itemCount;
+  final String ?itemCount;
   final String itemTitle;
   final Function() onTap;
   @override
@@ -22,7 +22,7 @@ class MainCustomCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         margin: const EdgeInsets.symmetric(
-            horizontal: MainSizeData.SIZE_12,
+            horizontal: MainSizeData.SIZE_6,
             vertical: MainSizeData.SIZE_8),
         elevation: 0,
         color: MainColorData.white,
@@ -50,7 +50,7 @@ class MainCustomCard extends StatelessWidget {
               ),
               Flexible(
                 child: Text(
-                  itemCount,
+                  itemCount ?? "",
                   style: const TextStyle(
                     color: MainColorData.black,
                     fontSize: MainSizeData.SIZE_28,
@@ -62,7 +62,7 @@ class MainCustomCard extends StatelessWidget {
                 itemTitle,
                 style: const TextStyle(
                     color: MainColorData.grey,
-                    fontSize: MainSizeData.SIZE_10,
+                    fontSize: MainSizeData.SIZE_20,
                     fontWeight: FontWeight.bold),
               )
             ],

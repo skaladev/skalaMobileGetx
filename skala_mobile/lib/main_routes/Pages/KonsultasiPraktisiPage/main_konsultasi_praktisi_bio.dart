@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
+import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_header_konsultasi_praktisi_widget.dart';
@@ -215,7 +217,9 @@ class MainKonsultasiPraktisiBio extends StatelessWidget {
               padding:EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_30, vertical: MainSizeData.SIZE_20),
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Get.toNamed(MainConstantRoute.mainKonsultasiPraktisiForm);
+                    },
                     child: Text(
                       'Mulai Konsultasi',
                       style: TextStyle(

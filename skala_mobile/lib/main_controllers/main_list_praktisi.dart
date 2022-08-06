@@ -1,8 +1,6 @@
 
 import 'package:get/get.dart';
 import 'dart:async';
-
-import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 class MainListPraktisiController extends GetxController{
   Future<Timer> loadData() async {

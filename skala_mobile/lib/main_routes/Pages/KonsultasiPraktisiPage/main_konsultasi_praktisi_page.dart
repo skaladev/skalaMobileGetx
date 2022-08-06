@@ -43,37 +43,52 @@ class MainKonsultasiPraktisiPage extends StatelessWidget {
               SizedBox(
                 height: MainSizeData.SIZE_8,
               ),
-              SizedBox(
-                height: MainSizeData.SIZE_120,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: MainCustomCard(
-                        itemCount: "9",
+              Container(
+                height:MainSizeData.SIZE_90,
+                child: ListView.builder(
+                  itemCount: 4,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: ((context, index) {
+                    return  MainCustomCard(
                         itemTitle: "Kesehatan Mental",
                         onTap: () {
                           Get.toNamed(MainConstantRoute.mainListPraktisi);
                         },
-                      ),
-                    ),
-                    Expanded(
-                      child: MainCustomCard(
-                        itemCount: "9",
-                        itemTitle: "Gizi Anak",
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: MainCustomCard(
-                        itemCount: "9",
-                        itemTitle: "Kenakalan Remaja",
-                        onTap: () {},
-                      ),
-                    ),
-                  ],
+                      );
+                  }),
                 ),
               ),
+              // SizedBox(
+              //   height: MainSizeData.SIZE_120,
+              //   child: Row(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Expanded(
+              //         child: MainCustomCard(
+              //           itemCount: "9",
+              //           itemTitle: "Kesehatan Mental",
+              //           onTap: () {
+              //             Get.toNamed(MainConstantRoute.mainListPraktisi);
+              //           },
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: MainCustomCard(
+              //           itemCount: "9",
+              //           itemTitle: "Gizi Anak",
+              //           onTap: () {},
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: MainCustomCard(
+              //           itemCount: "9",
+              //           itemTitle: "Kenakalan Remaja",
+              //           onTap: () {},
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
                SizedBox(
                 height: MainSizeData.SIZE_14,
               ),

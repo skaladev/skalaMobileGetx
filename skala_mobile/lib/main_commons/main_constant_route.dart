@@ -13,4 +13,5 @@ class MainConstantRoute {
   static const String mainListPraktisi =  '/listPraktisi';
   static const String mainKonsultasiPraktisiBio = '/konsultasiPraktisiBio';
   static const String mainKonsultasiPraktisiForm = '/konsultasiPraktisiForm';
+  static const String mainKla = '/kla';
 }

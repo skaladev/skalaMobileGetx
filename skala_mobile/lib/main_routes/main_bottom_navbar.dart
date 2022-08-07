@@ -47,7 +47,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                color: MainColorData.grey25,
+                color: MainColorData.grey,
               ),
               activeIcon: Icon(
                 Icons.home_filled,
@@ -58,7 +58,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.work_outline_outlined,
-                color: MainColorData.grey25,
+                color: MainColorData.grey,
               ),
               activeIcon: Icon(
                 Icons.work,
@@ -69,7 +69,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.message_outlined,
-                color: MainColorData.grey25,
+                color: MainColorData.grey,
               ),
               activeIcon: Icon(
                 Icons.message,
@@ -80,7 +80,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
-                color: MainColorData.grey25,
+                color: MainColorData.grey,
               ),
               activeIcon: Icon(
                 Icons.person,

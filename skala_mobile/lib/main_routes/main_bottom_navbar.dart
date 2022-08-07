@@ -6,6 +6,7 @@ import 'package:skala_mobile/main_controllers/main_app_controller.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/main_home_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KegiatanLainPage/main_kegiatan_lain_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_konsultasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_profile_page.dart';
 
 class MainBottomNavbar extends StatefulWidget {
@@ -20,7 +21,8 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
   int _currentIndex = 0;
   final List<Widget> _items = [
     MainHomePage(),
-    MainKegiatanLainPage(),
+    // MainKegiatanLainPage(),
+    MainKonsultasiPraktisiPage(),
     MainKonsultasiPage(),
     MainProfilePage(),
   ];
@@ -62,7 +64,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
                 Icons.work,
                 color: MainColorData.green_dop,
               ),
-              label: 'Kegiatan Lain',
+              label: 'Konsultasi',
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -73,7 +75,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
                 Icons.message,
                 color: MainColorData.green_dop,
               ),
-              label: 'Konsultasi',
+              label: 'Aduan',
             ),
             BottomNavigationBarItem(
               icon: Icon(

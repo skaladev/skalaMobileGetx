@@ -37,6 +37,7 @@ class MainColorData {
   static const Color blue44 = Color(0xFF448EFE);
   static const Color green_dop = Color(0xFF007A80);
   static const Color green_dop2 = Color(0xFF83c5be);
+  static const Color green_dop3 = Color(0xFF59BEC3);
 
   static const Color bgGreyED = Color(0xFFEDEDED);
 }

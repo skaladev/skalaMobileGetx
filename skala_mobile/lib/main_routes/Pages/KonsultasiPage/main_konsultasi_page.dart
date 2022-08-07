@@ -40,7 +40,7 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
     return Scaffold(
       backgroundColor: MainColorData.white,
       appBar: const MainCustomAppBarTitle(
-        title: "Konsultasi",
+        title: "Aduan",
         isIconEnabled: false,
         titleStyle: TextStyle(
           color: MainColorData.black,

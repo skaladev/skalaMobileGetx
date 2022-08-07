@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 
@@ -6,6 +5,9 @@ import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
+import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_bio_binding.dart';
+import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
+import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
@@ -17,6 +19,9 @@ import 'package:skala_mobile/main_bloc/ref/ref_cubit.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
@@ -76,11 +81,11 @@ class MainRouteHelper {
             transition: Transition.fadeIn),
         GetPage(
             name: MainConstantRoute.bottomNavigationBar,
-            page: () =>bloc.MultiBlocProvider(
+            page: () => bloc.MultiBlocProvider(
                   providers: [
-                   bloc.BlocProvider(create: (context) => KonsultasiCubit()),
-                   bloc.BlocProvider(create: (context)=>RefCubit()),
-                   bloc.BlocProvider(create: (context) => ProfileCubit())
+                    bloc.BlocProvider(create: (context) => KonsultasiCubit()),
+                    bloc.BlocProvider(create: (context) => RefCubit()),
+                    bloc.BlocProvider(create: (context) => ProfileCubit())
                   ],
                   child: MainBottomNavbar(),
                 ),
@@ -102,8 +107,8 @@ class MainRouteHelper {
           name: MainConstantRoute.mainEditProfile,
           page: () => bloc.MultiBlocProvider(
             providers: [
-              bloc.BlocProvider(create: (context)=> RefCubit()),
-              bloc.BlocProvider(create: (context)=> ProfileCubit()),
+              bloc.BlocProvider(create: (context) => RefCubit()),
+              bloc.BlocProvider(create: (context) => ProfileCubit()),
             ],
             child: MainEditProfilePage(),
           ),
@@ -119,6 +124,27 @@ class MainRouteHelper {
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainAddKosultasiBinding())
+            binding: MainAddKosultasiBinding()),
+        GetPage(
+          name: MainConstantRoute.mainListPraktisi,
+          page: () => MainKonsultasiListPraktisi(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding: MainListPraktisiBinding(),
+        ),
+        GetPage(
+          name: MainConstantRoute.mainKonsultasiPraktisiBio, 
+          page: ()=>MainKonsultasiPraktisiBio(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding: MainKosultasiPraktisiBioBinding()
+          ),
+        GetPage(
+          name: MainConstantRoute.mainKonsultasiPraktisiForm, 
+          page: ()=>MainKonsultasiPraktisiForm(),
+          alignment: Alignment.center,
+          transition: Transition.fadeIn,
+          binding: MainKosultasiPraktisiFormBinding()
+          )
       ];
 }

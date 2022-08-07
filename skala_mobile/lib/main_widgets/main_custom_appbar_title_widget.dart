@@ -12,6 +12,7 @@ class MainCustomAppBarTitle extends StatelessWidget
       this.isIconEnabled = true,
       this.titleStyle,
       this.action,
+      this.color,
       Key? key})
       : super(key: key);
   final AppBar? appBar;
@@ -20,6 +21,7 @@ class MainCustomAppBarTitle extends StatelessWidget
   final bool isIconEnabled;
   final Function()? onPressed;
   final Widget? action;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -51,7 +53,7 @@ class MainCustomAppBarTitle extends StatelessWidget
                       color: MainColorData.black),
             ),
       leadingWidth: MainSizeData.SIZE_50,
-      backgroundColor: Colors.transparent,
+      backgroundColor: color ?? Colors.transparent,
       elevation: 0,
       actions: action != null ? [action!] : null,
     );

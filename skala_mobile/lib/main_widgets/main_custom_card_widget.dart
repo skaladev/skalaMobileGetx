@@ -9,12 +9,12 @@ class MainCustomCard extends StatelessWidget {
   const MainCustomCard({
     Key? key,
      this.itemCount,
-    required this.itemTitle,
+     this.itemTitle,
     required this.onTap,
   }) : super(key: key);
 
-  final String ?itemCount;
-  final String itemTitle;
+  final String? itemCount;
+  final String? itemTitle;
   final Function() onTap;
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class MainCustomCard extends StatelessWidget {
                 ),
               ),
               Text(
-                itemTitle,
+                itemTitle!.toUpperCase(),
                 style: const TextStyle(
                     color: MainColorData.grey,
                     fontSize: MainSizeData.SIZE_20,

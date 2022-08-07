@@ -9,16 +9,19 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_article.dart';
+import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_custom_card_widget.dart';
 
 class MainHomePage extends StatelessWidget {
-  const MainHomePage({Key? key}) : super(key: key);
+  final _prefs = Prefs();
+  MainHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,6 +87,7 @@ class MainHomePage extends StatelessWidget {
                   icon: "assets/icons/ic_checklist.svg",
                   onPressed: (){},
                 ),
+                if(_prefs.roleId  !=6)
                 itemMenuHome(
                   title: "Aduan",
                   icon: "assets/icons/ic_coding.svg",

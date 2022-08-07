@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/route_manager.dart';
 import 'package:hive/hive.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
@@ -20,6 +21,7 @@ class MainHomePage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             HeaderWithSearchBox(size: size),
             SizedBox(height: MainSizeData.SIZE_16),
@@ -42,7 +44,7 @@ class MainHomePage extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
                         image: DecorationImage(
-                            image: AssetImage('assets/images/slider2.jpg'),
+                            image: AssetImage('assets/images/slider_1.png'),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -51,7 +53,7 @@ class MainHomePage extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
                         image: DecorationImage(
-                            image: AssetImage('assets/images/slider1.jpg'),
+                            image: AssetImage('assets/images/slider_2.png'),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -60,24 +62,50 @@ class MainHomePage extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
                         image: DecorationImage(
-                            image: AssetImage('assets/images/slider3.jpg'),
+                            image: AssetImage('assets/images/slider_3.png'),
                             fit: BoxFit.cover),
                       ),
                     ),
                   ],
                 )),
             SizedBox(height: MainSizeData.SIZE_20),
-            CustomCard(onPressed: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => KlasterPage()));
-            }),
-            SizedBox(height: MainSizeData.SIZE_20),
-            Text(
-              'Berita',
-              style: TextStyle(
-                  fontSize: MainSizeData.SIZE_16,
-                  fontWeight: FontWeight.w600,
-                  color: MainColorData.green_dop),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                itemMenuHome(
+                  title: "Tentang KLA",
+                  icon: "assets/icons/ic_horse.svg",
+                  onPressed: (){
+                      Get.toNamed(MainConstantRoute.mainKla);
+                  },
+                ),
+                itemMenuHome(
+                  title: "Konsultasi",
+                  icon: "assets/icons/ic_checklist.svg",
+                  onPressed: (){},
+                ),
+                itemMenuHome(
+                  title: "Aduan",
+                  icon: "assets/icons/ic_coding.svg",
+                  onPressed: (){},
+                ),
+                
+              ],
+            ),
+            // CustomCard(onPressed: () {
+            //   // Navigator.push(context,
+            //   //     MaterialPageRoute(builder: (context) => KlasterPage()));
+            // }),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+              child: Text(
+                'Berita',
+                style: TextStyle(
+                    fontSize: MainSizeData.SIZE_16,
+                    fontWeight: FontWeight.w600,
+                    color: MainColorData.green_dop),
+              ),
             ),
             FutureBuilder<String>(
               future: DefaultAssetBundle.of(context)
@@ -98,6 +126,52 @@ class MainHomePage extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 }
               },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class itemMenuHome extends StatelessWidget {
+  const itemMenuHome({
+    required this.title,
+    required this.icon,
+    required this.onPressed,
+
+    Key? key,
+  }) : super(key: key);
+
+  final String title;
+  final String icon;
+  final Function onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:(){
+        onPressed();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_18),
+        child: Column( 
+          children: [
+            Container(
+              width: MainSizeData.SIZE_50,
+              height: MainSizeData.SIZE_50,
+              child: SvgPicture.asset(
+                icon,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: MainSizeData.SIZE_5),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: MainSizeData.SIZE_12,
+                fontWeight: FontWeight.bold,
+                color: MainColorData.green_dop
+              ),
             )
           ],
         ),
@@ -117,7 +191,7 @@ class HeaderWithSearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: MainSizeData.SIZE_12),
+      margin: EdgeInsets.only(bottom: MainSizeData.SIZE_4),
       height: size.height * 0.3,
       child: Stack(
         children: <Widget>[
@@ -175,23 +249,22 @@ class HeaderWithSearchBox extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                    Text(
-                      'Selamat Datang,',
-                      style: TextStyle(
-                        color: MainColorData.white,
-                        fontSize: MainSizeData.SIZE_16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                     Text(
-                      'Di Aplikasi Kota Layak Anak Surakarta',
-                      style: TextStyle(
-                        color: MainColorData.white,
-                        fontSize: MainSizeData.SIZE_16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  
+                Text(
+                  'Selamat Datang,',
+                  style: TextStyle(
+                    color: MainColorData.white,
+                    fontSize: MainSizeData.SIZE_16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  'Di Aplikasi Kota Layak Anak Surakarta',
+                  style: TextStyle(
+                    color: MainColorData.white,
+                    fontSize: MainSizeData.SIZE_16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
               // text:
             ),

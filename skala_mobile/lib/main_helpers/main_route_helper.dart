@@ -14,6 +14,7 @@ import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
 import 'package:skala_mobile/main_bloc/auth/auth_cubit.dart';
+import 'package:skala_mobile/main_bloc/consultations/consultation_cubit.dart';
 import 'package:skala_mobile/main_bloc/konsultasi/konsultasi_cubit.dart';
 import 'package:skala_mobile/main_bloc/profile/profile_cubit.dart';
 import 'package:skala_mobile/main_bloc/ref/ref_cubit.dart';
@@ -87,7 +88,8 @@ class MainRouteHelper {
                   providers: [
                     bloc.BlocProvider(create: (context) => KonsultasiCubit()),
                     bloc.BlocProvider(create: (context) => RefCubit()),
-                    bloc.BlocProvider(create: (context) => ProfileCubit())
+                    bloc.BlocProvider(create: (context) => ProfileCubit()),
+                    bloc.BlocProvider(create: (context)=> ConsultationCubit(),)
                   ],
                   child: MainBottomNavbar(),
                 ),

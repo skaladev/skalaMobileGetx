@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_controllers/main_app_controller.dart';
+import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/main_home_page.dart';
-import 'package:skala_mobile/main_routes/Pages/KegiatanLainPage/main_kegiatan_lain_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_konsultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_profile_page.dart';
@@ -19,15 +19,18 @@ class MainBottomNavbar extends StatefulWidget {
 
 class _MainBottomNavbarState extends State<MainBottomNavbar> {
   int _currentIndex = 0;
-  final List<Widget> _items = [
-    MainHomePage(),
-    // MainKegiatanLainPage(),
-    MainKonsultasiPraktisiPage(),
-    MainKonsultasiPage(),
-    MainProfilePage(),
-  ];
+  final _prefs = Prefs();
+
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _items = [
+      MainHomePage(),
+      // MainKegiatanLainPage(),
+      MainKonsultasiPraktisiPage(),
+      if (_prefs.roleId != 6) MainKonsultasiPage(),
+      MainProfilePage(),
+    ];
+
     return Scaffold(
       body: _items[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -38,12 +41,12 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          iconSize:MainSizeData.SIZE_24,
-          unselectedFontSize:MainSizeData.SIZE_10,
-          selectedFontSize:MainSizeData.SIZE_10,
+          iconSize: MainSizeData.SIZE_24,
+          unselectedFontSize: MainSizeData.SIZE_10,
+          selectedFontSize: MainSizeData.SIZE_10,
           selectedItemColor: MainColorData.green_dop,
           unselectedItemColor: MainColorData.black,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
@@ -66,17 +69,18 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
               ),
               label: 'Konsultasi',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.message_outlined,
-                color: MainColorData.grey,
+            if (_prefs.roleId != 6)
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.message_outlined,
+                  color: MainColorData.grey,
+                ),
+                activeIcon: Icon(
+                  Icons.message,
+                  color: MainColorData.green_dop,
+                ),
+                label: 'Aduan',
               ),
-              activeIcon: Icon(
-                Icons.message,
-                color: MainColorData.green_dop,
-              ),
-              label: 'Aduan',
-            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,

@@ -7,6 +7,7 @@ class Prefs {
   static const String tokenKey = 'tokenKey';
   static const String isActiveKey = 'isActiveKey';
   static const String isWelcomeKey = 'isWelcomeKey';
+  static const String roleIdKey = 'roleIdKey';
 
   bool? get isWelcome => _box.get(isWelcomeKey);
   set isWelcome(bool? val) => _box.put(isWelcomeKey, val);
@@ -18,6 +19,9 @@ class Prefs {
   set token(String? val) => _box.put(tokenKey, val);
 
   bool get isLogin => isActive == true && (token?.isNotEmpty ?? false);
+
+  int? get roleId => _box.get(roleIdKey);
+  set roleId(int? val) => _box.put(roleIdKey, val);
 
   Future<void> clear() async => await _box.clear();
 }

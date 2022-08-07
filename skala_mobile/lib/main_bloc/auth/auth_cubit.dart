@@ -37,6 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (res.message?.toLowerCase().contains('success') ?? false) {
         if (res.data?.isActive == 1) {
           _prefs.isActive = true;
+          _prefs.roleId = res.data?.roleId;
           emit(AuthVerifyOtp.success());
         }
       }

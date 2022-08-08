@@ -7,6 +7,6 @@ import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsu
 class MainKosultasiPraktisiBioBinding implements Bindings{
   @override
   void dependencies(){
-    Get.put(MainKonsultasiPraktisiBio());
+    // Get.put(MainKonsultasiPraktisiBio());
   }
 }

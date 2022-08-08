@@ -89,7 +89,9 @@ class MainRouteHelper {
                     bloc.BlocProvider(create: (context) => KonsultasiCubit()),
                     bloc.BlocProvider(create: (context) => RefCubit()),
                     bloc.BlocProvider(create: (context) => ProfileCubit()),
-                    bloc.BlocProvider(create: (context)=> ConsultationCubit(),)
+                    bloc.BlocProvider(
+                      create: (context) => ConsultationCubit(),
+                    )
                   ],
                   child: MainBottomNavbar(),
                 ),
@@ -131,31 +133,34 @@ class MainRouteHelper {
             binding: MainAddKosultasiBinding()),
         GetPage(
           name: MainConstantRoute.mainListPraktisi,
-          page: () => MainKonsultasiListPraktisi(),
+          page: () => bloc.BlocProvider(
+            create: (context)=> ConsultationCubit(),
+            child: MainKonsultasiListPraktisi(),
+          ),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainListPraktisiBinding(),
         ),
+        // GetPage(
+        //     name: MainConstantRoute.mainKonsultasiPraktisiBio,
+        //     page: () => bloc.BlocProvider(
+        //           create: (context) => ConsultationCubit(),
+        //           child: MainKonsultasiPraktisiBio(),
+        //         ),
+        //     alignment: Alignment.center,
+        //     transition: Transition.fadeIn,
+        //     binding: MainKosultasiPraktisiBioBinding()),
         GetPage(
-          name: MainConstantRoute.mainKonsultasiPraktisiBio, 
-          page: ()=>MainKonsultasiPraktisiBio(),
-          alignment: Alignment.center,
-          transition: Transition.fadeIn,
-          binding: MainKosultasiPraktisiBioBinding()
-          ),
+            name: MainConstantRoute.mainKonsultasiPraktisiForm,
+            page: () => MainKonsultasiPraktisiForm(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKosultasiPraktisiFormBinding()),
         GetPage(
-          name: MainConstantRoute.mainKonsultasiPraktisiForm, 
-          page: ()=>MainKonsultasiPraktisiForm(),
-          alignment: Alignment.center,
-          transition: Transition.fadeIn,
-          binding: MainKosultasiPraktisiFormBinding()
-          ),
-        GetPage(
-          name: MainConstantRoute.mainKla, 
-          page: ()=>KlaPage(),
-          alignment: Alignment.center,
-          transition: Transition.fadeIn,
-          binding: MainKlaBinding()
-          )
+            name: MainConstantRoute.mainKla,
+            page: () => KlaPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKlaBinding())
       ];
 }

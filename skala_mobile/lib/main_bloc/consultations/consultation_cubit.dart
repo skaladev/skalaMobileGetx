@@ -25,9 +25,24 @@ class ConsultationCubit extends Cubit<ConsultationState>{
   }
 
   Future<void>getConsultantList()async{
-    emit(ConsultantFetch.loading());
+    emit( ConsultantListFetch.loading());
     try {
       final res = await _consultationService.getConsultantList();
+      print(res.toJson());
+      if(res.message?.toLowerCase().contains('success')?? false){
+        emit( ConsultantListFetch.success(data: res));
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit( ConsultantListFetch.error(msg: 'Gagal'));
+    }
+  }
+
+  Future<void>getConsultant(String id)async{
+    emit(ConsultantFetch.loading());
+    try {
+      final res = await _consultationService.getConsultant(id);
       print(res.toJson());
       if(res.message?.toLowerCase().contains('success')?? false){
         emit(ConsultantFetch.success(data: res));
@@ -38,5 +53,4 @@ class ConsultationCubit extends Cubit<ConsultationState>{
       emit(ConsultantFetch.error(msg: 'Gagal'));
     }
   }
-
 }

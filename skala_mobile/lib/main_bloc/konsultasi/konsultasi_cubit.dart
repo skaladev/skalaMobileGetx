@@ -56,7 +56,7 @@ class KonsultasiCubit extends Cubit<KonsultasiState> {
     try {
       final res = await _konsultasiService.getDetail(id);
       print(res.toJson());
-      if (res.message?.toLowerCase().contains('succes') ?? false) {
+      if (res.message?.toLowerCase().contains('success') ?? false) {
         emit(KonsultasiDetailFetch.success(data: res));
       }
     } catch (e, trace) {

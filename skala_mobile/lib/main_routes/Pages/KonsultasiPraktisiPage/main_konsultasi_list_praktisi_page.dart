@@ -45,9 +45,9 @@ class _MainKonsultasiListPraktisiState
         child: Column(
           children: [
             BlocBuilder<ConsultationCubit, ConsultationState>(
-              buildWhen: ((previous, current) => current is ConsultantFetch),
+              buildWhen: ((previous, current) => current is  ConsultantListFetch),
               builder: (context, state) {
-                if (state is ConsultantFetch) {
+                if (state is  ConsultantListFetch) {
                   return loadData(state.load,
                       errorMessage: state.message,
                       child: (state.data?.data?.isEmpty ?? true)

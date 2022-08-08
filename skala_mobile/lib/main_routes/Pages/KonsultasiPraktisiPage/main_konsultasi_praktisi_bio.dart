@@ -5,14 +5,26 @@ import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
+import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_header_konsultasi_praktisi_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MainKonsultasiPraktisiBio extends StatelessWidget {
-  const MainKonsultasiPraktisiBio({
+class MainKonsultasiPraktisiBio extends StatefulWidget {
+  final ConsultantListModel? consultant;
+  const MainKonsultasiPraktisiBio(
+    this.id,
+    {
     Key? key,
+    this.consultant,
   }) : super(key: key);
+  final int?id;
+
+  @override
+  State<MainKonsultasiPraktisiBio> createState() => _MainKonsultasiPraktisiBioState();
+}
+
+class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

@@ -4,15 +4,15 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 
 class MainCustomCardPraktisi extends StatelessWidget {
   const MainCustomCardPraktisi({
-    required this.itemName,
-    required this.itemCategory,
-    required this.itemImage,
-    required this.onPressed,
+    this.itemName,
+    this.itemCategory,
+    this.itemImage,
+    this.onPressed,
     Key? key,
   }) : super(key: key);
-  final String itemName;
-  final String itemCategory;
-  final String itemImage;
+  final String? itemName;
+  final String? itemCategory;
+  final String? itemImage;
   final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   image: DecorationImage(
-                      image:  AssetImage(itemImage))),
+                      image:  AssetImage(itemImage ?? "assets/images/user.png"))),
             ),
           ),
         ),
@@ -66,7 +66,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  itemName,
+                  itemName?? "No Name",
                   style: TextStyle(
                       fontSize: MainSizeData.fontSize14,
                       fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
                 ),
                 SizedBox(height: MainSizeData.SIZE_5),
                 Text(
-                  itemCategory,
+                  itemCategory??"-",
                   style: TextStyle(
                       fontSize: MainSizeData.fontSize10,
                       fontWeight: FontWeight.bold,

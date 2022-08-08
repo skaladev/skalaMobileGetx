@@ -97,7 +97,18 @@ class _MainKonsultasiPraktisiPageState
                     }
                     return const SizedBox();
                   }),
-
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(MainConstantRoute.mainListPraktisi);
+                },
+                child: Text(
+                  "Lihat Tenaga Ahli",
+                  style: TextStyle(
+                      fontSize: MainSizeData.fontSize16,
+                      fontWeight: FontWeight.bold,
+                      color: MainColorData.orangeFC),
+                ),
+              ),
               // SizedBox(
               //   height: MainSizeData.SIZE_120,
               //   child: Row(
@@ -110,20 +121,6 @@ class _MainKonsultasiPraktisiPageState
               //           onTap: () {
               //             Get.toNamed(MainConstantRoute.mainListPraktisi);
               //           },
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: MainCustomCard(
-              //           itemCount: "9",
-              //           itemTitle: "Gizi Anak",
-              //           onTap: () {},
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: MainCustomCard(
-              //           itemCount: "9",
-              //           itemTitle: "Kenakalan Remaja",
-              //           onTap: () {},
               //         ),
               //       ),
               //     ],
@@ -151,10 +148,6 @@ class _MainKonsultasiPraktisiPageState
 }
 
 Widget _buildConsultationCategories(
-  BuildContext context,
-  ConsultationCategoriesModelData? categories
-){
-  return MainCustomCard(
-    itemTitle: categories?.name, 
-    onTap: (){});
+    BuildContext context, ConsultationCategoriesModelData? categories) {
+  return MainCustomCard(itemTitle: categories?.name, onTap: () {});
 }

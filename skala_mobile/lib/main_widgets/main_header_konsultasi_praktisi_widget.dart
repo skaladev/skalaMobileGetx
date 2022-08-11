@@ -9,14 +9,14 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
     required this.itemKategori,
     this.itemSK,
     required this.itemImage,
-    this.itemExperience,
+    this.itemWorkExperience,
     required this.size,
   }) : super(key: key);
   final String itemName;
   final String itemKategori;
   final String itemImage;
   final String? itemSK;
-  final String? itemExperience;
+  final int? itemWorkExperience;
   final Size size;
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "$itemExperience year experience",
+                                  "$itemWorkExperience year experience",
                                   style: const TextStyle(
                                       color: MainColorData.white,
                                       fontSize: MainSizeData.SIZE_12,

@@ -2,6 +2,7 @@ import 'package:skala_mobile/main_commons/main_constant_key.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
+import 'package:skala_mobile/main_models/main_consultation_model.dart';
 
 abstract class ConsultationState {}
 
@@ -77,3 +78,99 @@ class ConsultantFetch extends ConsultationState {
       : this(load: LoadStatus.error, message: msg);
 }
 
+class ConsultationCreate extends ConsultationState{
+  final LoadStatus? load;
+  final String? message;
+
+  ConsultationCreate({
+    this.load,
+    this.message,
+  });
+
+  ConsultationCreate.loading({
+    String? msg,
+  }): this(
+    load: LoadStatus.loading,
+    message: msg,
+  );
+
+  ConsultationCreate.success({
+    String? msg,
+    ConsultationCategoriesModel? data,
+  }): this(
+    load:  LoadStatus.success,
+    message: msg,
+  );
+
+  ConsultationCreate.error({required String msg})
+    : this(
+      load:  LoadStatus.error,
+      message: msg
+    );
+}
+
+class ConsultationFetch extends ConsultationState{
+  final LoadStatus? load;
+  final String? message;
+  final ConsultationModel? data;
+
+  ConsultationFetch({
+    this.load,
+    this.message,
+    this.data,
+  });
+
+  ConsultationFetch.loading({
+    String? msg,
+  }): this(
+    load: LoadStatus.loading,
+    message: msg,
+  );
+
+  ConsultationFetch.success({
+    String? msg,
+    ConsultationModel? data,
+  }) : this(
+    load: LoadStatus.success,
+    message: msg,
+    data: data,
+  );
+
+  ConsultationFetch.error({
+    required String msg
+  }): this(
+    load: LoadStatus.error,
+    message: msg,
+  );
+}
+
+class ConsultationDelete extends ConsultationState {
+  final LoadStatus? load;
+  final String? message;
+
+  ConsultationDelete({
+    this.load,
+    this.message,
+  });
+
+  ConsultationDelete.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  ConsultationDelete.success({
+    String? msg,
+    ConsultationModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
+
+  ConsultationDelete.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}

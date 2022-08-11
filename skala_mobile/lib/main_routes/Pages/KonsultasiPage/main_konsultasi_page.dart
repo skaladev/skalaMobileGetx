@@ -49,15 +49,14 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
         ),
       ),
       body: BlocConsumer<KonsultasiCubit, KonsultasiState>(
-        listenWhen:(previous,current) => current is KonsultasiDelete,
-        listener : (context,state){
-          if(state is KonsultasiDelete){
+        listenWhen: (previous, current) => current is KonsultasiDelete,
+        listener: (context, state) {
+          if (state is KonsultasiDelete) {
             blocHelperListenner(
-              load: state.load,
-              onSuccess: (){
-                _fetch();
-              }
-            );
+                load: state.load,
+                onSuccess: () {
+                  _fetch();
+                });
           }
         },
         buildWhen: (previous, current) => current is KonsultasiFetch,
@@ -97,23 +96,22 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
   }
 
   Widget _buildKonsultasiItem(
-    BuildContext context,
-    KonsultasiModelData? konsultasiDummy) {
-  return MainConsultationCard(
+      BuildContext context, KonsultasiModelData? konsultasiDummy) {
+    return MainConsultationCard(
       title: konsultasiDummy?.title,
       date: konsultasiDummy?.date?.ddMMMMyyyy(),
       time: konsultasiDummy?.time?.toString(),
       status: konsultasiDummy?.status.toString(),
-      label:konsultasiDummy?.label.toString(),
-      onDelete: ()async{
+      label: konsultasiDummy?.label.toString(),
+      onDelete: () async {
         final res = await showDialog(
           context: context,
-          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Konsultasi ?'),
+          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Aduan ?'),
         );
-        if(res == true){
+        if (res == true) {
           context
-            .read<KonsultasiCubit>()
-            .delete(konsultasiDummy?.id.toString() ?? '');
+              .read<KonsultasiCubit>()
+              .delete(konsultasiDummy?.id.toString() ?? '');
         }
       },
       onPressed: () async {
@@ -126,8 +124,7 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
         if (res == true) {
           _fetch();
         }
-      });
+      },
+    );
+  }
 }
-}
-
-

@@ -89,8 +89,7 @@ class MainRouteHelper {
                     bloc.BlocProvider(create: (context) => KonsultasiCubit()),
                     bloc.BlocProvider(create: (context) => RefCubit()),
                     bloc.BlocProvider(create: (context) => ProfileCubit()),
-                    bloc.BlocProvider(
-                      create: (context) => ConsultationCubit(),
+                    bloc.BlocProvider(create: (context) => ConsultationCubit(),
                     )
                   ],
                   child: MainBottomNavbar(),
@@ -152,10 +151,14 @@ class MainRouteHelper {
         //     binding: MainKosultasiPraktisiBioBinding()),
         GetPage(
             name: MainConstantRoute.mainKonsultasiPraktisiForm,
-            page: () => MainKonsultasiPraktisiForm(),
+            page: () => bloc.BlocProvider(
+              create: (context) => ConsultationCubit(),
+              child:  MainKonsultasiPraktisiForm (),
+              ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainKosultasiPraktisiFormBinding()),
+            binding: MainKosultasiPraktisiFormBinding()
+            ),
         GetPage(
             name: MainConstantRoute.mainKla,
             page: () => KlaPage(),

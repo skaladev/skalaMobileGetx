@@ -14,8 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainKonsultasiListPraktisi extends StatefulWidget {
   const MainKonsultasiListPraktisi({Key? key}) : super(key: key);
-
-  @override
+    @override
   State<MainKonsultasiListPraktisi> createState() =>
       _MainKonsultasiListPraktisiState();
 }

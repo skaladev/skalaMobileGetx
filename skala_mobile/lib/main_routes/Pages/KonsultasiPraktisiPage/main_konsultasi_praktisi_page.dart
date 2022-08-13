@@ -11,6 +11,8 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
@@ -69,7 +71,8 @@ class _MainKonsultasiPraktisiPageState
             height: MainSizeData.SIZE_8,
           ),
           Padding(
-             padding: const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_18),
+            padding:
+                const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_18),
             child: BlocBuilder<ConsultationCubit, ConsultationState>(
               buildWhen: (previous, current) => current is CategoriesFetch,
               builder: (context, state) {
@@ -161,8 +164,8 @@ class _MainKonsultasiPraktisiPageState
                           child: Text('Kosong'),
                         )
                       : Container(
-                        height: MainSizeData.SIZE_460,
-                        child: ListView.builder(
+                          height: MainSizeData.SIZE_460,
+                          child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             // shrinkWrap: true,
                             itemCount: state.data?.data?.length,
@@ -173,7 +176,7 @@ class _MainKonsultasiPraktisiPageState
                               );
                             }),
                           ),
-                      ),
+                        ),
                 );
               }
               return const SizedBox();
@@ -195,7 +198,7 @@ class _MainKonsultasiPraktisiPageState
       onDelete: () async {
         final res = await showDialog(
           context: context,
-          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Aduan ?'),
+          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Konsultation ?'),
         );
         if (res == true) {
           context
@@ -203,12 +206,30 @@ class _MainKonsultasiPraktisiPageState
               .delete(consultation?.id.toString() ?? '');
         }
       },
-      onPressed: () {},
+      onPressed: () async {
+        final res = await Get.to(
+          () => BlocProvider.value(
+            value: context.read<ConsultationCubit>(),
+            child: MainKonsultasiPraktisiDetailPage(consultation?.id),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildConsultationCategories(
       BuildContext context, ConsultationCategoriesModelData? categories) {
-    return MainCustomCard(itemTitle: categories?.name, onTap: () {});
+    return MainCustomCard(
+      itemTitle: categories?.name,
+      onTap: () {
+        // final res = await Get.to(() => BlocProvider.value(
+        //       value: context.read<ConsultationCubit>(),
+        //       child: MainKonsultasiListPraktisi(categories?.id),
+        //     ));
+        // if (res == true) {
+        //   _fetch();
+        // }
+      },
+    );
   }
 }

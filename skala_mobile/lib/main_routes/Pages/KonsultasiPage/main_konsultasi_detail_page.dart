@@ -44,7 +44,7 @@ class _MainKonsultasiDetailPageState extends State<MainKonsultasiDetailPage> {
       backgroundColor: MainColorData.white,
       appBar: MainCustomAppBarTitle(
         appBar: AppBar(),
-        title: "Konsultasi",
+        title: "Aduan",
         titleStyle: const TextStyle(
             color: MainColorData.black,
             fontSize: MainSizeData.SIZE_16,

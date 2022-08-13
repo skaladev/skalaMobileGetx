@@ -15,6 +15,7 @@ import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_outlined_button_widget.dart';
+import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_area_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 import 'package:skala_mobile/main_widgets/main_header_konsultasi_praktisi_widget.dart';
@@ -35,17 +36,27 @@ class _MainKonsultasiPraktisiFormState
   final String? id_consultant = Get.arguments?['id'];
   final String? name = Get.arguments?['name'];
   final String? consultant_category = Get.arguments?['consultant_category'];
+  String? category() {
+    switch (consultant_category) {
+      case 'Kesehatan Mental':
+        return "1";
+      case 'Gizi Anak':
+        return "2";
+      case 'Kenakalan Remaja':
+        return "3";
+    }
+  }
+
   final String? sk_number = Get.arguments?['sk_number'];
   final bool? isTampil = Get.arguments['isTampil'] ?? false;
   final int? work_experience_times = Get.arguments?['work_experience_times'];
   final _mainValidatorHelper = MainValidatorHelper();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
-  String? selectedCategory;
   String? _imagePath;
   Uint8List? _image;
 
-  void _fetch(){
+  void _fetch() {
     context.read<ConsultationCubit>().getConsultationList();
   }
 
@@ -69,16 +80,16 @@ class _MainKonsultasiPraktisiFormState
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [  
-              isTampil! ? HeaderKonsultasiPraktisi(
-                          itemImage: "assets/images/example_praktisi.jpg",
-                          itemName: name ?? '-',
-                          itemKategori:
-                              consultant_category ?? '-',
-                          itemWorkExperience:
-                              work_experience_times ,
-                          itemSK:sk_number,
-                          size: size) : SizedBox(),
+            children: [
+              isTampil!
+                  ? HeaderKonsultasiPraktisi(
+                      itemImage: "assets/images/example_praktisi.jpg",
+                      itemName: name ?? '-',
+                      itemKategori: consultant_category ?? '-',
+                      itemWorkExperience: work_experience_times,
+                      itemSK: sk_number,
+                      size: size)
+                  : SizedBox(),
               Padding(
                 padding: const EdgeInsets.only(left: MainSizeData.SIZE_12),
                 child: Text(
@@ -94,13 +105,6 @@ class _MainKonsultasiPraktisiFormState
                 controller: _titleController,
                 validator: _mainValidatorHelper.validateBasic,
                 label: "JUDUL",
-                margin: const EdgeInsets.symmetric(
-                    horizontal: MainSizeData.SIZE_12,
-                    vertical: MainSizeData.SIZE_10),
-              ),
-              CustomTextField(
-                validator: _mainValidatorHelper.validateBasic,
-                label: "KATEGORI",
                 margin: const EdgeInsets.symmetric(
                     horizontal: MainSizeData.SIZE_12,
                     vertical: MainSizeData.SIZE_10),
@@ -125,14 +129,13 @@ class _MainKonsultasiPraktisiFormState
                   color: MainColorData.green_dop,
                   size: MainSizeData.SIZE_20,
                 ),
-                onPressed: () async{
+                onPressed: () async {
                   final ImagePicker _picker = ImagePicker();
                   final XFile? image = await _picker.pickImage(
-                    source: ImageSource.gallery,
-                    maxHeight: 480,
-                    maxWidth: 640,
-                    imageQuality: 50 
-                  );
+                      source: ImageSource.gallery,
+                      maxHeight: 480,
+                      maxWidth: 640,
+                      imageQuality: 50);
                   final img = await image?.readAsBytes();
                   setState(() {
                     _imagePath = image?.path;
@@ -140,46 +143,29 @@ class _MainKonsultasiPraktisiFormState
                   });
                 },
               ),
-              if(_image != null) Image.memory(_image!),
+              if (_image != null) Image.memory(_image!),
               SizedBox(
                 height: MainSizeData.SIZE_16,
               ),
               Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_13,
-                      vertical: MainSizeData.SIZE_20),
-                  child: ElevatedButton(
-                    onPressed: ()async {
-                      if(_formKey.currentState?.validate() == true){
-                        context.read<ConsultationCubit>().createConsultation(
-                          consultationCategoryId: consultant_category,
+                child: MainCustomRoundedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState?.validate() == true) {
+                      context.read<ConsultationCubit>().createConsultation(
                           description: _descriptionController.text,
                           title: _titleController.text,
                           image: _imagePath,
-                          toUserId: id_consultant
-                        );
-                      }
-                      _fetch();
-                    },
-                    child: Text(
-                      'Kirim Konsultasi',
-                      style: TextStyle(
-                          fontSize: MainSizeData.SIZE_14,
-                          fontWeight: FontWeight.w600,
-                          color: MainColorData.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        primary: MainColorData.green_dop3,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: MainSizeData.SIZE_18,
-                            vertical: MainSizeData.SIZE_8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(MainSizeData.SIZE_12))),
+                          toUserId: id_consultant);
+                    }
+                    _fetch();
+                  },
+                  text: "Kirim Konsultasi",
+                  margin: const EdgeInsets.symmetric(
+                    vertical: MainSizeData.SIZE_24,
+                    horizontal: MainSizeData.SIZE_14,
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),

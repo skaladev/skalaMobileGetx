@@ -7,6 +7,7 @@ import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
 import 'package:skala_mobile/main_bindings/main_kla_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_bio_binding.dart';
+import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_detail_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
 import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
@@ -23,6 +24,7 @@ import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_det
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
@@ -89,7 +91,8 @@ class MainRouteHelper {
                     bloc.BlocProvider(create: (context) => KonsultasiCubit()),
                     bloc.BlocProvider(create: (context) => RefCubit()),
                     bloc.BlocProvider(create: (context) => ProfileCubit()),
-                    bloc.BlocProvider(create: (context) => ConsultationCubit(),
+                    bloc.BlocProvider(
+                      create: (context) => ConsultationCubit(),
                     )
                   ],
                   child: MainBottomNavbar(),
@@ -133,7 +136,7 @@ class MainRouteHelper {
         GetPage(
           name: MainConstantRoute.mainListPraktisi,
           page: () => bloc.BlocProvider(
-            create: (context)=> ConsultationCubit(),
+            create: (context) => ConsultationCubit(),
             child: MainKonsultasiListPraktisi(),
           ),
           alignment: Alignment.center,
@@ -152,18 +155,24 @@ class MainRouteHelper {
         GetPage(
             name: MainConstantRoute.mainKonsultasiPraktisiForm,
             page: () => bloc.BlocProvider(
-              create: (context) => ConsultationCubit(),
-              child:  MainKonsultasiPraktisiForm (),
-              ),
+                  create: (context) => ConsultationCubit(),
+                  child: MainKonsultasiPraktisiForm(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainKosultasiPraktisiFormBinding()
-            ),
+            binding: MainKosultasiPraktisiFormBinding()),
         GetPage(
             name: MainConstantRoute.mainKla,
             page: () => KlaPage(),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainKlaBinding())
+            binding: MainKlaBinding()),
+
+        // GetPage(
+        //     name: MainConstantRoute.mainKonsultasiPraktisiDetail,
+        //     page: () => MainKonsultasiPraktisiDetailPage(),
+        //     alignment: Alignment.center,
+        //     transition: Transition.fadeIn,
+        //     binding: MainKosultasiPraktisiDetailBinding()),
       ];
 }

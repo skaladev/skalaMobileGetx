@@ -2,6 +2,7 @@ import 'package:skala_mobile/main_commons/main_constant_key.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
+import 'package:skala_mobile/main_models/main_consultation_detail.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 
 abstract class ConsultationState {}
@@ -37,21 +38,21 @@ class ConsultantListFetch extends ConsultationState {
   final String? message;
   final ConsultantListModel? data;
 
-   ConsultantListFetch({this.load, this.message, this.data});
+  ConsultantListFetch({this.load, this.message, this.data});
 
-   ConsultantListFetch.loading({
+  ConsultantListFetch.loading({
     String? msg,
   }) : this(
           load: LoadStatus.loading,
           message: msg,
         );
 
-   ConsultantListFetch.success({
+  ConsultantListFetch.success({
     String? msg,
     ConsultantListModel? data,
   }) : this(load: LoadStatus.success, message: msg, data: data);
 
-   ConsultantListFetch.error({required String msg})
+  ConsultantListFetch.error({required String msg})
       : this(load: LoadStatus.error, message: msg);
 }
 
@@ -60,25 +61,25 @@ class ConsultantFetch extends ConsultationState {
   final String? message;
   final ConsultantModel? data;
 
-   ConsultantFetch({this.load, this.message, this.data});
+  ConsultantFetch({this.load, this.message, this.data});
 
-   ConsultantFetch.loading({
+  ConsultantFetch.loading({
     String? msg,
   }) : this(
           load: LoadStatus.loading,
           message: msg,
         );
 
-   ConsultantFetch.success({
+  ConsultantFetch.success({
     String? msg,
     ConsultantModel? data,
   }) : this(load: LoadStatus.success, message: msg, data: data);
 
-   ConsultantFetch.error({required String msg})
+  ConsultantFetch.error({required String msg})
       : this(load: LoadStatus.error, message: msg);
 }
 
-class ConsultationCreate extends ConsultationState{
+class ConsultationCreate extends ConsultationState {
   final LoadStatus? load;
   final String? message;
 
@@ -89,27 +90,24 @@ class ConsultationCreate extends ConsultationState{
 
   ConsultationCreate.loading({
     String? msg,
-  }): this(
-    load: LoadStatus.loading,
-    message: msg,
-  );
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
 
   ConsultationCreate.success({
     String? msg,
     ConsultationCategoriesModel? data,
-  }): this(
-    load:  LoadStatus.success,
-    message: msg,
-  );
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+        );
 
   ConsultationCreate.error({required String msg})
-    : this(
-      load:  LoadStatus.error,
-      message: msg
-    );
+      : this(load: LoadStatus.error, message: msg);
 }
 
-class ConsultationFetch extends ConsultationState{
+class ConsultationFetch extends ConsultationState {
   final LoadStatus? load;
   final String? message;
   final ConsultationModel? data;
@@ -122,26 +120,25 @@ class ConsultationFetch extends ConsultationState{
 
   ConsultationFetch.loading({
     String? msg,
-  }): this(
-    load: LoadStatus.loading,
-    message: msg,
-  );
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
 
   ConsultationFetch.success({
     String? msg,
     ConsultationModel? data,
   }) : this(
-    load: LoadStatus.success,
-    message: msg,
-    data: data,
-  );
+          load: LoadStatus.success,
+          message: msg,
+          data: data,
+        );
 
-  ConsultationFetch.error({
-    required String msg
-  }): this(
-    load: LoadStatus.error,
-    message: msg,
-  );
+  ConsultationFetch.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
 }
 
 class ConsultationDelete extends ConsultationState {
@@ -173,4 +170,35 @@ class ConsultationDelete extends ConsultationState {
           load: LoadStatus.error,
           message: msg,
         );
+}
+
+class ConsultationDetailFetch extends ConsultationState {
+  final LoadStatus? load;
+  final String? message;
+  final ConsultationDetailModel? data;
+
+  ConsultationDetailFetch({
+    this.load,
+    this.message,
+    this.data,
+  });
+
+  ConsultationDetailFetch.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  ConsultationDetailFetch.success({
+    String? msg,
+    ConsultationDetailModel? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+          data: data,
+        );
+
+  ConsultationDetailFetch.error({required String msg})
+      : this(load: LoadStatus.error, message: msg);
 }

@@ -54,7 +54,6 @@ class ConsultationCubit extends Cubit<ConsultationState> {
   }
 
   Future<void> createConsultation({
-    String? consultationCategoryId,
     String? title,
     String? description,
     String? image,
@@ -64,7 +63,6 @@ class ConsultationCubit extends Cubit<ConsultationState> {
     try {
       if (image != null) {
         final res = await _consultationService.createConsultation(
-          cosultationCategoryId: consultationCategoryId,
           title: title,
           description: description,
           image: image,
@@ -75,10 +73,10 @@ class ConsultationCubit extends Cubit<ConsultationState> {
         }
       } else {
         final res = await _consultationService.createConsultation(
-            cosultationCategoryId: consultationCategoryId,
             title: title,
             description: description,
             toUserId: toUserId);
+        print(res);
         if(res){
           emit(ConsultationCreate.success());
         }
@@ -117,6 +115,21 @@ class ConsultationCubit extends Cubit<ConsultationState> {
       print(trace);
       emit(ConsultationDelete.error(msg: 'Gagal'));
       
+    }
+  }
+
+  Future<void> getDetailConsultation(String id) async{
+    emit(ConsultationDetailFetch.loading());
+    try {
+      final res = await _consultationService.getConsultationDetail(id);
+      print(res.toJson());
+      if(res.message?.toLowerCase().contains('success')?? false){
+        emit(ConsultationDetailFetch.success(data: res));
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(ConsultationDetailFetch.error(msg: 'Gagal'));
     }
   }
 }

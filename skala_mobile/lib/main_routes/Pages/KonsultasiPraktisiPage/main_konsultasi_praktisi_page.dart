@@ -221,14 +221,14 @@ class _MainKonsultasiPraktisiPageState
       BuildContext context, ConsultationCategoriesModelData? categories) {
     return MainCustomCard(
       itemTitle: categories?.name,
-      onTap: () {
-        // final res = await Get.to(() => BlocProvider.value(
-        //       value: context.read<ConsultationCubit>(),
-        //       child: MainKonsultasiListPraktisi(categories?.id),
-        //     ));
-        // if (res == true) {
-        //   _fetch();
-        // }
+      onTap: ()async {
+        final res = await Get.to(() => BlocProvider.value(
+              value: context.read<ConsultationCubit>(),
+              child: MainKonsultasiListPraktisi(categoryId: categories?.id,),
+            ));
+        if (res == true) {
+          _fetch();
+        }
       },
     );
   }

@@ -18,7 +18,7 @@ class MainBottomNavbar extends StatefulWidget {
 }
 
 class _MainBottomNavbarState extends State<MainBottomNavbar> {
-  int _currentIndex = 0;
+  int _currentIndex = Get.arguments ? ['index'] ?? 0;
   final _prefs = Prefs();
 
   @override

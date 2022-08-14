@@ -17,9 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainKonsultasiPraktisiBio extends StatefulWidget {
   final ConsultantListModel? consultant;
-  const MainKonsultasiPraktisiBio(
-    this.id, {
+  const MainKonsultasiPraktisiBio({
     Key? key,
+    this.id,
     this.consultant,
   }) : super(key: key);
   final int? id;
@@ -32,14 +32,13 @@ class MainKonsultasiPraktisiBio extends StatefulWidget {
 class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
   @override
   void _fetch() {
-    context.read<ConsultationCubit>().getConsultant(widget.id.toString());
+    context.read<ConsultationCubit>().getConsultant(id: widget.id);
   }
 
-  void initState(){
+  void initState() {
     _fetch();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +67,10 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                     HeaderKonsultasiPraktisi(
                         itemImage: "assets/images/user.png",
                         itemName: state.data?.data?.name ?? '-',
-                        itemKategori:  state.data?.data?.consultantCategory ?? '-',
-                        itemWorkExperience: state.data?.data?.workExperienceTimes ,
+                        itemKategori:
+                            state.data?.data?.consultantCategory ?? '-',
+                        itemWorkExperience:
+                            state.data?.data?.workExperienceTimes,
                         itemSK: state.data?.data?.skNumber ?? '-',
                         size: size),
                     Padding(
@@ -199,21 +200,22 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                                           color: MainColorData.black),
                                     ),
                                     Text(
-                                      state.data?.data?.graduateFaculty ?? "-" ,
+                                      state.data?.data?.graduateFaculty ?? "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
                                           color: MainColorData.black),
                                     ),
-                                     Text(
-                                      state.data?.data?.graduateUniversity ?? "-" ,
+                                    Text(
+                                      state.data?.data?.graduateUniversity ??
+                                          "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
                                           color: MainColorData.black),
                                     ),
-                                     Text(
-                                      state.data?.data?.graduateYear ?? "-" ,
+                                    Text(
+                                      state.data?.data?.graduateYear ?? "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
@@ -269,21 +271,24 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                           vertical: MainSizeData.SIZE_20),
                       alignment: Alignment.bottomRight,
                       child: ElevatedButton(
-                        onPressed: () async{
+                        onPressed: () async {
                           final res = await Get.toNamed(
-                            MainConstantRoute.mainKonsultasiPraktisiForm,
-                            arguments: {
-                              'id'  : state.data?.data?.id?.toString(),
-                              'name' : state.data?.data?.name,
-                              'consultant_category': state.data?.data?.consultantCategory,
-                              'work_experience_times': state.data?.data?.workExperienceTimes,
-                              'sk_number': state.data?.data?.skNumber,
-                              'isTampil': true
-                            }
-                          );
-                          if(res== true){
-                            if(!mounted) return;
-                            context.read<ConsultationCubit>().getConsultant(widget.id.toString());
+                              MainConstantRoute.mainKonsultasiPraktisiForm,
+                              arguments: {
+                                'id': state.data?.data?.id?.toString(),
+                                'name': state.data?.data?.name,
+                                'consultant_category':
+                                    state.data?.data?.consultantCategory,
+                                'work_experience_times':
+                                    state.data?.data?.workExperienceTimes,
+                                'sk_number': state.data?.data?.skNumber,
+                                'isTampil': true
+                              });
+                          if (res == true) {
+                            if (!mounted) return;
+                            context
+                                .read<ConsultationCubit>()
+                                .getConsultant(id: widget.id);
                           }
                         },
                         child: Text(

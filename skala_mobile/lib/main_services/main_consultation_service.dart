@@ -15,13 +15,19 @@ class ConsultationServices {
     return ConsultationCategoriesModel.fromJson(res.data);
   }
 
-  Future<ConsultantListModel> getConsultantList() async {
-    final res = await _api.get('/consultations/consultants');
+  Future<ConsultantListModel> getConsultantList({int? categoryId}) async {
+    final url = categoryId != null
+        ? '/consultations/consultants?consultation_category_id=$categoryId'
+        : '/consultations/consultants';
+    print(url);
+    final res = await _api.get(url);
+    print(res);
     return ConsultantListModel.fromJson(res.data);
   }
 
-  Future<ConsultantModel> getConsultant(String id) async {
+  Future<ConsultantModel> getConsultant({int? id}) async {
     final res = await _api.get('/consultations/consultants/$id');
+    print(res);
     return ConsultantModel.fromJson(res.data);
   }
 
@@ -31,31 +37,31 @@ class ConsultationServices {
     String? description,
     String? toUserId,
     String? image,
-  })async{
+  }) async {
     final res = await _api.post(
       '/consultations',
       data: FormData.fromMap({
         'title': title,
         'description': description,
         'to_user_id': toUserId,
-        if(image?.isNotEmpty ?? false)
-        'image': await MultipartFile.fromFile(image!),
+        if (image?.isNotEmpty ?? false)
+          'image': await MultipartFile.fromFile(image!),
       }),
     );
     return res.data?['message'] == 'Success';
   }
 
-  Future<ConsultationModel>getConsultationList() async{
-    final res = await  _api.get('/consultations');
+  Future<ConsultationModel> getConsultationList() async {
+    final res = await _api.get('/consultations');
     return ConsultationModel.fromJson(res.data);
   }
 
-  Future<bool> delete(String id)async{
-    final res= await _api.delete('/consultations/$id');
+  Future<bool> delete(String id) async {
+    final res = await _api.delete('/consultations/$id');
     return res.data?['message'] == 'Success';
   }
 
-  Future<ConsultationDetailModel> getConsultationDetail(String id) async{
+  Future<ConsultationDetailModel> getConsultationDetail(String id) async {
     final res = await _api.get('/consultations/$id');
     return ConsultationDetailModel.fromJson(res.data);
   }

@@ -137,33 +137,33 @@ class MainRouteHelper {
           name: MainConstantRoute.mainListPraktisi,
           page: () => bloc.BlocProvider(
             create: (context) => ConsultationCubit(),
-            child: MainKonsultasiListPraktisi(),
+            child:const MainKonsultasiListPraktisi(),
           ),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
           binding: MainListPraktisiBinding(),
         ),
-        // GetPage(
-        //     name: MainConstantRoute.mainKonsultasiPraktisiBio,
-        //     page: () => bloc.BlocProvider(
-        //           create: (context) => ConsultationCubit(),
-        //           child: MainKonsultasiPraktisiBio(),
-        //         ),
-        //     alignment: Alignment.center,
-        //     transition: Transition.fadeIn,
-        //     binding: MainKosultasiPraktisiBioBinding()),
+        GetPage(
+            name: MainConstantRoute.mainKonsultasiPraktisiBio,
+            page: () => bloc.BlocProvider(
+                  create: (context) => ConsultationCubit(),
+                  child: const MainKonsultasiPraktisiBio(),
+                ),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKosultasiPraktisiBioBinding()),
         GetPage(
             name: MainConstantRoute.mainKonsultasiPraktisiForm,
             page: () => bloc.BlocProvider(
                   create: (context) => ConsultationCubit(),
-                  child: MainKonsultasiPraktisiForm(),
+                  child: const MainKonsultasiPraktisiForm(),
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainKosultasiPraktisiFormBinding()),
         GetPage(
             name: MainConstantRoute.mainKla,
-            page: () => KlaPage(),
+            page: () => const KlaPage(),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainKlaBinding()),

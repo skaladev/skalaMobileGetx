@@ -78,7 +78,7 @@ class _MainKonsultasiPraktisiDetailPageState
                         ),
                       ),
                       Column(
-                        children: state.data?.data
+                        children: state.data?.data?.consultations
                                 ?.map(
                                   (e) => MainConsultationCard(
                                     date: e.date?.ddMMMMyyyy()??"",

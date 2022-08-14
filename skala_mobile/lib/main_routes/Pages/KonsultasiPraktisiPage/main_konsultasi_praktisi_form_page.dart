@@ -61,7 +61,12 @@ class _MainKonsultasiPraktisiFormState
   }
 
   @override
-  void initState() {}
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -149,6 +154,10 @@ class _MainKonsultasiPraktisiFormState
               ),
               Center(
                 child: MainCustomRoundedButton(
+                   margin: const EdgeInsets.symmetric(
+                    vertical: MainSizeData.SIZE_24,
+                    horizontal: MainSizeData.SIZE_14,
+                  ),
                   onPressed: () async {
                     if (_formKey.currentState?.validate() == true) {
                       context.read<ConsultationCubit>().createConsultation(
@@ -160,10 +169,7 @@ class _MainKonsultasiPraktisiFormState
                     _fetch();
                   },
                   text: "Kirim Konsultasi",
-                  margin: const EdgeInsets.symmetric(
-                    vertical: MainSizeData.SIZE_24,
-                    horizontal: MainSizeData.SIZE_14,
-                  ),
+                 
                 ),
               )
             ],

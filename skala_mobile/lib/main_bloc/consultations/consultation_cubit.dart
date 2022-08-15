@@ -132,4 +132,23 @@ class ConsultationCubit extends Cubit<ConsultationState> {
       emit(ConsultationDetailFetch.error(msg: 'Gagal'));
     }
   }
+
+
+  //role : praktisi
+  Future<void> getConsultationListUser()async{
+    emit(ConsultationUserFetch.loading());
+    try {
+      print("fandy");
+      final res = await _consultationService.getConsultationListUser();
+      print(res.toJson());
+      if(res.message?.toLowerCase().contains('success') ?? false){
+        emit(ConsultationUserFetch.success(data: res));
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(ConsultationUserFetch.error(msg: 'Gagal'));
+    }
+  }
+
 }

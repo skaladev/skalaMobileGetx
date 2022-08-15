@@ -4,6 +4,7 @@ import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_detail.dart';
+import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 
 class ConsultationServices {
@@ -64,5 +65,11 @@ class ConsultationServices {
   Future<ConsultationDetailModel> getConsultationDetail(String id) async {
     final res = await _api.get('/consultations/$id');
     return ConsultationDetailModel.fromJson(res.data);
+  }
+
+  //praktisi
+  Future<ConsultationListUserModel> getConsultationListUser()async{
+    final res = await _api.get('/consultations/consultant');
+    return ConsultationListUserModel.fromJson(res.data);
   }
 }

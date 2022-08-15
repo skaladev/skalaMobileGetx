@@ -38,6 +38,7 @@ class _MainKonsultasiPraktisiPageState
     context.read<ConsultationCubit>().getCategories();
     context.read<ConsultationCubit>().getConsultationList();
     context.read<ConsultationCubit>().getConsultationListUser();
+    context.read<ConsultationCubit>().getConsultationCount();
   }
 
   void initState() {
@@ -197,31 +198,45 @@ class _MainKonsultasiPraktisiPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_12),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: MainSizeData.SIZE_120,
-                          child: MainCustomCard(
-                              itemCount: "8",
-                              itemTitle: "Terjawab",
-                              onTap: () {}),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: MainSizeData.SIZE_120,
-                          child: MainCustomCard(
-                              itemCount: "8",
-                              itemTitle: "Menunggu",
-                              onTap: () {}),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12),
+                    child: BlocBuilder<ConsultationCubit, ConsultationState>(
+                      buildWhen: (previous, current) =>
+                          current is ConsultationCountFetch,
+                      builder: (context, state) {
+                        if (state is ConsultationCountFetch) {
+                          return loadData(
+                            state.load,
+                            errorMessage: state.message,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: MainSizeData.SIZE_120,
+                                    child: MainCustomCard(
+                                        itemCount: state.data?.data?.answeredConsultations.toString(),
+                                        itemTitle: "Terjawab",
+                                        onTap: () {}),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: MainSizeData.SIZE_120,
+                                    child: MainCustomCard(
+                                        itemCount: state.data?.data?.unansweredConsultations.toString(),
+                                        itemTitle: "Menunggu",
+                                        onTap: () {}),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        return const SizedBox();
+                      },
+                    )),
                 const SizedBox(
                   height: MainSizeData.SIZE_14,
                 ),

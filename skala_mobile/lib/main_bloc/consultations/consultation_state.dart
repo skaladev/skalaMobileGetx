@@ -2,6 +2,7 @@ import 'package:skala_mobile/main_commons/main_constant_key.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
+import 'package:skala_mobile/main_models/main_consultation_count_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_detail.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
@@ -238,4 +239,37 @@ class ConsultationUserFetch extends ConsultationState {
           load: LoadStatus.error,
           message: msg,
         );
+}
+
+class ConsultationCountFetch  extends ConsultationState{
+  final LoadStatus? load;
+  final String? message;
+  final ConsultationCountModel? data;
+
+  ConsultationCountFetch({
+    this.load,
+    this.message,
+    this.data
+  });
+
+  ConsultationCountFetch.loading({
+    String? msg,
+  }): this(
+    load: LoadStatus.loading,
+    message: msg
+  );
+
+  ConsultationCountFetch.success({
+    String? msg,
+    ConsultationCountModel? data,
+  }): this(
+    load: LoadStatus.success,
+    message: msg,
+    data: data,
+  );
+
+  ConsultationCountFetch.error({required String msg}) : this(
+    load: LoadStatus.error,
+    message: msg,
+  );
 }

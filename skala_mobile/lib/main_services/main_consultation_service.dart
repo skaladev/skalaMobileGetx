@@ -3,6 +3,7 @@ import 'package:skala_mobile/main_helpers/main_dio_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
+import 'package:skala_mobile/main_models/main_consultation_count_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_detail.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
@@ -71,5 +72,10 @@ class ConsultationServices {
   Future<ConsultationListUserModel> getConsultationListUser()async{
     final res = await _api.get('/consultations/consultant');
     return ConsultationListUserModel.fromJson(res.data);
+  }
+
+  Future<ConsultationCountModel> getConsultationCount()async{
+    final res = await _api.get('/consultations/count');
+    return ConsultationCountModel.fromJson(res.data);
   }
 }

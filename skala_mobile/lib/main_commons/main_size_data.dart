@@ -145,6 +145,8 @@ class MainSizeData {
   static const double SIZE_430 = 430;
   static const double SIZE_440 = 440;
   static const double SIZE_450 = 450;
+  static const double SIZE_460 = 460;
+  static const double SIZE_470 = 470;
   static const double SIZE_500 = 500;
   static const double SIZE_600 = 600;
   static const double SIZE_650 = 650;

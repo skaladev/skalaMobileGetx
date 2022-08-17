@@ -48,8 +48,8 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: MainSizeData.SIZE_16,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+          const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
               child: Text(
                 MainConstantData.appNames,
                 textAlign: TextAlign.center,
@@ -69,9 +69,10 @@ class LoginPage extends StatelessWidget {
                 // controller: controller.noWhatshapp..text = '6285801482929',
                 controller: controller.noWhatshapp,
                 errorMessage: MainConstantData.required,
+                keyboardType: TextInputType.phone,
                 label: "No Whatshapp",
                 hint: "62xxxxxxxxxxx",
-                margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_24),
+                margin: const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_24),
               ),
             ),
             MainCustomRoundedButton(

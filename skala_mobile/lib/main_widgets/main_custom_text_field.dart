@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
       this.minLines,
       this.maxLength,
       this.maxLines,
+      this.keyboardType,
       Key? key})
       : super(key: key);
 
@@ -26,6 +27,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final int? minLines;
   final int? maxLines;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class CustomTextField extends StatelessWidget {
               }
               return null;
             },
+            keyboardType: keyboardType,
             maxLength: maxLength,
             minLines: minLines,
             cursorColor: MainColorData.black,

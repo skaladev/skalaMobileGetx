@@ -9,14 +9,14 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
     required this.itemKategori,
     this.itemSK,
     required this.itemImage,
-    this.itemExperience,
+    this.itemWorkExperience,
     required this.size,
   }) : super(key: key);
   final String itemName;
   final String itemKategori;
   final String itemImage;
   final String? itemSK;
-  final String? itemExperience;
+  final int? itemWorkExperience;
   final Size size;
   @override
   Widget build(BuildContext context) {
@@ -56,9 +56,14 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                               bottomRight: Radius.circular(15),
                               topRight: Radius.circular(15)),
                           image: DecorationImage(
-                              image: AssetImage(
+                              image: NetworkImage(
                                 itemImage,
                               ),
+                              onError: (exception, stackTrace) => Image.asset(
+                                  "assets/images/example_praktisi.jpg",
+                                  width: 300,
+                                  height: 200,
+                                  fit: BoxFit.contain),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -106,7 +111,7 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "$itemExperience year experience",
+                                  "$itemWorkExperience year experience",
                                   style: const TextStyle(
                                       color: MainColorData.white,
                                       fontSize: MainSizeData.SIZE_12,

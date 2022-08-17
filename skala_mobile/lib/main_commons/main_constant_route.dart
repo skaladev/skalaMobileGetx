@@ -14,4 +14,6 @@ class MainConstantRoute {
   static const String mainKonsultasiPraktisiBio = '/konsultasiPraktisiBio';
   static const String mainKonsultasiPraktisiForm = '/konsultasiPraktisiForm';
   static const String mainKla = '/kla';
+  static const String mainKonsultasiPraktisiDetail = '/konsultasiPraktisiDetail';
+  static const String mainCreateConsultation = '/createConsultatiton';
 }

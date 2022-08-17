@@ -9,6 +9,7 @@ import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_header_konsultasi_praktisi_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,9 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainKonsultasiPraktisiBio extends StatefulWidget {
   final ConsultantListModel? consultant;
-  const MainKonsultasiPraktisiBio(
-    this.id, {
+  const MainKonsultasiPraktisiBio({
     Key? key,
+    this.id,
     this.consultant,
   }) : super(key: key);
   final int? id;
@@ -30,8 +31,13 @@ class MainKonsultasiPraktisiBio extends StatefulWidget {
 
 class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
   @override
+  void _fetch() {
+    context.read<ConsultationCubit>().getConsultant(id: widget.id);
+  }
+
   void initState() {
-    context.read<ConsultationCubit>().getConsultant(widget.id.toString());
+    _fetch();
+    super.initState();
   }
 
   @override
@@ -59,10 +65,12 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HeaderKonsultasiPraktisi(
-                        itemImage: "assets/images/user.png",
+                        itemImage: state.data?.data?.imagePath ?? "assets/images/user.png",
                         itemName: state.data?.data?.name ?? '-',
-                        itemKategori:  state.data?.data?.consultantCategory ?? '-',
-                        itemExperience: state.data?.data?.experiences.toString() ?? '-',
+                        itemKategori:
+                            state.data?.data?.consultantCategory ?? '-',
+                        itemWorkExperience:
+                            state.data?.data?.workExperienceTimes,
                         itemSK: state.data?.data?.skNumber ?? '-',
                         size: size),
                     Padding(
@@ -192,21 +200,22 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                                           color: MainColorData.black),
                                     ),
                                     Text(
-                                      state.data?.data?.graduateFaculty ?? "-" ,
+                                      state.data?.data?.graduateFaculty ?? "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
                                           color: MainColorData.black),
                                     ),
-                                     Text(
-                                      state.data?.data?.graduateUniversity ?? "-" ,
+                                    Text(
+                                      state.data?.data?.graduateUniversity ??
+                                          "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
                                           color: MainColorData.black),
                                     ),
-                                     Text(
-                                      state.data?.data?.graduateYear ?? "-" ,
+                                    Text(
+                                      state.data?.data?.graduateYear ?? "-",
                                       style: TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.normal,
@@ -262,9 +271,25 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                           vertical: MainSizeData.SIZE_20),
                       alignment: Alignment.bottomRight,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(
-                              MainConstantRoute.mainKonsultasiPraktisiForm);
+                        onPressed: () async {
+                          final res = await Get.toNamed(
+                              MainConstantRoute.mainKonsultasiPraktisiForm,
+                              arguments: {
+                                'id': state.data?.data?.id?.toString(),
+                                'name': state.data?.data?.name,
+                                'consultant_category':
+                                    state.data?.data?.consultantCategory,
+                                'work_experience_times':
+                                    state.data?.data?.workExperienceTimes,
+                                'sk_number': state.data?.data?.skNumber,
+                                'isTampil': true
+                              });
+                          if (res == true) {
+                            if (!mounted) return;
+                            context
+                                .read<ConsultationCubit>()
+                                .getConsultant(id: widget.id);
+                          }
                         },
                         child: Text(
                           'Mulai Konsultasi',

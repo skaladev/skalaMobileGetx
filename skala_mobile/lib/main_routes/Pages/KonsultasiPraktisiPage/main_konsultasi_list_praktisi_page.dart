@@ -13,8 +13,11 @@ import 'package:skala_mobile/main_widgets/main_custom_card_praktisi.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainKonsultasiListPraktisi extends StatefulWidget {
-  const MainKonsultasiListPraktisi({Key? key}) : super(key: key);
-
+  const MainKonsultasiListPraktisi({
+    Key? key,
+    this.categoryId,
+  }) : super(key: key);
+  final int? categoryId;
   @override
   State<MainKonsultasiListPraktisi> createState() =>
       _MainKonsultasiListPraktisiState();
@@ -23,7 +26,7 @@ class MainKonsultasiListPraktisi extends StatefulWidget {
 class _MainKonsultasiListPraktisiState
     extends State<MainKonsultasiListPraktisi> {
   void _fetch() {
-    context.read<ConsultationCubit>().getConsultantList();
+    context.read<ConsultationCubit>().getConsultantList(id: widget.categoryId);
   }
 
   void initState() {
@@ -45,9 +48,10 @@ class _MainKonsultasiListPraktisiState
         child: Column(
           children: [
             BlocBuilder<ConsultationCubit, ConsultationState>(
-              buildWhen: ((previous, current) => current is  ConsultantListFetch),
+              buildWhen: ((previous, current) =>
+                  current is ConsultantListFetch),
               builder: (context, state) {
-                if (state is  ConsultantListFetch) {
+                if (state is ConsultantListFetch) {
                   return loadData(state.load,
                       errorMessage: state.message,
                       child: (state.data?.data?.isEmpty ?? true)
@@ -55,16 +59,15 @@ class _MainKonsultasiListPraktisiState
                               child: Text('Kosong'),
                             )
                           : Container(
-                            height: MainSizeData.SIZE_900,
-                            child: ListView.builder(
+                              height: MainSizeData.SIZE_900,
+                              child: ListView.builder(
                                 itemCount: state.data?.data?.length,
                                 itemBuilder: (context, index) {
                                   return _buildConsultantList(
-                                      context,
-                                      state.data?.data?[index]);
+                                      context, state.data?.data?[index]);
                                 },
                               ),
-                          ));
+                            ));
                 }
                 return const SizedBox();
               },
@@ -81,10 +84,14 @@ class _MainKonsultasiListPraktisiState
       itemName: consultantList?.name,
       itemCategory: consultantList?.consultantCategory,
       onPressed: () async {
-        final res = await Get.to(() => BlocProvider.value(
-              value: context.read<ConsultationCubit>(),
-              child: MainKonsultasiPraktisiBio(consultantList?.id),
-            ));
+        print(consultantList?.id);
+        final res = await Get.to(
+          () => BlocProvider.value(
+            value: context.read<ConsultationCubit>(),
+            child: MainKonsultasiPraktisiBio(id: consultantList?.id),
+          ),
+        );
+        print(res);
         if (res == true) {
           _fetch();
         }

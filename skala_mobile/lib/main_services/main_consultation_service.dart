@@ -5,6 +5,7 @@ import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_count_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_detail.dart';
+import 'package:skala_mobile/main_models/main_consultation_detail_praktisi_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 
@@ -78,4 +79,34 @@ class ConsultationServices {
     final res = await _api.get('/consultations/count');
     return ConsultationCountModel.fromJson(res.data);
   }
+
+  Future<ConsultationDetailPraktisi>getConsultationDetailPraktisi(String id)async{
+    final res = await _api.get('/consultations/$id');
+    return ConsultationDetailPraktisi.fromJson(res.data);
+  }
+
+  Future<bool> answeredConsultations({
+    String? consultation_id,
+    String? title,
+    String? description,
+    String? image,
+  }) async {
+    print(image);
+    print(consultation_id);
+    final url = '/consultations/answer';
+    print(url);
+    final res = await _api.post(
+      url,
+      data: FormData.fromMap({
+        'title': title,
+        'description': description,
+        'consultation_id': consultation_id,
+        if (image?.isNotEmpty ?? false)
+          'image': await MultipartFile.fromFile(image!),
+      }),
+    );
+    print(res);
+    return res.data?['message'] == 'Success';
+  }
+
 }

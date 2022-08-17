@@ -37,17 +37,17 @@ class Data {
     this.consultations,
   });
 
-  dynamic user;
+  User? user;
   List<Consultation>? consultations;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        user: json["user"],
+        user: User.fromJson(json["user"]),
         consultations: List<Consultation>.from(
             json["consultations"].map((x) => Consultation.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "user": user,
+        "user": user?.toJson(),
         "consultations":
             List<dynamic>.from(consultations?.map((x) => x.toJson()) ?? []),
       };
@@ -90,6 +90,38 @@ class Consultation {
             "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
         "time": time,
         "from_user": fromUser,
+        "image_path": imagePath,
+      };
+}
+
+class User {
+  User({
+    this.id,
+    this.name,
+    this.category,
+    this.workExperienceTimes,
+    this.imagePath,
+  });
+
+  final int? id;
+  final String? name;
+  final String? category;
+  final int? workExperienceTimes;
+  final String? imagePath;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        name: json["name"],
+        category: json["category"],
+        workExperienceTimes: json["work_experience_times"],
+        imagePath: json["image_path"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "category": category,
+        "work_experience_times": workExperienceTimes,
         "image_path": imagePath,
       };
 }

@@ -65,7 +65,7 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HeaderKonsultasiPraktisi(
-                        itemImage: "assets/images/user.png",
+                        itemImage: state.data?.data?.imagePath ?? "assets/images/user.png",
                         itemName: state.data?.data?.name ?? '-',
                         itemKategori:
                             state.data?.data?.consultantCategory ?? '-',

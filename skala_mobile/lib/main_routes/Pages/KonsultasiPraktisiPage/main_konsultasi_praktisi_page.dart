@@ -288,16 +288,16 @@ class _MainKonsultasiPraktisiPageState
       BuildContext context, ConsultationListUserModelData? item) {
     return MainConsultationCard(
       title: item?.user,
-      date: "",
-      time: "",
+      date: item?.date?.ddMMMMyyyy(),
+      time: item?.time,
       label: item?.profession ?? '-',
-      onPressed: () {
-        // final res = await Get.to(
-        //   () => BlocProvider.value(
-        //     value: context.read<ConsultationCubit>(),
-        //     child: MainKonsultasiPraktisiDetailPage(item?.id),
-        //   ),
-        // );
+      onPressed: ()async {
+        final res = await Get.to(
+          () => BlocProvider.value(
+            value: context.read<ConsultationCubit>(),
+            child: MainKonsultasiPraktisiDetailPage(item?.id),
+          ),
+        );
       },
     );
   }

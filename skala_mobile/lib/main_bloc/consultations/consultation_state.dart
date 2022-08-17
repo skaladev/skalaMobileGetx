@@ -4,6 +4,7 @@ import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_count_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_detail.dart';
+import 'package:skala_mobile/main_models/main_consultation_detail_praktisi_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 
@@ -205,7 +206,6 @@ class ConsultationDetailFetch extends ConsultationState {
       : this(load: LoadStatus.error, message: msg);
 }
 
-
 //role:praktisi
 class ConsultationUserFetch extends ConsultationState {
   final LoadStatus? load;
@@ -241,35 +241,60 @@ class ConsultationUserFetch extends ConsultationState {
         );
 }
 
-class ConsultationCountFetch  extends ConsultationState{
+class ConsultationCountFetch extends ConsultationState {
   final LoadStatus? load;
   final String? message;
   final ConsultationCountModel? data;
 
-  ConsultationCountFetch({
-    this.load,
-    this.message,
-    this.data
-  });
+  ConsultationCountFetch({this.load, this.message, this.data});
 
   ConsultationCountFetch.loading({
     String? msg,
-  }): this(
-    load: LoadStatus.loading,
-    message: msg
-  );
+  }) : this(load: LoadStatus.loading, message: msg);
 
   ConsultationCountFetch.success({
     String? msg,
     ConsultationCountModel? data,
-  }): this(
-    load: LoadStatus.success,
-    message: msg,
-    data: data,
-  );
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+          data: data,
+        );
 
-  ConsultationCountFetch.error({required String msg}) : this(
-    load: LoadStatus.error,
-    message: msg,
-  );
+  ConsultationCountFetch.error({required String msg})
+      : this(
+          load: LoadStatus.error,
+          message: msg,
+        );
+}
+
+class ConsultationDetailPraktisiFetch extends ConsultationState {
+  final LoadStatus? load;
+  final String? message;
+  ConsultationDetailPraktisi? data;
+
+  ConsultationDetailPraktisiFetch({
+    this.load,
+    this.message,
+    this.data,
+  });
+
+  ConsultationDetailPraktisiFetch.loading({
+    String? msg,
+  }) : this(
+          load: LoadStatus.loading,
+          message: msg,
+        );
+
+  ConsultationDetailPraktisiFetch.success({
+    String? msg,
+    ConsultationDetailPraktisi? data,
+  }) : this(
+          load: LoadStatus.success,
+          message: msg,
+          data: data,
+        );
+
+  ConsultationDetailPraktisiFetch.error({required String msg})
+      : this(load: LoadStatus.error, message: msg);
 }

@@ -56,9 +56,14 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                               bottomRight: Radius.circular(15),
                               topRight: Radius.circular(15)),
                           image: DecorationImage(
-                              image: AssetImage(
+                              image: NetworkImage(
                                 itemImage,
                               ),
+                              onError: (exception, stackTrace) => Image.asset(
+                                  "assets/images/example_praktisi.jpg",
+                                  width: 300,
+                                  height: 200,
+                                  fit: BoxFit.contain),
                               fit: BoxFit.cover),
                         ),
                       ),

@@ -164,4 +164,53 @@ class ConsultationCubit extends Cubit<ConsultationState> {
     }
   }
 
+  Future<void> getDetailConsultationPraktisi(String id)async{
+    emit(ConsultationDetailPraktisiFetch.loading());
+    try {
+      final res = await _consultationService.getConsultationDetailPraktisi(id);
+      print(res.toJson());
+      if(res.message?.toLowerCase().contains('success') ?? false){
+        emit(ConsultationDetailPraktisiFetch.success(data: res));
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(ConsultationDetailPraktisiFetch.error(msg: 'Gagal'));
+    }
+  }
+
+   Future<void> answerConsultation({
+    String? title,
+    String? description,
+    String? image,
+    String? consultation_id,
+  }) async {
+    emit(ConsultationCreate.loading());
+    try {
+      if (image != null) {
+        final res = await _consultationService.answeredConsultations(
+          title: title,
+          description: description,
+          image: image,
+          consultation_id: consultation_id,
+        );
+        if (res) {
+          emit(ConsultationCreate.success());
+        }
+      } else {
+        final res = await _consultationService.answeredConsultations(
+            title: title,
+            description: description,
+            consultation_id: consultation_id,);
+        print(res);
+        if(res){
+          emit(ConsultationCreate.success());
+        }
+      }
+    } catch (e,trace) {
+      print(e);
+      print(trace);
+      emit(ConsultationCreate.error(msg: 'Gagal'));
+    }
+  }
 }

@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
                 fontSize: MainSizeData.SIZE_12,
                 fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: MainSizeData.SIZE_8),
+          const SizedBox(height: MainSizeData.SIZE_8),
           TextFormField(
             controller: controller,
             validator: (value) {

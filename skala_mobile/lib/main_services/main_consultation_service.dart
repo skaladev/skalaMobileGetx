@@ -35,7 +35,6 @@ class ConsultationServices {
   }
 
   Future<bool> createConsultation({
-    String? consultationCategoryId,
     String? title,
     String? description,
     String? toUserId,
@@ -80,8 +79,11 @@ class ConsultationServices {
     return ConsultationCountModel.fromJson(res.data);
   }
 
-  Future<ConsultationDetailPraktisi>getConsultationDetailPraktisi(String id)async{
-    final res = await _api.get('/consultations/$id');
+  Future<ConsultationDetailPraktisi>getConsultationDetailPraktisi({int? id})async{
+    final url = '/consultations/$id';
+    print(url);
+    final res = await _api.get(url);
+    print(res);
     return ConsultationDetailPraktisi.fromJson(res.data);
   }
 
@@ -91,10 +93,7 @@ class ConsultationServices {
     String? description,
     String? image,
   }) async {
-    print(image);
-    print(consultation_id);
     final url = '/consultations/answer';
-    print(url);
     final res = await _api.post(
       url,
       data: FormData.fromMap({

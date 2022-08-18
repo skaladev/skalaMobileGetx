@@ -23,7 +23,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiPage extends StatefulWidget {
-  const MainKonsultasiPraktisiPage({Key? key}) : super(key: key);
+  const MainKonsultasiPraktisiPage({Key? key, this.id}) : super(key: key);
+  final int? id;
 
   @override
   State<MainKonsultasiPraktisiPage> createState() =>
@@ -49,7 +50,7 @@ class _MainKonsultasiPraktisiPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MainColorData.white,
+      backgroundColor: MainColorData.greybg,
       appBar: const MainCustomAppBarTitle(
         title: "Konsultasi",
         isIconEnabled: false,
@@ -60,31 +61,159 @@ class _MainKonsultasiPraktisiPageState
         ),
       ),
       body: _prefs.roleId != 6
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_18),
-                  child: const Text(
-                    'Kategori',
-                    style: const TextStyle(
-                        color: MainColorData.grey,
-                        fontSize: MainSizeData.SIZE_14,
-                        fontWeight: FontWeight.w600),
+          ? SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin:
+                        EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: MainColorData.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Tentang',
+                          style: const TextStyle(
+                              color: MainColorData.green_dop,
+                              fontSize: MainSizeData.SIZE_14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: MainSizeData.SIZE_10,
+                        ),
+                        Text(
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                        ),
+                        SizedBox(
+                          height: MainSizeData.SIZE_10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Pilih Tenaga Ahli Berdasarkan Kategori?',
+                              style: const TextStyle(
+                                  color: MainColorData.green_dop,
+                                  fontSize: MainSizeData.SIZE_14,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: MainSizeData.SIZE_10,
+                            ),
+                            BlocBuilder<ConsultationCubit, ConsultationState>(
+                              buildWhen: (previous, current) =>
+                                  current is CategoriesFetch,
+                              builder: (context, state) {
+                                if (state is CategoriesFetch) {
+                                  return loadData(
+                                    state.load,
+                                    errorMessage: state.message,
+                                    child: (state.data?.data?.isEmpty ?? true)
+                                        ? const Center(
+                                            child: Text('Kosong'),
+                                          )
+                                        : Container(
+                                            height: MainSizeData.SIZE_90,
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  state.data?.data?.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: ((context, index) {
+                                                return _buildConsultationCategories(
+                                                  context,
+                                                  state.data?.data?[index],
+                                                  // itemTitle:  state.data?.data?.name ?? '-',
+                                                  // onTap: () {
+                                                  //   Get.toNamed(
+                                                  //       MainConstantRoute.mainListPraktisi);
+                                                  // },
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                  );
+                                }
+                                return const SizedBox();
+                              },
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MainSizeData.SIZE_10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Daftar Tenaga Ahli',
+                              style: const TextStyle(
+                                  color: MainColorData.green_dop,
+                                  fontSize: MainSizeData.SIZE_14,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            ElevatedButton(
+                              onPressed:(){ Get.toNamed(MainConstantRoute.mainListPraktisi);},
+                              child: Text(
+                                'Lihat',
+                                style: TextStyle(
+                                    fontSize: MainSizeData.SIZE_14,
+                                    fontWeight: FontWeight.w600,
+                                    color: MainColorData.white),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: MainColorData.green_dop,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MainSizeData.SIZE_18,
+                                      vertical: MainSizeData.SIZE_8),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          MainSizeData.SIZE_12))),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: MainSizeData.SIZE_8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_18),
-                  child: BlocBuilder<ConsultationCubit, ConsultationState>(
+                  const SizedBox(
+                    height: MainSizeData.SIZE_10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_24),
+                    child: const Text(
+                      'Riwayat Konsultasi',
+                      style: TextStyle(
+                          color: MainColorData.green_dop,
+                          fontSize: MainSizeData.SIZE_14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  BlocConsumer<ConsultationCubit, ConsultationState>(
+                    listenWhen: (previous, current) =>
+                        current is ConsultationDelete,
+                    listener: (context, state) {
+                      if (state is ConsultationDelete) {
+                        blocHelperListenner(
+                          load: state.load,
+                          onSuccess: () {
+                            _fetch();
+                          },
+                        );
+                      }
+                    },
                     buildWhen: (previous, current) =>
-                        current is CategoriesFetch,
+                        current is ConsultationFetch,
                     builder: (context, state) {
-                      if (state is CategoriesFetch) {
+                      if (state is ConsultationFetch) {
                         return loadData(
                           state.load,
                           errorMessage: state.message,
@@ -93,19 +222,15 @@ class _MainKonsultasiPraktisiPageState
                                   child: Text('Kosong'),
                                 )
                               : Container(
-                                  height: MainSizeData.SIZE_90,
+                                  height: MainSizeData.SIZE_460,
                                   child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    // shrinkWrap: true,
                                     itemCount: state.data?.data?.length,
-                                    scrollDirection: Axis.horizontal,
                                     itemBuilder: ((context, index) {
-                                      return _buildConsultationCategories(
+                                      return _buildConsultationItem(
                                         context,
                                         state.data?.data?[index],
-                                        // itemTitle:  state.data?.data?.name ?? '-',
-                                        // onTap: () {
-                                        //   Get.toNamed(
-                                        //       MainConstantRoute.mainListPraktisi);
-                                        // },
                                       );
                                     }),
                                   ),
@@ -114,86 +239,145 @@ class _MainKonsultasiPraktisiPageState
                       }
                       return const SizedBox();
                     },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_18),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed(MainConstantRoute.mainListPraktisi);
-                    },
-                    child: Text(
-                      "Lihat Tenaga Ahli",
-                      style: TextStyle(
-                          fontSize: MainSizeData.fontSize16,
-                          fontWeight: FontWeight.bold,
-                          color: MainColorData.orangeFC),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: MainSizeData.SIZE_14,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: MainSizeData.SIZE_18),
-                  child: const Text(
-                    'Riwayat Konsultasi',
-                    style: TextStyle(
-                        color: MainColorData.grey,
-                        fontSize: MainSizeData.SIZE_14,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                const SizedBox(
-                  height: MainSizeData.SIZE_8,
-                ),
-                BlocConsumer<ConsultationCubit, ConsultationState>(
-                  listenWhen: (previous, current) =>
-                      current is ConsultationDelete,
-                  listener: (context, state) {
-                    if (state is ConsultationDelete) {
-                      blocHelperListenner(
-                        load: state.load,
-                        onSuccess: () {
-                          _fetch();
-                        },
-                      );
-                    }
-                  },
-                  buildWhen: (previous, current) =>
-                      current is ConsultationFetch,
-                  builder: (context, state) {
-                    if (state is ConsultationFetch) {
-                      return loadData(
-                        state.load,
-                        errorMessage: state.message,
-                        child: (state.data?.data?.isEmpty ?? true)
-                            ? const Center(
-                                child: Text('Kosong'),
-                              )
-                            : Container(
-                                height: MainSizeData.SIZE_460,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  // shrinkWrap: true,
-                                  itemCount: state.data?.data?.length,
-                                  itemBuilder: ((context, index) {
-                                    return _buildConsultationItem(
-                                      context,
-                                      state.data?.data?[index],
-                                    );
-                                  }),
-                                ),
-                              ),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                )
-              ],
+                  )
+                ],
+              ),
             )
+
+          // Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(
+          //             horizontal: MainSizeData.SIZE_18),
+          //         child: const Text(
+          //           'Kategori',
+          //           style: const TextStyle(
+          //               color: MainColorData.grey,
+          //               fontSize: MainSizeData.SIZE_14,
+          //               fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         height: MainSizeData.SIZE_8,
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(
+          //             horizontal: MainSizeData.SIZE_18),
+          //         child: BlocBuilder<ConsultationCubit, ConsultationState>(
+          //           buildWhen: (previous, current) =>
+          //               current is CategoriesFetch,
+          //           builder: (context, state) {
+          //             if (state is CategoriesFetch) {
+          //               return loadData(
+          //                 state.load,
+          //                 errorMessage: state.message,
+          //                 child: (state.data?.data?.isEmpty ?? true)
+          //                     ? const Center(
+          //                         child: Text('Kosong'),
+          //                       )
+          //                     : Container(
+          //                         height: MainSizeData.SIZE_90,
+          //                         child: ListView.builder(
+          //                           itemCount: state.data?.data?.length,
+          //                           scrollDirection: Axis.horizontal,
+          //                           itemBuilder: ((context, index) {
+          //                             return _buildConsultationCategories(
+          //                               context,
+          //                               state.data?.data?[index],
+          //                               // itemTitle:  state.data?.data?.name ?? '-',
+          //                               // onTap: () {
+          //                               //   Get.toNamed(
+          //                               //       MainConstantRoute.mainListPraktisi);
+          //                               // },
+          //                             );
+          //                           }),
+          //                         ),
+          //                       ),
+          //               );
+          //             }
+          //             return const SizedBox();
+          //           },
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(
+          //             horizontal: MainSizeData.SIZE_18),
+          //         child: GestureDetector(
+          //           onTap: () {
+          //             Get.toNamed(MainConstantRoute.mainListPraktisi);
+          //           },
+          //           child: Text(
+          //             "Lihat Tenaga Ahli",
+          //             style: TextStyle(
+          //                 fontSize: MainSizeData.fontSize16,
+          //                 fontWeight: FontWeight.bold,
+          //                 color: MainColorData.orangeFC),
+          //           ),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         height: MainSizeData.SIZE_14,
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(
+          //             horizontal: MainSizeData.SIZE_18),
+          //         child: const Text(
+          //           'Riwayat Konsultasi',
+          //           style: TextStyle(
+          //               color: MainColorData.grey,
+          //               fontSize: MainSizeData.SIZE_14,
+          //               fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //       const SizedBox(
+          //         height: MainSizeData.SIZE_8,
+          //       ),
+          //       BlocConsumer<ConsultationCubit, ConsultationState>(
+          //         listenWhen: (previous, current) =>
+          //             current is ConsultationDelete,
+          //         listener: (context, state) {
+          //           if (state is ConsultationDelete) {
+          //             blocHelperListenner(
+          //               load: state.load,
+          //               onSuccess: () {
+          //                 _fetch();
+          //               },
+          //             );
+          //           }
+          //         },
+          //         buildWhen: (previous, current) =>
+          //             current is ConsultationFetch,
+          //         builder: (context, state) {
+          //           if (state is ConsultationFetch) {
+          //             return loadData(
+          //               state.load,
+          //               errorMessage: state.message,
+          //               child: (state.data?.data?.isEmpty ?? true)
+          //                   ? const Center(
+          //                       child: Text('Kosong'),
+          //                     )
+          //                   : Container(
+          //                       height: MainSizeData.SIZE_460,
+          //                       child: ListView.builder(
+          //                         scrollDirection: Axis.vertical,
+          //                         // shrinkWrap: true,
+          //                         itemCount: state.data?.data?.length,
+          //                         itemBuilder: ((context, index) {
+          //                           return _buildConsultationItem(
+          //                             context,
+          //                             state.data?.data?[index],
+          //                           );
+          //                         }),
+          //                       ),
+          //                     ),
+          //             );
+          //           }
+          //           return const SizedBox();
+          //         },
+          //       )
+          //     ],
+          //   )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -215,7 +399,9 @@ class _MainKonsultasiPraktisiPageState
                                     alignment: Alignment.center,
                                     height: MainSizeData.SIZE_120,
                                     child: MainCustomCard(
-                                        itemCount: state.data?.data?.answeredConsultations.toString(),
+                                        itemCount: state
+                                            .data?.data?.answeredConsultations
+                                            .toString(),
                                         itemTitle: "Terjawab",
                                         onTap: () {}),
                                   ),
@@ -225,7 +411,9 @@ class _MainKonsultasiPraktisiPageState
                                     alignment: Alignment.center,
                                     height: MainSizeData.SIZE_120,
                                     child: MainCustomCard(
-                                        itemCount: state.data?.data?.unansweredConsultations.toString(),
+                                        itemCount: state
+                                            .data?.data?.unansweredConsultations
+                                            .toString(),
                                         itemTitle: "Menunggu",
                                         onTap: () {}),
                                   ),
@@ -291,13 +479,24 @@ class _MainKonsultasiPraktisiPageState
       date: item?.date?.ddMMMMyyyy(),
       time: item?.time,
       label: item?.profession ?? '-',
-      onPressed: ()async {
-        final res = await Get.to(
-          () => BlocProvider.value(
-            value: context.read<ConsultationCubit>(),
-            child: MainKonsultasiPraktisiDetailPage(item?.id),
-          ),
-        );
+      onPressed: () async {
+        final res = await Get.toNamed(
+            MainConstantRoute.mainKonsultasiPraktisiDetail,
+            arguments: {
+              'id': item?.id,
+            });
+        if (res == true) {
+          if (!mounted) return;
+          context
+              .read<ConsultationCubit>()
+              .getDetailConsultationPraktisi(id: widget.id);
+        }
+        // final res = await Get.to(
+        //   () => BlocProvider.value(
+        //     value: context.read<ConsultationCubit>(),
+        //     child: MainKonsultasiPraktisiDetailPage(item?.id),
+        //   ),
+        // );
       },
     );
   }
@@ -305,31 +504,45 @@ class _MainKonsultasiPraktisiPageState
   Widget _buildConsultationItem(
       BuildContext context, ConsultationModelData? consultation) {
     return MainConsultationCard(
-      title: consultation?.title,
-      date: consultation?.date?.ddMMMMyyyy(),
-      time: consultation?.time?.toString(),
-      status: consultation?.status.toString(),
-      label: consultation?.category.toString(),
-      onDelete: () async {
-        final res = await showDialog(
-          context: context,
-          builder: (ctx) => ConfirmDialogWidget(title: 'Hapus Konsultation ?'),
-        );
-        if (res == true) {
-          context
-              .read<ConsultationCubit>()
-              .delete(consultation?.id.toString() ?? '');
+        title: consultation?.title,
+        date: consultation?.date?.ddMMMMyyyy(),
+        time: consultation?.time?.toString(),
+        status: consultation?.status.toString(),
+        label: consultation?.category.toString(),
+        onDelete: () async {
+          final res = await showDialog(
+            context: context,
+            builder: (ctx) =>
+                ConfirmDialogWidget(title: 'Hapus Konsultation ?'),
+          );
+          if (res == true) {
+            context
+                .read<ConsultationCubit>()
+                .delete(consultation?.id.toString() ?? '');
+          }
+        },
+        onPressed: () async {
+          final res = await Get.toNamed(
+              MainConstantRoute.mainKonsultasiPraktisiDetail,
+              arguments: {
+                'id': consultation?.id,
+              });
+          if (res == true) {
+            if (!mounted) return;
+            context
+                .read<ConsultationCubit>()
+                .getDetailConsultationPraktisi(id: widget.id);
+          }
         }
-      },
-      onPressed: () async {
-        final res = await Get.to(
-          () => BlocProvider.value(
-            value: context.read<ConsultationCubit>(),
-            child: MainKonsultasiPraktisiDetailPage(consultation?.id),
-          ),
+        // onPressed: () async {
+        //   final res = await Get.to(
+        //     () => BlocProvider.value(
+        //       value: context.read<ConsultationCubit>(),
+        //       child: MainKonsultasiPraktisiDetailPage(consultation?.id),
+        //     ),
+        //   );
+        // },
         );
-      },
-    );
   }
 
   Widget _buildConsultationCategories(

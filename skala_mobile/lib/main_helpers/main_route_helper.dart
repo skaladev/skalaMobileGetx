@@ -137,7 +137,7 @@ class MainRouteHelper {
           name: MainConstantRoute.mainListPraktisi,
           page: () => bloc.BlocProvider(
             create: (context) => ConsultationCubit(),
-            child:const MainKonsultasiListPraktisi(),
+            child: const MainKonsultasiListPraktisi(),
           ),
           alignment: Alignment.center,
           transition: Transition.fadeIn,
@@ -167,12 +167,14 @@ class MainRouteHelper {
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainKlaBinding()),
-
-        // GetPage(
-        //     name: MainConstantRoute.mainKonsultasiPraktisiDetail,
-        //     page: () => MainKonsultasiPraktisiDetailPage(),
-        //     alignment: Alignment.center,
-        //     transition: Transition.fadeIn,
-        //     binding: MainKosultasiPraktisiDetailBinding()),
+        GetPage(
+            name: MainConstantRoute.mainKonsultasiPraktisiDetail,
+            page: () => bloc.BlocProvider(
+                  create: (context) => ConsultationCubit(),
+                  child: MainKonsultasiPraktisiDetailPage(),
+                ),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKosultasiPraktisiDetailBinding()),
       ];
 }

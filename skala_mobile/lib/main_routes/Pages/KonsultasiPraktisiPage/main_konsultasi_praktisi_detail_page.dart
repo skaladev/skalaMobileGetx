@@ -19,7 +19,7 @@ import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiDetailPage extends StatefulWidget {
   final ConsultationModelData? consultation;
-  const MainKonsultasiPraktisiDetailPage(this.id, {Key? key, this.consultation})
+  const MainKonsultasiPraktisiDetailPage( {Key? key,this.id, this.consultation})
       : super(key: key);
   final int? id;
   @override
@@ -30,16 +30,17 @@ class MainKonsultasiPraktisiDetailPage extends StatefulWidget {
 class _MainKonsultasiPraktisiDetailPageState
     extends State<MainKonsultasiPraktisiDetailPage> {
   final _prefs = Prefs();
+  final int? id_consultation = Get.arguments?['id'];
   @override
   void initState() {
     if (_prefs.roleId != 6) {
       context
           .read<ConsultationCubit>()
-          .getDetailConsultation(widget.id.toString());
+          .getDetailConsultation(id_consultation.toString());
     }
     context
         .read<ConsultationCubit>()
-        .getDetailConsultationPraktisi(widget.id.toString());
+        .getDetailConsultationPraktisi(id: id_consultation);
   }
 
   @override
@@ -149,6 +150,7 @@ class _MainKonsultasiPraktisiDetailPageState
                                         arguments: {
                                           'id':
                                               state.data?.data?.user?.id.toString(),
+                                          'id_consultation': id_consultation.toString(),
                                           'name': state.data?.data?.user?.name ?? "-",
                                           'profession': state
                                               .data?.data?.user?.profession ?? "-",

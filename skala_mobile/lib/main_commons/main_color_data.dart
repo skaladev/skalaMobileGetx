@@ -28,6 +28,7 @@ class MainColorData {
   static const Color grey52 = Color(0xFF52575C);
   static const Color grey42 = Color(0xFF424242);
   static const Color grey75 = Color(0xFF757575);
+  static const Color greybg = Color(0xffFAFAFA);
   static const Color green18 = Color(0xFF18A659);
   static const Color orangeFC = Color(0xFFFCA639);
   static const Color orangeFF = Color(0xFFFFA200);

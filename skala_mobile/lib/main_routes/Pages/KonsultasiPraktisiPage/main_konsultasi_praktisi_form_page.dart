@@ -37,7 +37,8 @@ class _MainKonsultasiPraktisiFormState
     extends State<MainKonsultasiPraktisiForm> {
   final _prefs = Prefs();
   final _formKey = GlobalKey<FormState>();
-  final String? id_consultant = Get.arguments?['id'];
+  final String? _toUserId = Get.arguments?['id'];
+  final String? id_consultant = Get.arguments?['id_consultation'];
   final String? name = Get.arguments?['name'];
   final String? consultant_category = Get.arguments?['consultant_category'];
   String? category() {
@@ -188,7 +189,7 @@ class _MainKonsultasiPraktisiFormState
                                             _descriptionController.text,
                                         title: _titleController.text,
                                         image: _imagePath,
-                                        toUserId: id_consultant);
+                                        toUserId: _toUserId);
                               }
                               _fetch();
                             },

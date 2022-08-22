@@ -10,6 +10,10 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
     this.itemSK,
     required this.itemImage,
     this.itemWorkExperience,
+    this.subDestrict,
+    this.district,
+    this.regency,
+    this.phone,
     required this.size,
   }) : super(key: key);
   final String itemName;
@@ -18,6 +22,10 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
   final String? itemSK;
   final int? itemWorkExperience;
   final Size size;
+  final String? subDestrict;
+  final String? regency;
+  final String? district;
+  final String? phone;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -96,32 +104,68 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                               indent: MainSizeData.SIZE_14,
                               endIndent: MainSizeData.SIZE_14,
                               color: MainColorData.white),
+                          if (itemWorkExperience != null)
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: MainSizeData.SIZE_14),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: MainSizeData.SIZE_5),
+                                    child: Icon(
+                                      Icons.timelapse,
+                                      color: MainColorData.white,
+                                      size: MainSizeData.SIZE_16,
+                                    ),
+                                  ),
+                                  Text(
+                                    "$itemWorkExperience year experience",
+                                    style: const TextStyle(
+                                        color: MainColorData.white,
+                                        fontSize: MainSizeData.SIZE_12,
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ],
+                              ),
+                            ),
+                          SizedBox(
+                            height: MainSizeData.SIZE_12,
+                          ),
+                          if (regency != null)
                           Padding(
                             padding: const EdgeInsets.only(
                                 left: MainSizeData.SIZE_14),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: MainSizeData.SIZE_5),
-                                  child: Icon(
-                                    Icons.timelapse,
-                                    color: MainColorData.white,
-                                    size: MainSizeData.SIZE_16,
-                                  ),
-                                ),
-                                Text(
-                                  "$itemWorkExperience year experience",
-                                  style: const TextStyle(
-                                      color: MainColorData.white,
-                                      fontSize: MainSizeData.SIZE_12,
-                                      fontWeight: FontWeight.w400),
-                                )
-                              ],
+                            child: Text(
+                              "$subDestrict,$district,$regency",
+                              style: TextStyle(
+                                  fontSize: MainSizeData.fontSize12,
+                                  fontWeight: FontWeight.bold,
+                                  color: MainColorData.white),
                             ),
                           ),
-                          SizedBox(
-                            height: MainSizeData.SIZE_12,
+                          if(phone != null)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: MainSizeData.SIZE_14),
+                            child: Text(
+                              phone ?? '-',
+                              style: TextStyle(
+                                  fontSize: MainSizeData.fontSize12,
+                                  fontWeight: FontWeight.bold,
+                                  color: MainColorData.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: MainSizeData.SIZE_14),
+                            child: Text(
+                              itemSK ?? '',
+                              style: TextStyle(
+                                  fontSize: MainSizeData.fontSize12,
+                                  fontWeight: FontWeight.bold,
+                                  color: MainColorData.white),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(

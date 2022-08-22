@@ -120,6 +120,10 @@ class _MainKonsultasiPraktisiDetailPageState
                                   itemName: state.data?.data?.user?.name ?? "-",
                                   itemKategori:
                                       state.data?.data?.user?.profession ?? "-",
+                                  subDestrict: state.data?.data?.user?.subDistrict ?? "",
+                                  district: state.data?.data?.user?.district ?? "",
+                                  regency: state.data?.data?.user?.regency ?? "",
+                                  phone: state.data?.data?.user?.phone ?? "",
                                   itemImage: "assets/images/user.png",
                                   size: size),
                               Column(

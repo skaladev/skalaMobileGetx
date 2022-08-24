@@ -475,7 +475,7 @@ class DescriptionContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      MainConstantData.definitionKla,
+      description,
       style: TextStyle(
           fontSize: MainSizeData.SIZE_14,
           fontWeight: FontWeight.normal,

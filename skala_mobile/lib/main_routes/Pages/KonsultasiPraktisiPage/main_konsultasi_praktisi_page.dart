@@ -70,7 +70,7 @@ class _MainKonsultasiPraktisiPageState
                   Container(
                     width: double.infinity,
                     margin:
-                        EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
+                        EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_10),
                     padding: EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 20,
@@ -82,22 +82,6 @@ class _MainKonsultasiPraktisiPageState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Tentang',
-                          style: const TextStyle(
-                              color: MainColorData.green_dop,
-                              fontSize: MainSizeData.SIZE_14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: MainSizeData.SIZE_10,
-                        ),
-                        Text(
-                          'Layanan Konsultasi merupakan upaya dalam peningkatan keberjalanan Kota Layak Anak Surakarta. Mengacu pada indikator atau variabel pengukur dalam pelakasanaan pemenuhan hak anak di daerah dalam upaya mewujudkan KLA yang terdapat pada point Kesehatan dan Kesejahteraan. Dalam fitur konsultasi ini, nantinya anda dapat menyampaikan permasalahan yang sedang anda alami sesuai dengan kategori yang telah disediakan dan akan dilayani langsung oleh tenaga ahli yang telah berkompeten sesuai kategori yang dipilih.',
-                        ),
-                        SizedBox(
-                          height: MainSizeData.SIZE_10,
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

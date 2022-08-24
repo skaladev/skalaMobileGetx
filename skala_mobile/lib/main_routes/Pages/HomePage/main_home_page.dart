@@ -12,6 +12,7 @@ import 'package:skala_mobile/main_helpers/main_article.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_custom_card_widget.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
 
 class MainHomePage extends StatelessWidget {
   final _prefs = Prefs();
@@ -85,7 +86,9 @@ class MainHomePage extends StatelessWidget {
                 itemMenuHome(
                   title: "Konsultasi",
                   icon: "assets/icons/ic_checklist.svg",
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.toNamed(MainConstantRoute.mainMenuKonsultasi);
+                  },
                 ),
                 if(_prefs.roleId  !=6)
                 itemMenuHome(

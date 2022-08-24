@@ -5,7 +5,9 @@ import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
+import 'package:skala_mobile/main_bindings/main_kategori_konsultasi.dart';
 import 'package:skala_mobile/main_bindings/main_kla_binding.dart';
+import 'package:skala_mobile/main_bindings/main_konsultasi_menu_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_bio_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_detail_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
@@ -27,7 +29,9 @@ import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsu
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/categories/main_kesehatan_mental_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
 import 'package:skala_mobile/main_routes/Pages/RegisterPage/main_register_page.dart';
@@ -176,5 +180,17 @@ class MainRouteHelper {
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainKosultasiPraktisiDetailBinding()),
+        GetPage(
+            name: MainConstantRoute.mainMenuKonsultasi,
+            page: () => const MainMenuKonsultasiPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKonsultasiMenuBinding()),
+        GetPage(
+            name: MainConstantRoute.mainKesehatanMental,
+            page: () => const MainKesehatanMentalPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainKategoriKonsultasiBinding()),
       ];
 }

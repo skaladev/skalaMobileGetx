@@ -53,12 +53,14 @@ class AuthCubit extends Cubit<AuthState> {
     String? name,
     String? gender,
     String? tanggalLahir,
+    String? nik,
   }) async {
     emit(AuthRegister.loading());
     try {
       final res = await _authService.register(
         phone: phone,
         name: name,
+        nik:nik,
         gender: gender,
         tanggalLahir: tanggalLahir,
       );

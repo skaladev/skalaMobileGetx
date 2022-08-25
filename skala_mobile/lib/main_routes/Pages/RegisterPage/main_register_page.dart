@@ -31,6 +31,7 @@ class _MainRegisterPageState extends State<MainRegisterPage> {
 
   final _namaController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _nikController = TextEditingController();
   DateTime? _tanggalLahir;
   String _jenisKelamin = "M";
 
@@ -102,6 +103,18 @@ class _MainRegisterPageState extends State<MainRegisterPage> {
                           height: MainSizeData.SIZE_16,
                         ),
                         CustomTextField(
+                          validator: _mainValidatorHelper.validateNIK,
+                          controller: _nikController,
+                          errorMessage: MainConstantData.required,
+                          label: "NIK",
+                          hint: "nik",
+                          margin: EdgeInsets.symmetric(
+                              horizontal: MainSizeData.SIZE_12),
+                        ),
+                        SizedBox(
+                          height: MainSizeData.SIZE_16,
+                        ),
+                        CustomTextField(
                           validator: _mainValidatorHelper.validateBasic,
                           controller: _namaController,
                           errorMessage: MainConstantData.required,
@@ -154,6 +167,7 @@ class _MainRegisterPageState extends State<MainRegisterPage> {
                               context.read<AuthCubit>().register(
                                 phone: _phoneController.text,
                                 name: _namaController.text,
+                                nik:_nikController.text,
                                 gender: _jenisKelamin,
                                 tanggalLahir:   '${_tanggalLahir?.year}-${_tanggalLahir?.month}-${_tanggalLahir?.day}',
                               );

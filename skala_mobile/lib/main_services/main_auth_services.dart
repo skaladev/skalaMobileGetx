@@ -33,6 +33,7 @@ class MainAuthServices {
   Future<bool> register({
     String? phone,
     String? name,
+    String? nik,
     String? gender,
     String? tanggalLahir,
   }) async {
@@ -41,6 +42,7 @@ class MainAuthServices {
       data: FormData.fromMap({
         'phone': phone,
         'name': name,
+        'nik':nik,
         'gender': gender,
         'date_of_birth': tanggalLahir,
       }),

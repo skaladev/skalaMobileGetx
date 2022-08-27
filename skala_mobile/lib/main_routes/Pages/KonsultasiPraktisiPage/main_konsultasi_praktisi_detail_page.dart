@@ -14,6 +14,7 @@ import 'package:skala_mobile/main_models/main_consultation_model.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
+import 'package:skala_mobile/main_widgets/main_custom_consutlation_detail_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_header_konsultasi_praktisi_widget.dart';
 import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
@@ -81,12 +82,12 @@ class _MainKonsultasiPraktisiDetailPageState
                               Column(
                                 children: state.data?.data?.consultations
                                         ?.map(
-                                          (e) => MainConsultationCard(
+                                          (e) => MainCustomConsultationDetailCardWidget(
                                             date: e.date?.ddMMMMyyyy() ?? "",
                                             title: e.title?.toString(),
                                             description: e.description,
                                             time: e.time,
-                                            onPressed: () {},
+                                            from_user: e.fromUser,
                                           ),
                                         )
                                         .toList() ??

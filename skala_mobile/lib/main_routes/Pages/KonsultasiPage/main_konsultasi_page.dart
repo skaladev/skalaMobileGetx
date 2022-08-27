@@ -66,7 +66,16 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
               state.load,
               errorMessage: state.message,
               child: (state.data?.data?.isEmpty ?? true)
-                  ? const Center(child: Text('Kosong'))
+                  ? Center(
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: MainSizeData.imageHeight300,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/images/404.png'),
+                                fit: BoxFit.fitHeight)),
+                      ),
+                    )
                   : ListView.builder(
                       itemCount: state.data?.data?.length,
                       itemBuilder: (context, index) {

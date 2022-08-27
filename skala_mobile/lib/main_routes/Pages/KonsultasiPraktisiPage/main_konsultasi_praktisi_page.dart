@@ -201,8 +201,15 @@ class _MainKonsultasiPraktisiPageState
                           state.load,
                           errorMessage: state.message,
                           child: (state.data?.data?.isEmpty ?? true)
-                              ? const Center(
-                                  child: Text('Kosong'),
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: MainSizeData.imageHeight300,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/404.png'),
+                                          fit: BoxFit.fitHeight)),
+                              
                                 )
                               : Container(
                                   height: MainSizeData.SIZE_460,
@@ -297,9 +304,16 @@ class _MainKonsultasiPraktisiPageState
                         state.load,
                         errorMessage: state.message,
                         child: (state.data?.data?.isEmpty ?? true)
-                            ? const Center(
-                                child: Text("Kosong"),
-                              )
+                            ? Container(
+                                  alignment: Alignment.center,
+                                  height: MainSizeData.imageHeight300,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/404.png'),
+                                          fit: BoxFit.fitHeight)),
+                              
+                                )
                             : Container(
                                 height: MainSizeData.SIZE_470,
                                 child: ListView.builder(
@@ -377,8 +391,7 @@ class _MainKonsultasiPraktisiPageState
                 .read<ConsultationCubit>()
                 .getDetailConsultationPraktisi(id: widget.id);
           }
-        }
-        );
+        });
   }
 
   Widget _buildConsultationCategories(
@@ -399,4 +412,3 @@ class _MainKonsultasiPraktisiPageState
     );
   }
 }
-

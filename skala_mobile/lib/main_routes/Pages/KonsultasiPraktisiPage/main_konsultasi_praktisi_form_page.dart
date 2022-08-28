@@ -16,6 +16,7 @@ import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_konsultasi_page.dart';
+import 'package:skala_mobile/main_services/main_firemessaging_service.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_outlined_button_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
@@ -41,6 +42,7 @@ class _MainKonsultasiPraktisiFormState
   final String? id_consultant = Get.arguments?['id_consultation'];
   final String? name = Get.arguments?['name'];
   final String? consultant_category = Get.arguments?['consultant_category'];
+  final String? notification_token = Get.arguments?['notification_token'];
   String? category() {
     switch (consultant_category) {
       case 'Kesehatan Mental':
@@ -182,6 +184,10 @@ class _MainKonsultasiPraktisiFormState
                             ),
                             onPressed: () async {
                               if (_formKey.currentState?.validate() == true) {
+                                FiremessagingService.sendNotification(
+                                    _titleController.text,
+                                    _descriptionController.text,
+                                    notification_token.toString());
                                 context
                                     .read<ConsultationCubit>()
                                     .createConsultation(
@@ -276,6 +282,10 @@ class _MainKonsultasiPraktisiFormState
                             ),
                             onPressed: () async {
                               if (_formKey.currentState?.validate() == true) {
+                                FiremessagingService.sendNotification(
+                                    _titleController.text,
+                                    _descriptionController.text,
+                                    notification_token.toString());
                                 context
                                     .read<ConsultationCubit>()
                                     .answerConsultation(

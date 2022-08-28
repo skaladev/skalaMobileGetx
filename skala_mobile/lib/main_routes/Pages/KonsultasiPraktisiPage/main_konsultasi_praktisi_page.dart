@@ -169,66 +169,82 @@ class _MainKonsultasiPraktisiPageState
                   const SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: MainSizeData.SIZE_24),
-                    child: const Text(
-                      'Riwayat Konsultasi',
-                      style: TextStyle(
-                          color: MainColorData.green_dop,
-                          fontSize: MainSizeData.SIZE_14,
-                          fontWeight: FontWeight.w600),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 0,
                     ),
-                  ),
-                  BlocConsumer<ConsultationCubit, ConsultationState>(
-                    listenWhen: (previous, current) =>
-                        current is ConsultationDelete,
-                    listener: (context, state) {
-                      if (state is ConsultationDelete) {
-                        blocHelperListenner(
-                          load: state.load,
-                          onSuccess: () {
-                            _fetch();
+                    decoration: BoxDecoration(
+                      color: MainColorData.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: MainSizeData.SIZE_24),
+                          child: const Text(
+                            'Riwayat Konsultasi',
+                            style: TextStyle(
+                                color: MainColorData.green_dop,
+                                fontSize: MainSizeData.SIZE_14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: MainSizeData.SIZE_10,
+                        ),
+                        BlocConsumer<ConsultationCubit, ConsultationState>(
+                          listenWhen: (previous, current) =>
+                              current is ConsultationDelete,
+                          listener: (context, state) {
+                            if (state is ConsultationDelete) {
+                              blocHelperListenner(
+                                load: state.load,
+                                onSuccess: () {
+                                  _fetch();
+                                },
+                              );
+                            }
                           },
-                        );
-                      }
-                    },
-                    buildWhen: (previous, current) =>
-                        current is ConsultationFetch,
-                    builder: (context, state) {
-                      if (state is ConsultationFetch) {
-                        return loadData(
-                          state.load,
-                          errorMessage: state.message,
-                          child: (state.data?.data?.isEmpty ?? true)
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  height: MainSizeData.imageHeight300,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/404.png'),
-                                          fit: BoxFit.fitHeight)),
-                              
-                                )
-                              : Container(
-                                  height: MainSizeData.SIZE_460,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    // shrinkWrap: true,
-                                    itemCount: state.data?.data?.length,
-                                    itemBuilder: ((context, index) {
-                                      return _buildConsultationItem(
-                                        context,
-                                        state.data?.data?[index],
-                                      );
-                                    }),
-                                  ),
-                                ),
-                        );
-                      }
-                      return const SizedBox();
-                    },
+                          buildWhen: (previous, current) =>
+                              current is ConsultationFetch,
+                          builder: (context, state) {
+                            if (state is ConsultationFetch) {
+                              return loadData(
+                                state.load,
+                                errorMessage: state.message,
+                                child: (state.data?.data?.isEmpty ?? true)
+                                    ? Container(
+                                        alignment: Alignment.center,
+                                        height: MainSizeData.imageHeight300,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/404.png'),
+                                                fit: BoxFit.fitHeight)),
+                                      )
+                                    : Container(
+                                        height: MainSizeData.SIZE_460,
+                                        child: ListView.builder(
+                                          itemCount: state.data?.data?.length,
+                                          itemBuilder: ((context, index) {
+                                            return _buildConsultationItem(
+                                              context,
+                                              state.data?.data?[index],
+                                            );
+                                          }),
+                                        ),
+                                      ),
+                              );
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -305,23 +321,24 @@ class _MainKonsultasiPraktisiPageState
                         errorMessage: state.message,
                         child: (state.data?.data?.isEmpty ?? true)
                             ? Container(
-                                  alignment: Alignment.center,
-                                  height: MainSizeData.imageHeight300,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/404.png'),
-                                          fit: BoxFit.fitHeight)),
-                              
-                                )
-                            : Container(
-                                height: MainSizeData.SIZE_470,
-                                child: ListView.builder(
-                                  itemCount: state.data?.data?.length,
-                                  itemBuilder: (context, index) {
-                                    return _buildConsultationListUser(
-                                        context, state.data?.data?[index]);
-                                  },
+                                alignment: Alignment.center,
+                                height: MainSizeData.imageHeight300,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage('assets/images/404.png'),
+                                        fit: BoxFit.fitHeight)),
+                              )
+                            : Expanded(
+                                child: Container(
+                                  height: MainSizeData.SIZE_470,
+                                  child: ListView.builder(
+                                    itemCount: state.data?.data?.length,
+                                    itemBuilder: (context, index) {
+                                      return _buildConsultationListUser(
+                                          context, state.data?.data?[index]);
+                                    },
+                                  ),
                                 ),
                               ),
                       );
@@ -342,6 +359,7 @@ class _MainKonsultasiPraktisiPageState
       time: item?.time,
       kategori: item?.category,
       title: item?.title,
+      status: item?.status,
       profession: item?.profession,
       onPressed: () async {
         final res = await Get.toNamed(

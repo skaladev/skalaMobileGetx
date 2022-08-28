@@ -70,15 +70,9 @@ class MainConsultationCardPraktisi extends StatelessWidget {
                   const SizedBox(
                     width: MainSizeData.SIZE_10,
                   ),
-                  // Container(
-                  //   child: Text(
-                  //     'Menunggu',
-                  //     style: const TextStyle(
-                  //         color: MainColorData.yellowFF,
-                  //         fontSize: MainSizeData.SIZE_12,
-                  //         fontWeight: FontWeight.w500),
-                  //   ),
-                  // ),
+                 Container(
+                    child: StatusSection(status: status == "Unaswered" ? 'Belum Dibalas' : 'Menunggu') ,
+                  ),
                   const SizedBox(
                     width: MainSizeData.SIZE_12,
                   ),
@@ -133,5 +127,38 @@ class MainConsultationCardPraktisi extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class StatusSection extends StatelessWidget {
+  const StatusSection({Key? key, required this.status}) : super(key: key);
+  final String status;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          horizontal: MainSizeData.SIZE_10, vertical: MainSizeData.SIZE_4),
+      decoration: BoxDecoration(
+          color: statusColor(),
+          borderRadius: BorderRadius.circular(MainSizeData.SIZE_20)),
+      child: Text(
+        status,
+        style: const TextStyle(
+            color: MainColorData.white,
+            fontSize: MainSizeData.SIZE_8,
+            fontWeight: FontWeight.w900),
+      ),
+    );
+  }
+
+  Color? statusColor() {
+    switch (status) {
+      case 'Terkirim':
+        return MainColorData.green;
+      case 'Dibalas':
+        return MainColorData.blue01;
+      case 'Menunggu':
+        return MainColorData.orangeFC;
+    }
   }
 }

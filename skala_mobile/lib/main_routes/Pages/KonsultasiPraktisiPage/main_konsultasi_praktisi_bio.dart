@@ -282,6 +282,7 @@ class _MainKonsultasiPraktisiBioState extends State<MainKonsultasiPraktisiBio> {
                                 'work_experience_times':
                                     state.data?.data?.workExperienceTimes,
                                 'sk_number': state.data?.data?.skNumber,
+                                'notification_token':state.data?.data?.notification_token,
                                 'isTampil': true
                               });
                           if (res == true) {

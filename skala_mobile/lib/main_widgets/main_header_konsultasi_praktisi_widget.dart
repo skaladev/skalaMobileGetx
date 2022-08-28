@@ -167,17 +167,6 @@ class HeaderKonsultasiPraktisi extends StatelessWidget {
                                   color: MainColorData.white),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: MainSizeData.SIZE_14),
-                            child: Text(
-                              itemSK ?? '',
-                              style: TextStyle(
-                                  fontSize: MainSizeData.fontSize12,
-                                  fontWeight: FontWeight.bold,
-                                  color: MainColorData.white),
-                            ),
-                          ),
                         ],
                       ),
                     ),

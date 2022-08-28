@@ -4,50 +4,57 @@
 
 import 'dart:convert';
 
-ConsultationListUserModel consultationListUserModelFromJson(String str) => ConsultationListUserModel.fromJson(json.decode(str));
+ConsultationListUserModel consultationListUserModelFromJson(String str) =>
+    ConsultationListUserModel.fromJson(json.decode(str));
 
-String consultationListUserModelToJson(ConsultationListUserModel data) => json.encode(data.toJson());
+String consultationListUserModelToJson(ConsultationListUserModel data) =>
+    json.encode(data.toJson());
 
 class ConsultationListUserModel {
-    ConsultationListUserModel({
-        this.message,
-        this.data,
-    });
+  ConsultationListUserModel({
+    this.message,
+    this.data,
+  });
 
-   final String? message;
-   final List<ConsultationListUserModelData>? data;
+  final String? message;
+  final List<ConsultationListUserModelData>? data;
 
-    factory ConsultationListUserModel.fromJson(Map<String, dynamic> json) => ConsultationListUserModel(
+  factory ConsultationListUserModel.fromJson(Map<String, dynamic> json) =>
+      ConsultationListUserModel(
         message: json["message"],
-        data: List<ConsultationListUserModelData>.from(json["data"].map((x) => ConsultationListUserModelData.fromJson(x))),
-    );
+        data: List<ConsultationListUserModelData>.from(
+            json["data"].map((x) => ConsultationListUserModelData.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "message": message,
         "data": List<dynamic>.from(data?.map((x) => x.toJson()) ?? []),
-    };
+      };
 }
 
 class ConsultationListUserModelData {
-    ConsultationListUserModelData({
-        this.id,
-        this.user,
-        this.profession,
-        this.title,
-        this.category,
-        this.date,
-        this.time,
-    });
+  ConsultationListUserModelData({
+    this.id,
+    this.user,
+    this.profession,
+    this.title,
+    this.category,
+    this.date,
+    this.time,
+    this.status,
+  });
 
-   final int? id;
-   final String? user;
-   final String? profession;
-   final String? title;
-   final String? category;
-   final DateTime? date;
-   final String? time;
+  final int? id;
+  final String? user;
+  final String? profession;
+  final String? title;
+  final String? category;
+  final DateTime? date;
+  final String? status;
+  final String? time;
 
-    factory ConsultationListUserModelData.fromJson(Map<String, dynamic> json) => ConsultationListUserModelData(
+  factory ConsultationListUserModelData.fromJson(Map<String, dynamic> json) =>
+      ConsultationListUserModelData(
         id: json["id"],
         user: json["user"],
         profession: json["profession"],
@@ -55,15 +62,18 @@ class ConsultationListUserModelData {
         category: json["category"],
         date: DateTime.parse(json["date"]),
         time: json["time"],
-    );
+        status: json["status"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user": user,
         "profession": profession,
         "title": title,
         "category": category,
-        "date": "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
+        "date":
+            "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
         "time": time,
-    };
+        "status": status,
+      };
 }

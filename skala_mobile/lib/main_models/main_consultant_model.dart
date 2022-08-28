@@ -47,6 +47,7 @@ class Data {
     this.graduateFaculty,
     this.graduateYear,
     this.experiences,
+    this.notification_token,
   });
 
   final int? id;
@@ -63,6 +64,7 @@ class Data {
   final String? graduateFaculty;
   final String? graduateYear;
   final List<dynamic>? experiences;
+  final String? notification_token;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
@@ -79,6 +81,7 @@ class Data {
         graduateFaculty: json["graduate_faculty"],
         graduateYear: json["graduate_year"],
         experiences: List<dynamic>.from(json["experiences"].map((x) => x)),
+        notification_token: json["notification_token"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -96,5 +99,6 @@ class Data {
         "graduate_faculty": graduateFaculty,
         "graduate_year": graduateYear,
         "experiences": List<dynamic>.from(experiences?.map((x) => x.toString()) ?? []),
+        "notification_token":notification_token,
       };
 }

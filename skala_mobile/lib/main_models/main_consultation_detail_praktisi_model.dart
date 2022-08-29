@@ -98,6 +98,7 @@ class User {
         this.district,
         this.regency,
         this.phone,
+        this.notification_token,
     });
 
    final int? id;
@@ -108,6 +109,7 @@ class User {
    final String? district;
    final String? regency;
    final String? phone;
+   final String? notification_token;
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -118,6 +120,7 @@ class User {
         district: json["district"],
         regency: json["regency"],
         phone: json["phone"],
+        notification_token: json["notification_token"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -129,5 +132,6 @@ class User {
         "district": district,
         "regency": regency,
         "phone": phone,
+        "notification_token": notification_token
     };
 }

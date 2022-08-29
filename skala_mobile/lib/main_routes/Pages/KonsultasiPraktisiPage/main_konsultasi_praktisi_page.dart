@@ -359,7 +359,7 @@ class _MainKonsultasiPraktisiPageState
       time: item?.time,
       kategori: item?.category,
       title: item?.title,
-      status: item?.status,
+      status: item?.status.toString(),
       profession: item?.profession,
       onPressed: () async {
         final res = await Get.toNamed(

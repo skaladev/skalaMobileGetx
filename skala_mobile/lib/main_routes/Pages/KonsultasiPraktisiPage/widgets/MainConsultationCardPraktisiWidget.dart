@@ -71,7 +71,7 @@ class MainConsultationCardPraktisi extends StatelessWidget {
                     width: MainSizeData.SIZE_10,
                   ),
                  Container(
-                    child: StatusSection(status: status == "Unaswered" ? 'Belum Dibalas' : 'Menunggu') ,
+                    child:StatusSection(status: status == 'Answered' ? 'Dibalas' : 'Menunggu')  ,
                   ),
                   const SizedBox(
                     width: MainSizeData.SIZE_12,

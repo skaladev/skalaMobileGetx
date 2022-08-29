@@ -20,7 +20,7 @@ import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiDetailPage extends StatefulWidget {
   final ConsultationModelData? consultation;
-  const MainKonsultasiPraktisiDetailPage( {Key? key,this.id, this.consultation})
+  const MainKonsultasiPraktisiDetailPage({Key? key, this.id, this.consultation})
       : super(key: key);
   final int? id;
   @override
@@ -74,15 +74,18 @@ class _MainKonsultasiPraktisiDetailPageState
                             children: [
                               HeaderKonsultasiPraktisi(
                                   itemName: state.data?.data?.user?.name ?? "",
-                                  itemKategori: state.data?.data?.user?.category ?? "",
-                                  itemWorkExperience: state.data?.data?.user?.workExperienceTimes,
-                                  itemImage: state.data?.data?.user?.imagePath ?? "",
+                                  itemKategori:
+                                      state.data?.data?.user?.category ?? "",
+                                  itemWorkExperience: state
+                                      .data?.data?.user?.workExperienceTimes,
+                                  itemImage:
+                                      state.data?.data?.user?.imagePath ?? "",
                                   size: size),
-                              
                               Column(
                                 children: state.data?.data?.consultations
                                         ?.map(
-                                          (e) => MainCustomConsultationDetailCardWidget(
+                                          (e) =>
+                                              MainCustomConsultationDetailCardWidget(
                                             date: e.date?.ddMMMMyyyy() ?? "",
                                             title: e.title?.toString(),
                                             description: e.description,
@@ -121,21 +124,25 @@ class _MainKonsultasiPraktisiDetailPageState
                                   itemName: state.data?.data?.user?.name ?? "-",
                                   itemKategori:
                                       state.data?.data?.user?.profession ?? "-",
-                                  subDestrict: state.data?.data?.user?.subDistrict ?? "",
-                                  district: state.data?.data?.user?.district ?? "",
-                                  regency: state.data?.data?.user?.regency ?? "",
+                                  subDestrict:
+                                      state.data?.data?.user?.subDistrict ?? "",
+                                  district:
+                                      state.data?.data?.user?.district ?? "",
+                                  regency:
+                                      state.data?.data?.user?.regency ?? "",
                                   phone: state.data?.data?.user?.phone ?? "",
                                   itemImage: "assets/images/user.png",
                                   size: size),
                               Column(
                                 children: state.data?.data?.consultations
                                         ?.map(
-                                          (e) => MainConsultationCard(
+                                          (e) =>
+                                              MainCustomConsultationDetailCardWidget(
                                             date: e.date?.ddMMMMyyyy() ?? "",
                                             title: e.title?.toString(),
                                             description: e.description,
                                             time: e.time,
-                                            onPressed: () {},
+                                            from_user: e.fromUser,
                                           ),
                                         )
                                         .toList() ??
@@ -145,7 +152,7 @@ class _MainKonsultasiPraktisiDetailPageState
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: MainSizeData.SIZE_30,
-                                    vertical: MainSizeData.SIZE_20),
+                                    ),
                                 alignment: Alignment.bottomRight,
                                 child: ElevatedButton(
                                   onPressed: () async {
@@ -153,15 +160,23 @@ class _MainKonsultasiPraktisiDetailPageState
                                         MainConstantRoute
                                             .mainKonsultasiPraktisiForm,
                                         arguments: {
-                                          'id':
-                                              state.data?.data?.user?.id.toString(),
-                                          'id_consultation': id_consultation.toString(),
-                                          'name': state.data?.data?.user?.name ?? "-",
-                                          'profession': state
-                                              .data?.data?.user?.profession ?? "-",
+                                          'id': state.data?.data?.user?.id
+                                              .toString(),
+                                          'id_consultation':
+                                              id_consultation.toString(),
+                                          'name':
+                                              state.data?.data?.user?.name ??
+                                                  "-",
+                                          'profession': state.data?.data?.user
+                                                  ?.profession ??
+                                              "-",
                                           // 'image_path': state
                                           //     .data?.data?.user?.imagePath ?? "-",
-                                          'phone':state.data?.data?.user?.phone ?? "",
+                                          'phone':
+                                              state.data?.data?.user?.phone ??
+                                                  "",
+                                          "notification_token": state.data?.data
+                                              ?.user?.notification_token,
                                           'isTampil': true
                                         });
                                     if (res == true) {
@@ -171,6 +186,7 @@ class _MainKonsultasiPraktisiDetailPageState
                                           .getConsultant(id: widget.id);
                                     }
                                   },
+                                
                                   child: Text(
                                     'Jawab Konsultasi',
                                     style: TextStyle(
@@ -179,13 +195,15 @@ class _MainKonsultasiPraktisiDetailPageState
                                         color: MainColorData.white),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                      primary: MainColorData.green_dop3,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MainSizeData.SIZE_18,
-                                          vertical: MainSizeData.SIZE_8),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              MainSizeData.SIZE_12))),
+                                    primary: MainColorData.green_dop3,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: MainSizeData.SIZE_18,
+                                        vertical: MainSizeData.SIZE_8),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          MainSizeData.SIZE_12),
+                                    ),
+                                  ),
                                 ),
                               )
                             ],

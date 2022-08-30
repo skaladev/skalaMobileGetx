@@ -25,8 +25,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiPage extends StatefulWidget {
-  const MainKonsultasiPraktisiPage({Key? key, this.id}) : super(key: key);
+  const MainKonsultasiPraktisiPage({Key? key, this.id, this.status})
+      : super(key: key);
   final int? id;
+  final int? status;
 
   @override
   State<MainKonsultasiPraktisiPage> createState() =>
@@ -40,7 +42,7 @@ class _MainKonsultasiPraktisiPageState
   void _fetch() {
     context.read<ConsultationCubit>().getCategories();
     context.read<ConsultationCubit>().getConsultationList();
-    context.read<ConsultationCubit>().getConsultationListUser();
+    context.read<ConsultationCubit>().getConsultationListUser(statusId: widget.status);
     context.read<ConsultationCubit>().getConsultationCount();
   }
 
@@ -274,7 +276,19 @@ class _MainKonsultasiPraktisiPageState
                                             .data?.data?.answeredConsultations
                                             .toString(),
                                         itemTitle: "Terjawab",
-                                        onTap: () {}),
+                                        onTap: () async {
+                                          final res = await Get.to(() =>
+                                              BlocProvider.value(
+                                                value: context
+                                                    .read<ConsultationCubit>(),
+                                                child:
+                                                    MainKonsultasiPraktisiPage(
+                                                        status: 2),
+                                              ));
+                                          if (res == true) {
+                                            _fetch();
+                                          }
+                                        }),
                                   ),
                                 ),
                                 Expanded(
@@ -286,7 +300,19 @@ class _MainKonsultasiPraktisiPageState
                                             .data?.data?.unansweredConsultations
                                             .toString(),
                                         itemTitle: "Menunggu",
-                                        onTap: () {}),
+                                        onTap: () async {
+                                          final res = await Get.to(() =>
+                                              BlocProvider.value(
+                                                value: context
+                                                    .read<ConsultationCubit>(),
+                                                child:
+                                                    MainKonsultasiPraktisiPage(
+                                                        status: 1),
+                                              ));
+                                          if (res == true) {
+                                            _fetch();
+                                          }
+                                        }),
                                   ),
                                 ),
                               ],

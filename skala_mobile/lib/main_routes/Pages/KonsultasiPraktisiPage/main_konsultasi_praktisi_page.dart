@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -25,10 +26,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiPage extends StatefulWidget {
-  const MainKonsultasiPraktisiPage({Key? key, this.id, this.status})
+  const MainKonsultasiPraktisiPage(
+      {Key? key, this.id, this.status, this.categoryId})
       : super(key: key);
   final int? id;
   final int? status;
+  final int? categoryId;
 
   @override
   State<MainKonsultasiPraktisiPage> createState() =>
@@ -41,8 +44,11 @@ class _MainKonsultasiPraktisiPageState
 
   void _fetch() {
     context.read<ConsultationCubit>().getCategories();
-    context.read<ConsultationCubit>().getConsultationList();
-    context.read<ConsultationCubit>().getConsultationListUser(statusId: widget.status);
+    context.read<ConsultationCubit>().getConsultationList(
+        statusId: widget.status, categoryId: widget.categoryId);
+    context
+        .read<ConsultationCubit>()
+        .getConsultationListUser(statusId: widget.status);
     context.read<ConsultationCubit>().getConsultationCount();
   }
 
@@ -187,12 +193,49 @@ class _MainKonsultasiPraktisiPageState
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: MainSizeData.SIZE_24),
-                          child: const Text(
-                            'Riwayat Konsultasi',
-                            style: TextStyle(
-                                color: MainColorData.green_dop,
-                                fontSize: MainSizeData.SIZE_14,
-                                fontWeight: FontWeight.w600),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Riwayat Konsultasi',
+                                style: TextStyle(
+                                    color: MainColorData.green_dop,
+                                    fontSize: MainSizeData.SIZE_14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton2(
+                                  customButton: Image.asset(
+                                    "assets/icons/ic_filter.png",
+                                    width: MainSizeData.SIZE_28,
+                                  ),
+                                  items: [
+                                    ...MenuItems.firstItems.map(
+                                      (item) => DropdownMenuItem<MenuItem>(
+                                        value: item,
+                                        child: MenuItems.buildItem(item),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    MenuItems.onChanged(
+                                        context, value as MenuItem);
+                                  },
+                                  itemHeight: MainSizeData.SIZE_36,
+                                  itemPadding: const EdgeInsets.only(
+                                      left: 16, right: 16),
+                                  dropdownWidth: 130,
+                                  dropdownPadding:
+                                      const EdgeInsets.symmetric(vertical: 6),
+                                  dropdownDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: MainColorData.white,
+                                  ),
+                                  dropdownElevation: 8,
+                                  offset: const Offset(40, -4),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                         const SizedBox(
@@ -454,5 +497,45 @@ class _MainKonsultasiPraktisiPageState
         }
       },
     );
+  }
+}
+
+class MenuItem {
+  final String text;
+  const MenuItem({
+    required this.text,
+  });
+}
+
+class MenuItems {
+  static const List<MenuItem> firstItems = [dibalas, menunggu];
+
+  static const dibalas = MenuItem(text: 'Dibalas');
+  static const menunggu = MenuItem(text: 'Menunggu');
+
+  static Widget buildItem(MenuItem item) {
+    return Text(
+      item.text,
+      style: const TextStyle(color: MainColorData.green_dop),
+    );
+  }
+
+  static onChanged(BuildContext context, MenuItem item) async {
+    switch (item) {
+      case MenuItems.dibalas:
+        //Do something
+        final res = await Get.to(() => BlocProvider.value(
+              value: context.read<ConsultationCubit>(),
+              child: MainKonsultasiPraktisiPage(status: 2),
+            ));
+        break;
+      case MenuItems.menunggu:
+        //Do something
+        final res = await Get.to(() => BlocProvider.value(
+              value: context.read<ConsultationCubit>(),
+              child: MainKonsultasiPraktisiPage(status: 1),
+            ));
+        break;
+    }
   }
 }

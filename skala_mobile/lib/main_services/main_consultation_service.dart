@@ -69,17 +69,22 @@ class ConsultationServices {
   }
 
   //praktisi
-  Future<ConsultationListUserModel> getConsultationListUser()async{
-    final res = await _api.get('/consultations/consultant');
+  Future<ConsultationListUserModel> getConsultationListUser(
+      {int? status}) async {
+    final url = status != null
+        ? '/consultations/consultant?status=$status'
+        : '/consultations/consultant';
+    final res = await _api.get(url);
     return ConsultationListUserModel.fromJson(res.data);
   }
 
-  Future<ConsultationCountModel> getConsultationCount()async{
+  Future<ConsultationCountModel> getConsultationCount() async {
     final res = await _api.get('/consultations/count');
     return ConsultationCountModel.fromJson(res.data);
   }
 
-  Future<ConsultationDetailPraktisi>getConsultationDetailPraktisi({int? id})async{
+  Future<ConsultationDetailPraktisi> getConsultationDetailPraktisi(
+      {int? id}) async {
     final url = '/consultations/$id';
     print(url);
     final res = await _api.get(url);
@@ -107,5 +112,4 @@ class ConsultationServices {
     print(res);
     return res.data?['message'] == 'Success';
   }
-
 }

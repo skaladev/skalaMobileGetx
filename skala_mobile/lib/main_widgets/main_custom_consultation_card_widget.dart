@@ -98,10 +98,10 @@ class MainConsultationCard extends StatelessWidget {
                 height: MainSizeData.SIZE_10,
               ),
               Text(
-                label!.toLowerCase(),
+               "Kategori : ${label!.toString()}" ,
                 style: const TextStyle(
-                  color: MainColorData.grey,
-                  fontSize: MainSizeData.SIZE_14,
+                  color: MainColorData.black,
+                  fontSize: MainSizeData.SIZE_12,
                   fontWeight: FontWeight.w700,
                 ),
               ),

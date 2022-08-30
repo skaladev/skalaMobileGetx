@@ -88,10 +88,10 @@ class ConsultationCubit extends Cubit<ConsultationState> {
     }
   }
 
-  Future<void> getConsultationList() async {
+  Future<void> getConsultationList({int? statusId, int? categoryId}) async {
     emit(ConsultationFetch.loading());
     try {
-      final res = await _consultationService.getConsultationList();
+      final res = await _consultationService.getConsultationList(statusId: statusId, categoryId: categoryId);
       print(res.toJson());
       if (res.message?.toLowerCase().contains('success') ?? false) {
         emit(ConsultationFetch.success(data: res));

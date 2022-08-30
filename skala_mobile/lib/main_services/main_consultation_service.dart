@@ -53,7 +53,15 @@ class ConsultationServices {
     return res.data?['message'] == 'Success';
   }
 
-  Future<ConsultationModel> getConsultationList() async {
+  Future<ConsultationModel> getConsultationList(
+      {int? categoryId, int? statusId}) async {
+    if (categoryId != null) {
+      final res = await _api.get('/consultations?category_id=$categoryId');
+      return ConsultationModel.fromJson(res.data);
+    } else if (statusId != null) {
+      final res = await _api.get('/consultations?status=$statusId');
+      return ConsultationModel.fromJson(res.data);
+    }
     final res = await _api.get('/consultations');
     return ConsultationModel.fromJson(res.data);
   }

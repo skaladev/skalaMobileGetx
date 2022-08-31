@@ -1,0 +1,28 @@
+[
+    {
+        "id": "1",
+        "title": "Pahami cara kerja aplikasi Skala",
+        "description": "Dalam aplikasi Skala,konsultasi merupakan fitur yang menghubungkan antara pengguna dalam hal ini masyarakat umum untuk dapat terhubung dengan penyedia layanan konsultasi sesuai dengan kategori yang tersedia. Untuk saat ini fitur konsultasi yang tersedia hanya dapat mengirimkan pesan satu kali saja yang nantinya akan diterima oleh penyedia layanan dalam hal ini konsultan."
+    },
+    {
+        "id": "2",
+        "title": "Pilih menu konsultasi yang terdapat pada bottom navigation",
+        "description": "Pada halaman konsultasi maka pengguna akan mendapati button untuk memilih konsultan. Pengguna dapat melihat daftar keseluruhan konsultan atau memilihnya berdasarkan kategori yang tersedia."
+    },
+    {
+        "id": "3",
+        "title": "Cari konsultan sesuai topik yang akan ditanyakan",
+        "description": "Sebelumnya pengguna diharapkan telah membaca panduan untuk konsultasi terlebih dahulu dan memahami masing-masing dari kategori yang tersedia. Kemudian pilih konsultan berdasarkan topik/kategori yang sesuai."
+    },
+    {
+        "id": "4",
+        "title": "Menampilkan detail profil konsultan",
+        "description": "Cermati bagian detail profil dari konsultan."
+    },
+    {
+        "id": "5",
+        "title": "Ajukan pertanyaan sesuai kategori konsultasi",
+        "description": "Dalam pengisian form untuk konsultasi pengguna diwajibkan mengisi judul dan deskripsi dari pertanyaan yang akan diajukan. Untuk dokumen pendukung pengguna dapat melampirkan berkas berupa foto dengan format 'jpg/jpeg/png'"
+    } 
+
+]

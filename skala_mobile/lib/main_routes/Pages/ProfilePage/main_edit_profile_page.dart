@@ -38,6 +38,9 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
   String _jenisKelamin = 'F';
   DateTime? _tanggalLahir;
   final _professionController = TextEditingController();
+  final _professionCompanyController = TextEditingController();
+  final _professionStartYearController = TextEditingController();
+  final _professionEndYearController = TextEditingController();
   String? _province;
   String? _regency;
   String? _district;
@@ -49,7 +52,9 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
   void initState() {
     context.read<RefCubit>().getProvince();
     _jenisKelamin =
-        (Get.arguments?['jenisKelamin'] ?? 'M') == 'Laki-laki' ? 'M' : 'F';
+        (Get.arguments?['jenisKelamin'] ?? 'Laki-Laki') == 'Laki-Laki'
+            ? 'M'
+            : 'F';
     _namaController.text = Get.arguments?['nama'] ?? '';
     _professionController.text = Get.arguments?['pekerjaan'] ?? '';
     _nikController.text = Get.arguments?['nik'] ?? '';
@@ -109,7 +114,7 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                   CustomTextField(
                     validator: _mainValidatorHelper.validateNIK,
                     label: "NIK",
-                    controller: _nikController ,
+                    controller: _nikController,
                     margin: EdgeInsets.symmetric(
                         horizontal: MainSizeData.SIZE_12,
                         vertical: MainSizeData.SIZE_10),
@@ -132,7 +137,7 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                   MainCustomDatePickerWidget(
                     label: "TANGGAL LAHIR",
                     date: _tanggalLahir,
-                    onChanged: (value){
+                    onChanged: (value) {
                       setState(() {
                         _tanggalLahir = value;
                       });
@@ -141,21 +146,6 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                         horizontal: MainSizeData.SIZE_12,
                         vertical: MainSizeData.SIZE_10),
                   ),
-                  CustomTextField(
-                    validator: _mainValidatorHelper.validatePhoneNumber,
-                    label: "NO.HANDPHONE",
-                    controller: _noWhashappController,
-                    margin: EdgeInsets.symmetric(
-                        horizontal: MainSizeData.SIZE_12,
-                        vertical: MainSizeData.SIZE_10),
-                  ),
-                  // CustomTextField(
-                  //   validator: _mainValidatorHelper.validateEmail,
-                  //   label: "EMAIL",
-                  //   margin: EdgeInsets.symmetric(
-                  //       horizontal: MainSizeData.SIZE_12,
-                  //       vertical: MainSizeData.SIZE_10),
-                  // ),
                   BlocBuilder<RefCubit, RefState>(
                     buildWhen: (previous, current) => current is ProvinceFetch,
                     builder: (context, state) {
@@ -350,26 +340,36 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                       return const SizedBox();
                     },
                   ),
-                  // Center(
-                  //   child: CustomDropdownButton2(
-                  //     label: "KECAMATAN",
-                  //     hint: 'Kecamatan',
-                  //     margin: EdgeInsets.symmetric(
-                  //         horizontal: MainSizeData.SIZE_12,
-                  //         vertical: MainSizeData.SIZE_10),
-                  //     dropdownItems: items,
-                  //     value: selectedValue,
-                  //     onChanged: (value) {
-                  //       setState(() {
-                  //         selectedValue = value;
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
                   CustomTextField(
                     validator: _mainValidatorHelper.validateBasic,
                     label: "PEKERJAAN",
                     controller: _professionController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateBasic,
+                    label: "SEKOLAH/PERGURIAN TINGGI/TEMPAT KERJA",
+                    controller: _professionCompanyController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateBasic,
+                    label: "TAHUN MASUK",
+                    controller: _professionStartYearController,
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_12,
+                        vertical: MainSizeData.SIZE_10),
+                  ),
+                
+                  CustomTextField(
+                    validator: _mainValidatorHelper.validateBasic,
+                    label: "TAHUN BERAKHIR",
+                    controller: _professionEndYearController,
                     margin: EdgeInsets.symmetric(
                         horizontal: MainSizeData.SIZE_12,
                         vertical: MainSizeData.SIZE_10),
@@ -384,12 +384,17 @@ class _MainEditProfilePageState extends State<MainEditProfilePage> {
                               name: _namaController.text,
                               nik: _nikController.text,
                               gender: _jenisKelamin,
-                              tanggalLahir:
-                                  '${_tanggalLahir?.year}-${_tanggalLahir?.month}-${_tanggalLahir?.day}',
+                              tanggalLahir: _tanggalLahir == null
+                                  ? null
+                                  : '${_tanggalLahir?.year}-${_tanggalLahir?.month}-${_tanggalLahir?.day}',
                               regency: _regency,
                               district: _district,
                               subDistrict: _subDistrict,
                               profession: _professionController.text,
+                              proffesionCompany: _professionCompanyController.text,
+                              proffesionStartYear: _professionStartYearController.text,
+                              proffesionEndYear: _professionEndYearController.text,
+                              
                               id: id,
                             );
                       }

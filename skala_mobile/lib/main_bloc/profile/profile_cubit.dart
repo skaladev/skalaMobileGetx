@@ -36,6 +36,9 @@ class ProfileCubit extends Cubit<ProfileState>{
     String? district,
     String? subDistrict,
     String? profession,
+    String? proffesionCompany,
+    String? proffesionStartYear,
+    String? proffesionEndYear,
     String? image,
   }) async {
     emit(ProfileUpdate.loading());
@@ -50,6 +53,9 @@ class ProfileCubit extends Cubit<ProfileState>{
         district:district,
         subDistrict: subDistrict,
         profession: profession,
+        profession_company: proffesionCompany,
+        profession_start_year: proffesionStartYear,
+        profession_end_year: proffesionEndYear
         // image: image
       );
       if(res){

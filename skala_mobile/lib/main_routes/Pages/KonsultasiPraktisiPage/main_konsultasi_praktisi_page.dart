@@ -312,51 +312,55 @@ class _MainKonsultasiPraktisiPageState
                               children: [
                                 Expanded(
                                   child: Container(
-                                    alignment: Alignment.center,
-                                    height: MainSizeData.SIZE_120,
-                                    child: MainCustomCard(
+                                      alignment: Alignment.center,
+                                      height: MainSizeData.SIZE_120,
+                                      child: MainCustomCard(
                                         itemCount: state
                                             .data?.data?.answeredConsultations
                                             .toString(),
                                         itemTitle: "Terjawab",
-                                        onTap: () async {
-                                          final res = await Get.to(() =>
-                                              BlocProvider.value(
-                                                value: context
-                                                    .read<ConsultationCubit>(),
-                                                child:
-                                                    MainKonsultasiPraktisiPage(
-                                                        status: 2),
-                                              ));
-                                          if (res == true) {
-                                            _fetch();
-                                          }
-                                        }),
-                                  ),
+                                        onTap: () {},
+                                      )
+                                      // onTap: () async {
+                                      //   final res = await Get.to(() =>
+                                      //       BlocProvider.value(
+                                      //         value: context
+                                      //             .read<ConsultationCubit>(),
+                                      //         child:
+                                      //             MainKonsultasiPraktisiPage(
+                                      //                 status: 2),
+                                      //       ));
+                                      //   if (res == true) {
+                                      //     _fetch();
+                                      //   }
+                                      // }),
+                                      ),
                                 ),
                                 Expanded(
                                   child: Container(
-                                    alignment: Alignment.center,
-                                    height: MainSizeData.SIZE_120,
-                                    child: MainCustomCard(
+                                      alignment: Alignment.center,
+                                      height: MainSizeData.SIZE_120,
+                                      child: MainCustomCard(
                                         itemCount: state
                                             .data?.data?.unansweredConsultations
                                             .toString(),
                                         itemTitle: "Menunggu",
-                                        onTap: () async {
-                                          final res = await Get.to(() =>
-                                              BlocProvider.value(
-                                                value: context
-                                                    .read<ConsultationCubit>(),
-                                                child:
-                                                    MainKonsultasiPraktisiPage(
-                                                        status: 1),
-                                              ));
-                                          if (res == true) {
-                                            _fetch();
-                                          }
-                                        }),
-                                  ),
+                                        onTap: () {},
+                                      )
+                                      // onTap: () async {
+                                      //   final res = await Get.to(() =>
+                                      //       BlocProvider.value(
+                                      //         value: context
+                                      //             .read<ConsultationCubit>(),
+                                      //         child:
+                                      //             MainKonsultasiPraktisiPage(
+                                      //                 status: 1),
+                                      //       ));
+                                      //   if (res == true) {
+                                      //     _fetch();
+                                      //   }
+                                      // }),
+                                      ),
                                 ),
                               ],
                             ),
@@ -368,15 +372,51 @@ class _MainKonsultasiPraktisiPageState
                 const SizedBox(
                   height: MainSizeData.SIZE_14,
                 ),
-                const Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: MainSizeData.SIZE_18),
-                  child: const Text(
-                    'Daftar Konsultasi',
-                    style: TextStyle(
-                        color: MainColorData.green_dop,
-                        fontSize: MainSizeData.SIZE_14,
-                        fontWeight: FontWeight.w600),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Daftar Konsultasi',
+                        style: TextStyle(
+                            color: MainColorData.green_dop,
+                            fontSize: MainSizeData.SIZE_14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          customButton: Image.asset(
+                            "assets/icons/ic_filter.png",
+                            width: MainSizeData.SIZE_28,
+                          ),
+                          items: [
+                            ...MenuItems.firstItems.map(
+                              (item) => DropdownMenuItem<MenuItem>(
+                                value: item,
+                                child: MenuItems.buildItem(item),
+                              ),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            MenuItems.onChanged(context, value as MenuItem);
+                          },
+                          itemHeight: MainSizeData.SIZE_36,
+                          itemPadding:
+                              const EdgeInsets.only(left: 16, right: 16),
+                          dropdownWidth: 130,
+                          dropdownPadding:
+                              const EdgeInsets.symmetric(vertical: 6),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: MainColorData.white,
+                          ),
+                          dropdownElevation: 8,
+                          offset: const Offset(40, -4),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 const SizedBox(height: MainSizeData.SIZE_8),
@@ -524,17 +564,13 @@ class MenuItems {
     switch (item) {
       case MenuItems.dibalas:
         //Do something
-        final res = await Get.to(() => BlocProvider.value(
-              value: context.read<ConsultationCubit>(),
-              child: MainKonsultasiPraktisiPage(status: 2),
-            ));
+        context.read<ConsultationCubit>().getConsultationList(statusId: 2);
+        context.read<ConsultationCubit>().getConsultationListUser(statusId: 2);
         break;
       case MenuItems.menunggu:
         //Do something
-        final res = await Get.to(() => BlocProvider.value(
-              value: context.read<ConsultationCubit>(),
-              child: MainKonsultasiPraktisiPage(status: 1),
-            ));
+        context.read<ConsultationCubit>().getConsultationList(statusId: 1);
+        context.read<ConsultationCubit>().getConsultationListUser(statusId: 1);
         break;
     }
   }

@@ -119,6 +119,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
                                       'id': state.data?.data?.id?.toString(),
                                       'nama': state.data?.data?.name,
                                       'jenisKelamin': state.data?.data?.gender,
+                                      'nik':state.data?.data?.nik,
                                       'tanggalLahir':
                                           state.data?.data?.dateOfBirth,
                                       'pekerjaan': state.data?.data?.profession,

@@ -22,7 +22,6 @@ class MainHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,6 +122,7 @@ class MainHomePage extends StatelessWidget {
                   return SizedBox(
                     height: MainSizeData.SIZE_500,
                     child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: articles.length,
                       itemBuilder: (context, index) {
                         return _buildArticleItem(context, articles[index]);

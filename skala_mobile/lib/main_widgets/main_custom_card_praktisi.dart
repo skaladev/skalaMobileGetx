@@ -21,11 +21,11 @@ class MainCustomCardPraktisi extends StatelessWidget {
       child: Stack(children: [
         Positioned(
           top: 0,
-          left: MainSizeData.SIZE_30,
+          left: MainSizeData.SIZE_12,
           child: Material(
             child: Container(
               height: MainSizeData.SIZE_120,
-              width: MainSizeData.SIZE_300,
+              width: MainSizeData.SIZE_340,
               decoration: BoxDecoration(
                   color: MainColorData.white,
                   borderRadius: BorderRadius.circular(15.0),
@@ -41,7 +41,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
         ),
         Positioned(
           top: -4,
-          left: 26,
+          left: 8,
           child: Card(
             shadowColor: MainColorData.grey.withOpacity(0.5),
             shape: RoundedRectangleBorder(

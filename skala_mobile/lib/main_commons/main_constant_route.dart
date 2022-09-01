@@ -18,4 +18,5 @@ class MainConstantRoute {
   static const String mainKonsultasiPraktisiDetail = '/konsultasiPraktisiDetail';
   static const String mainCreateConsultation = '/createConsultatiton';
   static const String mainKesehatanMental ='/kesehatanMental';
+  static const String mainRiwayatKonsultasi = '/riwayatKonsultasi';
 }

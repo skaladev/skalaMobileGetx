@@ -124,7 +124,9 @@ class _MainKonsultasiPraktisiPageState
                                   height: MainSizeData.SIZE_6,
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.toNamed(MainConstantRoute.mainRiwayatKonsultasi);
+                                  },
                                   child: Text(
                                     'Riwayat Konsultasi',
                                     style: TextStyle(
@@ -212,27 +214,6 @@ class _MainKonsultasiPraktisiPageState
                             ),
                           ],
                         ),
-
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     Get.toNamed(MainConstantRoute.mainListPraktisi);
-                        //   },
-                        //   child: Text(
-                        //     'Lihat',
-                        //     style: TextStyle(
-                        //         fontSize: MainSizeData.SIZE_14,
-                        //         fontWeight: FontWeight.w600,
-                        //         color: MainColorData.white),
-                        //   ),
-                        //   style: ElevatedButton.styleFrom(
-                        //       primary: MainColorData.green_dop,
-                        //       padding: EdgeInsets.symmetric(
-                        //           horizontal: MainSizeData.SIZE_18,
-                        //           vertical: MainSizeData.SIZE_8),
-                        //       shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(
-                        //               MainSizeData.SIZE_12))),
-                        // )
                       ],
                     ),
                   ),
@@ -266,7 +247,7 @@ class _MainKonsultasiPraktisiPageState
                                     child: Text('Kosong'),
                                   )
                                 : Container(
-                                    height: MainSizeData.SIZE_900,
+                                    height: MainSizeData.SIZE_600,
                                     child: ListView.builder(
                                       physics: NeverScrollableScrollPhysics(),
                                       itemCount: state.data?.data?.length,
@@ -280,123 +261,6 @@ class _MainKonsultasiPraktisiPageState
                       return const SizedBox();
                     },
                   ),
-                  const SizedBox(
-                    height: MainSizeData.SIZE_10,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: MainColorData.white,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: MainSizeData.SIZE_24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Riwayat Konsultasi',
-                                style: TextStyle(
-                                    color: MainColorData.green_dop,
-                                    fontSize: MainSizeData.SIZE_14,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  customButton: Image.asset(
-                                    "assets/icons/ic_filter.png",
-                                    width: MainSizeData.SIZE_28,
-                                  ),
-                                  items: [
-                                    ...MenuItems.firstItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                        value: item,
-                                        child: MenuItems.buildItem(item),
-                                      ),
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    MenuItems.onChanged(
-                                        context, value as MenuItem);
-                                  },
-                                  itemHeight: MainSizeData.SIZE_36,
-                                  itemPadding: const EdgeInsets.only(
-                                      left: 16, right: 16),
-                                  dropdownWidth: 130,
-                                  dropdownPadding:
-                                      const EdgeInsets.symmetric(vertical: 6),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: MainColorData.white,
-                                  ),
-                                  dropdownElevation: 8,
-                                  offset: const Offset(40, -4),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: MainSizeData.SIZE_10,
-                        ),
-                        BlocConsumer<ConsultationCubit, ConsultationState>(
-                          listenWhen: (previous, current) =>
-                              current is ConsultationDelete,
-                          listener: (context, state) {
-                            if (state is ConsultationDelete) {
-                              blocHelperListenner(
-                                load: state.load,
-                                onSuccess: () {
-                                  _fetch();
-                                },
-                              );
-                            }
-                          },
-                          buildWhen: (previous, current) =>
-                              current is ConsultationFetch,
-                          builder: (context, state) {
-                            if (state is ConsultationFetch) {
-                              return loadData(
-                                state.load,
-                                errorMessage: state.message,
-                                child: (state.data?.data?.isEmpty ?? true)
-                                    ? Container(
-                                        alignment: Alignment.center,
-                                        height: MainSizeData.imageHeight300,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/404.png'),
-                                                fit: BoxFit.fitHeight)),
-                                      )
-                                    : Container(
-                                        height: MainSizeData.SIZE_460,
-                                        child: ListView.builder(
-                                          itemCount: state.data?.data?.length,
-                                          itemBuilder: ((context, index) {
-                                            return _buildConsultationItem(
-                                              context,
-                                              state.data?.data?[index],
-                                            );
-                                          }),
-                                        ),
-                                      ),
-                              );
-                            }
-                            return const SizedBox();
-                          },
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             )

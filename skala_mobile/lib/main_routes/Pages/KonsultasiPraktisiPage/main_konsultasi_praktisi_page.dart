@@ -10,15 +10,18 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
+import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/widgets/MainConsultationCardPraktisiWidget.dart';
 import 'package:skala_mobile/main_widgets/main_category_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
+import 'package:skala_mobile/main_widgets/main_custom_card_praktisi.dart';
 import 'package:skala_mobile/main_widgets/main_custom_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
@@ -50,6 +53,7 @@ class _MainKonsultasiPraktisiPageState
         .read<ConsultationCubit>()
         .getConsultationListUser(statusId: widget.status);
     context.read<ConsultationCubit>().getConsultationCount();
+    context.read<ConsultationCubit>().getConsultantList(id: widget.categoryId);
   }
 
   void initState() {
@@ -75,6 +79,80 @@ class _MainKonsultasiPraktisiPageState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: MainSizeData.SIZE_12,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(MainSizeData.SIZE_10),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 211, 248, 244),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/ic_medicalConsultation.svg",
+                            height: MainSizeData.SIZE_150,
+                            width: MainSizeData.SIZE_200,
+                          ),
+                          SizedBox(
+                            width: MainSizeData.SIZE_20,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Apakah anda pernah melakukan konsultasi ?",
+                                  style: TextStyle(
+                                    fontSize: MainSizeData.fontSize16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: MainSizeData.SIZE_6,
+                                ),
+                                Text(
+                                  "Lihat riwayat konsultasi berikut.",
+                                  style: TextStyle(
+                                      fontSize: MainSizeData.fontSize10,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: MainSizeData.SIZE_6,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.toNamed(MainConstantRoute.mainRiwayatKonsultasi);
+                                  },
+                                  child: Text(
+                                    'Riwayat Konsultasi',
+                                    style: TextStyle(
+                                        fontSize: MainSizeData.SIZE_12,
+                                        fontWeight: FontWeight.w600,
+                                        color: MainColorData.white),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: MainColorData.green_dop3,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: MainSizeData.SIZE_18,
+                                          vertical: MainSizeData.SIZE_8),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              MainSizeData.SIZE_12))),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: MainSizeData.SIZE_10,
+                  ),
                   Container(
                     width: double.infinity,
                     margin:
@@ -97,7 +175,7 @@ class _MainKonsultasiPraktisiPageState
                               'Pilih Tenaga Ahli Berdasarkan Kategori?',
                               style: const TextStyle(
                                   color: MainColorData.green_dop,
-                                  fontSize: MainSizeData.SIZE_14,
+                                  fontSize: MainSizeData.SIZE_16,
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
@@ -136,161 +214,53 @@ class _MainKonsultasiPraktisiPageState
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: MainSizeData.SIZE_10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Daftar Tenaga Ahli',
-                              style: const TextStyle(
-                                  color: MainColorData.green_dop,
-                                  fontSize: MainSizeData.SIZE_14,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.toNamed(MainConstantRoute.mainListPraktisi);
-                              },
-                              child: Text(
-                                'Lihat',
-                                style: TextStyle(
-                                    fontSize: MainSizeData.SIZE_14,
-                                    fontWeight: FontWeight.w600,
-                                    color: MainColorData.white),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                  primary: MainColorData.green_dop,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: MainSizeData.SIZE_18,
-                                      vertical: MainSizeData.SIZE_8),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          MainSizeData.SIZE_12))),
-                            )
-                          ],
-                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
+                    height: MainSizeData.SIZE_20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: MainSizeData.SIZE_30,
+                    ),
+                    child: Text(
+                      'Daftar Tenaga Ahli',
+                      style: const TextStyle(
+                          color: MainColorData.green_dop,
+                          fontSize: MainSizeData.SIZE_16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: MainColorData.white,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: MainSizeData.SIZE_24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Riwayat Konsultasi',
-                                style: TextStyle(
-                                    color: MainColorData.green_dop,
-                                    fontSize: MainSizeData.SIZE_14,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  customButton: Image.asset(
-                                    "assets/icons/ic_filter.png",
-                                    width: MainSizeData.SIZE_28,
-                                  ),
-                                  items: [
-                                    ...MenuItems.firstItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                        value: item,
-                                        child: MenuItems.buildItem(item),
-                                      ),
+                  BlocBuilder<ConsultationCubit, ConsultationState>(
+                    buildWhen: ((previous, current) =>
+                        current is ConsultantListFetch),
+                    builder: (context, state) {
+                      if (state is ConsultantListFetch) {
+                        return loadData(state.load,
+                            errorMessage: state.message,
+                            child: (state.data?.data?.isEmpty ?? true)
+                                ? const Center(
+                                    child: Text('Kosong'),
+                                  )
+                                : Container(
+                                    height: MainSizeData.SIZE_600,
+                                    child: ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: state.data?.data?.length,
+                                      itemBuilder: (context, index) {
+                                        return _buildConsultantList(
+                                            context, state.data?.data?[index]);
+                                      },
                                     ),
-                                  ],
-                                  onChanged: (value) {
-                                    MenuItems.onChanged(
-                                        context, value as MenuItem);
-                                  },
-                                  itemHeight: MainSizeData.SIZE_36,
-                                  itemPadding: const EdgeInsets.only(
-                                      left: 16, right: 16),
-                                  dropdownWidth: 130,
-                                  dropdownPadding:
-                                      const EdgeInsets.symmetric(vertical: 6),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: MainColorData.white,
-                                  ),
-                                  dropdownElevation: 8,
-                                  offset: const Offset(40, -4),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: MainSizeData.SIZE_10,
-                        ),
-                        BlocConsumer<ConsultationCubit, ConsultationState>(
-                          listenWhen: (previous, current) =>
-                              current is ConsultationDelete,
-                          listener: (context, state) {
-                            if (state is ConsultationDelete) {
-                              blocHelperListenner(
-                                load: state.load,
-                                onSuccess: () {
-                                  _fetch();
-                                },
-                              );
-                            }
-                          },
-                          buildWhen: (previous, current) =>
-                              current is ConsultationFetch,
-                          builder: (context, state) {
-                            if (state is ConsultationFetch) {
-                              return loadData(
-                                state.load,
-                                errorMessage: state.message,
-                                child: (state.data?.data?.isEmpty ?? true)
-                                    ? Container(
-                                        alignment: Alignment.center,
-                                        height: MainSizeData.imageHeight300,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/404.png'),
-                                                fit: BoxFit.fitHeight)),
-                                      )
-                                    : Container(
-                                        height: MainSizeData.SIZE_460,
-                                        child: ListView.builder(
-                                          itemCount: state.data?.data?.length,
-                                          itemBuilder: ((context, index) {
-                                            return _buildConsultationItem(
-                                              context,
-                                              state.data?.data?[index],
-                                            );
-                                          }),
-                                        ),
-                                      ),
-                              );
-                            }
-                            return const SizedBox();
-                          },
-                        ),
-                      ],
-                    ),
-                  )
+                                  ));
+                      }
+                      return const SizedBox();
+                    },
+                  ),
                 ],
               ),
             )
@@ -312,55 +282,29 @@ class _MainKonsultasiPraktisiPageState
                               children: [
                                 Expanded(
                                   child: Container(
-                                      alignment: Alignment.center,
-                                      height: MainSizeData.SIZE_120,
-                                      child: MainCustomCard(
-                                        itemCount: state
-                                            .data?.data?.answeredConsultations
-                                            .toString(),
-                                        itemTitle: "Terjawab",
-                                        onTap: () {},
-                                      )
-                                      // onTap: () async {
-                                      //   final res = await Get.to(() =>
-                                      //       BlocProvider.value(
-                                      //         value: context
-                                      //             .read<ConsultationCubit>(),
-                                      //         child:
-                                      //             MainKonsultasiPraktisiPage(
-                                      //                 status: 2),
-                                      //       ));
-                                      //   if (res == true) {
-                                      //     _fetch();
-                                      //   }
-                                      // }),
-                                      ),
+                                    alignment: Alignment.center,
+                                    height: MainSizeData.SIZE_120,
+                                    child: MainCustomCard(
+                                      itemCount: state
+                                          .data?.data?.answeredConsultations
+                                          .toString(),
+                                      itemTitle: "Terjawab",
+                                      onTap: () {},
+                                    ),
+                                  ),
                                 ),
                                 Expanded(
                                   child: Container(
-                                      alignment: Alignment.center,
-                                      height: MainSizeData.SIZE_120,
-                                      child: MainCustomCard(
-                                        itemCount: state
-                                            .data?.data?.unansweredConsultations
-                                            .toString(),
-                                        itemTitle: "Menunggu",
-                                        onTap: () {},
-                                      )
-                                      // onTap: () async {
-                                      //   final res = await Get.to(() =>
-                                      //       BlocProvider.value(
-                                      //         value: context
-                                      //             .read<ConsultationCubit>(),
-                                      //         child:
-                                      //             MainKonsultasiPraktisiPage(
-                                      //                 status: 1),
-                                      //       ));
-                                      //   if (res == true) {
-                                      //     _fetch();
-                                      //   }
-                                      // }),
-                                      ),
+                                    alignment: Alignment.center,
+                                    height: MainSizeData.SIZE_120,
+                                    child: MainCustomCard(
+                                      itemCount: state
+                                          .data?.data?.unansweredConsultations
+                                          .toString(),
+                                      itemTitle: "Menunggu",
+                                      onTap: () {},
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -460,6 +404,27 @@ class _MainKonsultasiPraktisiPageState
     );
   }
 
+  Widget _buildConsultantList(
+      BuildContext context, ConsultantListModelData? consultantList) {
+    return MainCustomCardPraktisi(
+      itemName: consultantList?.name,
+      itemCategory: consultantList?.consultantCategory,
+      onPressed: () async {
+        print(consultantList?.id);
+        final res = await Get.to(
+          () => BlocProvider.value(
+            value: context.read<ConsultationCubit>(),
+            child: MainKonsultasiPraktisiBio(id: consultantList?.id),
+          ),
+        );
+        print(res);
+        if (res == true) {
+          _fetch();
+        }
+      },
+    );
+  }
+
   Widget _buildConsultationListUser(
       BuildContext context, ConsultationListUserModelData? item) {
     return MainConsultationCardPraktisi(
@@ -526,15 +491,7 @@ class _MainKonsultasiPraktisiPageState
     return MainCategoryCard(
       label: categories?.name,
       onTap: () async {
-        final res = await Get.to(() => BlocProvider.value(
-              value: context.read<ConsultationCubit>(),
-              child: MainKonsultasiListPraktisi(
-                categoryId: categories?.id,
-              ),
-            ));
-        if (res == true) {
-          _fetch();
-        }
+        context.read<ConsultationCubit>().getConsultantList(id: categories?.id);
       },
     );
   }

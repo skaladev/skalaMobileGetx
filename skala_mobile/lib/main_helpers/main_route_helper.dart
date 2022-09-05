@@ -20,6 +20,7 @@ import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
 import 'package:skala_mobile/main_bloc/auth/auth_cubit.dart';
 import 'package:skala_mobile/main_bloc/consultations/consultation_cubit.dart';
 import 'package:skala_mobile/main_bloc/konsultasi/konsultasi_cubit.dart';
+import 'package:skala_mobile/main_bloc/notifications/notification_cubit.dart';
 import 'package:skala_mobile/main_bloc/profile/profile_cubit.dart';
 import 'package:skala_mobile/main_bloc/ref/ref_cubit.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
@@ -114,7 +115,10 @@ class MainRouteHelper {
         ),
         GetPage(
             name: MainConstantRoute.mainNotifikasi,
-            page: () => const MainNotifikasiPage(),
+            page: () => bloc.BlocProvider(
+                  create: (context) => NotificationCubit(),
+                  child: const MainNotifikasiPage(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn),
         GetPage(
@@ -197,9 +201,9 @@ class MainRouteHelper {
         GetPage(
             name: MainConstantRoute.mainRiwayatKonsultasi,
             page: () => bloc.BlocProvider(
-              create: (context) => ConsultationCubit(),
-              child: const MainRiwayatKonsultasiPage(),
-              ),
+                  create: (context) => ConsultationCubit(),
+                  child: const MainRiwayatKonsultasiPage(),
+                ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainRiwayatKonsultasiBinding())

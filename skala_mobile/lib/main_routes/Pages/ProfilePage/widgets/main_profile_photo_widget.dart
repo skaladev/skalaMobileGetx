@@ -18,28 +18,28 @@ class MainProfilePhotoWidget extends StatelessWidget {
             backgroundColor: MainColorData.green_dop,
             // backgroundImage: AssetImage('assets/images/logo.png'),
           ),
-          Positioned(
-            right: -6,
-            bottom: 0,
-            child: SizedBox(
-              height: 30,
-              width: 30,
-              child: FlatButton(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      side: BorderSide(color: MainColorData.white)),
-                  color: Color(0xFFF5F6F9),
-                  onPressed: () {},
-                  child: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: SvgPicture.asset(
-                      'assets/icons/ic_camera.svg',
-                    ),
-                  )),
-            ),
-          )
+          // Positioned(
+          //   right: -6,
+          //   bottom: 0,
+          //   child: SizedBox(
+          //     height: 30,
+          //     width: 30,
+          //     child: FlatButton(
+          //         padding: EdgeInsets.zero,
+          //         shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(50),
+          //             side: BorderSide(color: MainColorData.white)),
+          //         color: Color(0xFFF5F6F9),
+          //         onPressed: () {},
+          //         child: SizedBox(
+          //           height: 18,
+          //           width: 18,
+          //           child: SvgPicture.asset(
+          //             'assets/icons/ic_camera.svg',
+          //           ),
+          //         )),
+          //   ),
+          // )
         ]));
   }
 }

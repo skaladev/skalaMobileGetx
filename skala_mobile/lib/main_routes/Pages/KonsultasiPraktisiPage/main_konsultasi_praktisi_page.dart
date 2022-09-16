@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:skala_mobile/main_bloc/consultations/consultation_cubit.dart';
@@ -10,14 +11,13 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
+import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
-import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
-import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/widgets/MainConsultationCardPraktisiWidget.dart';
 import 'package:skala_mobile/main_widgets/main_category_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
@@ -25,8 +25,6 @@ import 'package:skala_mobile/main_widgets/main_custom_card_praktisi.dart';
 import 'package:skala_mobile/main_widgets/main_custom_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiPage extends StatefulWidget {
   const MainKonsultasiPraktisiPage(
@@ -56,6 +54,7 @@ class _MainKonsultasiPraktisiPageState
     context.read<ConsultationCubit>().getConsultantList(id: widget.categoryId);
   }
 
+  @override
   void initState() {
     _fetch();
     super.initState();
@@ -85,9 +84,9 @@ class _MainKonsultasiPraktisiPageState
                       horizontal: MainSizeData.SIZE_12,
                     ),
                     child: Container(
-                      padding: EdgeInsets.all(MainSizeData.SIZE_10),
+                      padding: const EdgeInsets.all(MainSizeData.SIZE_10),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 211, 248, 244),
+                        color: const Color.fromARGB(255, 211, 248, 244),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Row(
@@ -97,36 +96,45 @@ class _MainKonsultasiPraktisiPageState
                             height: MainSizeData.SIZE_150,
                             width: MainSizeData.SIZE_200,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: MainSizeData.SIZE_20,
                           ),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Apakah anda pernah melakukan konsultasi ?",
                                   style: TextStyle(
                                     fontSize: MainSizeData.fontSize16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: MainSizeData.SIZE_6,
                                 ),
-                                Text(
+                                const Text(
                                   "Lihat riwayat konsultasi berikut.",
                                   style: TextStyle(
                                       fontSize: MainSizeData.fontSize10,
                                       fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: MainSizeData.SIZE_6,
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Get.toNamed(MainConstantRoute.mainRiwayatKonsultasi);
+                                    Get.toNamed(MainConstantRoute
+                                        .mainRiwayatKonsultasi);
                                   },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: MainColorData.green_dop3,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: MainSizeData.SIZE_18,
+                                          vertical: MainSizeData.SIZE_8),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              MainSizeData.SIZE_12))),
                                   child: Text(
                                     'Riwayat Konsultasi',
                                     style: TextStyle(
@@ -134,14 +142,6 @@ class _MainKonsultasiPraktisiPageState
                                         fontWeight: FontWeight.w600,
                                         color: MainColorData.white),
                                   ),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: MainColorData.green_dop3,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MainSizeData.SIZE_18,
-                                          vertical: MainSizeData.SIZE_8),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              MainSizeData.SIZE_12))),
                                 ),
                               ],
                             ),
@@ -155,9 +155,9 @@ class _MainKonsultasiPraktisiPageState
                   ),
                   Container(
                     width: double.infinity,
-                    margin:
-                        EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_10),
-                    padding: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_10),
+                    padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 20,
                     ),
@@ -171,14 +171,14 @@ class _MainKonsultasiPraktisiPageState
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Pilih Tenaga Ahli Berdasarkan Kategori?',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: MainColorData.green_dop,
                                   fontSize: MainSizeData.SIZE_16,
                                   fontWeight: FontWeight.w600),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: MainSizeData.SIZE_10,
                             ),
                             BlocBuilder<ConsultationCubit, ConsultationState>(
@@ -193,7 +193,7 @@ class _MainKonsultasiPraktisiPageState
                                         ? const Center(
                                             child: Text('Kosong'),
                                           )
-                                        : Container(
+                                        : SizedBox(
                                             height: MainSizeData.SIZE_50,
                                             child: ListView.builder(
                                               itemCount:
@@ -217,22 +217,22 @@ class _MainKonsultasiPraktisiPageState
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: MainSizeData.SIZE_20,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
                       horizontal: MainSizeData.SIZE_30,
                     ),
                     child: Text(
                       'Daftar Tenaga Ahli',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: MainColorData.green_dop,
                           fontSize: MainSizeData.SIZE_16,
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
                   BlocBuilder<ConsultationCubit, ConsultationState>(
@@ -246,10 +246,11 @@ class _MainKonsultasiPraktisiPageState
                                 ? const Center(
                                     child: Text('Kosong'),
                                   )
-                                : Container(
+                                : SizedBox(
                                     height: MainSizeData.SIZE_600,
                                     child: ListView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       itemCount: state.data?.data?.length,
                                       itemBuilder: (context, index) {
                                         return _buildConsultantList(
@@ -322,7 +323,7 @@ class _MainKonsultasiPraktisiPageState
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Daftar Konsultasi',
                         style: TextStyle(
                             color: MainColorData.green_dop,
@@ -376,7 +377,7 @@ class _MainKonsultasiPraktisiPageState
                             ? Container(
                                 alignment: Alignment.center,
                                 height: MainSizeData.imageHeight300,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image:
                                             AssetImage('assets/images/404.png'),
@@ -463,7 +464,7 @@ class _MainKonsultasiPraktisiPageState
           final res = await showDialog(
             context: context,
             builder: (ctx) =>
-                ConfirmDialogWidget(title: 'Hapus Konsultation ?'),
+                const ConfirmDialogWidget(title: 'Hapus Konsultation ?'),
           );
           if (res == true) {
             context

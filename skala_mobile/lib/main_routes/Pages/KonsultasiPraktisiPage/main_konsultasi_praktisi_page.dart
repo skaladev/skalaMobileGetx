@@ -2,7 +2,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:skala_mobile/main_bloc/consultations/consultation_cubit.dart';
@@ -11,13 +10,14 @@ import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
-import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 import 'package:skala_mobile/main_models/main_consultant_list_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_categories_model.dart';
 import 'package:skala_mobile/main_models/main_consultation_list_user.dart';
 import 'package:skala_mobile/main_models/main_consultation_model.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/widgets/MainConsultationCardPraktisiWidget.dart';
 import 'package:skala_mobile/main_widgets/main_category_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
@@ -25,6 +25,8 @@ import 'package:skala_mobile/main_widgets/main_custom_card_praktisi.dart';
 import 'package:skala_mobile/main_widgets/main_custom_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_confirm_dialog.dart';
 import 'package:skala_mobile/main_widgets/main_custom_consultation_card_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainKonsultasiPraktisiPage extends StatefulWidget {
   const MainKonsultasiPraktisiPage(
@@ -124,8 +126,7 @@ class _MainKonsultasiPraktisiPageState
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Get.toNamed(MainConstantRoute
-                                        .mainRiwayatKonsultasi);
+                                    Get.toNamed(MainConstantRoute.mainRiwayatKonsultasi);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: MainColorData.green_dop3,
@@ -155,8 +156,8 @@ class _MainKonsultasiPraktisiPageState
                   ),
                   Container(
                     width: double.infinity,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: MainSizeData.SIZE_10),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_10),
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 20,
@@ -249,8 +250,7 @@ class _MainKonsultasiPraktisiPageState
                                 : SizedBox(
                                     height: MainSizeData.SIZE_600,
                                     child: ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: state.data?.data?.length,
                                       itemBuilder: (context, index) {
                                         return _buildConsultantList(
@@ -385,7 +385,6 @@ class _MainKonsultasiPraktisiPageState
                               )
                             : Expanded(
                                 child: Container(
-                                  height: MainSizeData.SIZE_470,
                                   child: ListView.builder(
                                     itemCount: state.data?.data?.length,
                                     itemBuilder: (context, index) {

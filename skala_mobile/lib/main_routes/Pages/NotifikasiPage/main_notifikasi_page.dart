@@ -11,6 +11,7 @@ import 'package:skala_mobile/main_models/main_notification_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_notification_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skala_mobile/main_helpers/main_extensions_helper.dart';
 
 class MainNotifikasiPage extends StatefulWidget {
   const MainNotifikasiPage({Key? key}) : super(key: key);
@@ -76,6 +77,10 @@ class _MainNotifikasiPageState extends State<MainNotifikasiPage> {
   Widget _buildNotificationList(
       BuildContext context, NotificationModelData? notificationList) {
     return MainNotificationCard(
-        title: notificationList?.title, message: notificationList?.message);
+        title: notificationList?.title, 
+        message: notificationList?.message,
+        time: notificationList?.time,
+        date: notificationList?.date?.ddMMMMyyyy(), 
+        );
   }
 }

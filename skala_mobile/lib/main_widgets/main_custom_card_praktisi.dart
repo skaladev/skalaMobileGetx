@@ -16,7 +16,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
   final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MainSizeData.SIZE_130,
       child: Stack(children: [
         Positioned(
@@ -53,54 +53,55 @@ class MainCustomCardPraktisi extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   image: DecorationImage(
-                      image:  AssetImage(itemImage ?? "assets/images/user.png"))),
+                      image:
+                          AssetImage(itemImage ?? "assets/images/user.png"))),
             ),
           ),
         ),
         Positioned(
           top: MainSizeData.SIZE_16,
           left: MainSizeData.SIZE_150,
-          child: Container(
+          child: SizedBox(
             height: MainSizeData.SIZE_120,
             width: MainSizeData.SIZE_160,
             child: Column(
               children: [
                 Text(
-                  itemName?? "No Name",
-                  style: TextStyle(
+                  itemName ?? "No Name",
+                  style: const TextStyle(
                       fontSize: MainSizeData.fontSize14,
                       fontWeight: FontWeight.bold,
                       color: MainColorData.black),
                 ),
-                SizedBox(height: MainSizeData.SIZE_5),
+                const SizedBox(height: MainSizeData.SIZE_5),
                 Text(
-                  itemCategory??"-",
-                  style: TextStyle(
+                  itemCategory ?? "-",
+                  style: const TextStyle(
                       fontSize: MainSizeData.fontSize10,
                       fontWeight: FontWeight.bold,
                       color: MainColorData.grey),
                 ),
-                Divider(
+                const Divider(
                     indent: MainSizeData.SIZE_14,
                     endIndent: MainSizeData.SIZE_14,
                     color: MainColorData.green_dop),
                 ElevatedButton(
                   onPressed: onPressed,
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: MainColorData.green_dop,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: MainSizeData.SIZE_18,
+                          vertical: MainSizeData.SIZE_8),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(MainSizeData.SIZE_12))),
+                  child: const Text(
                     'Konsultasi',
                     style: TextStyle(
                         fontSize: MainSizeData.SIZE_14,
                         fontWeight: FontWeight.w600,
                         color: MainColorData.white),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      primary: MainColorData.green_dop,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: MainSizeData.SIZE_18,
-                          vertical: MainSizeData.SIZE_8),
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(MainSizeData.SIZE_12))),
                 )
               ],
             ),

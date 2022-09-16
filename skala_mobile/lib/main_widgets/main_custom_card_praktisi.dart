@@ -25,7 +25,7 @@ class MainCustomCardPraktisi extends StatelessWidget {
           child: Material(
             child: Container(
               height: MainSizeData.SIZE_120,
-              width: MainSizeData.SIZE_340,
+              width: MainSizeData.SIZE_370,
               decoration: BoxDecoration(
                   color: MainColorData.white,
                   borderRadius: BorderRadius.circular(15.0),

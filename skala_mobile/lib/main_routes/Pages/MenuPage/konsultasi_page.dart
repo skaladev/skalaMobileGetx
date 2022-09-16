@@ -1,15 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_models/main_step_consultation.dart';
-import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
 import 'package:skala_mobile/main_widgets/main_category_card_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -31,8 +26,8 @@ class MainMenuKonsultasiPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: MainSizeData.SIZE_25,
                   vertical: MainSizeData.SIZE_12),
               child: TitleContent(
@@ -41,22 +36,23 @@ class MainMenuKonsultasiPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
-              padding: EdgeInsets.symmetric(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
+              padding: const EdgeInsets.symmetric(
                   vertical: MainSizeData.SIZE_10,
                   horizontal: MainSizeData.SIZE_20),
               decoration: BoxDecoration(
                   color: MainColorData.white,
                   borderRadius: BorderRadius.circular(18)),
-              child: DescriptionContent(
+              child: const DescriptionContent(
                 description: MainConstantData.tentangKonsultasi,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: MainSizeData.SIZE_10,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: MainSizeData.SIZE_25,
                   vertical: MainSizeData.SIZE_5),
               child: TitleContent(
@@ -65,8 +61,9 @@ class MainMenuKonsultasiPage extends StatelessWidget {
             ),
             Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_18),
-                padding: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: MainSizeData.SIZE_18),
+                padding: const EdgeInsets.symmetric(
                     vertical: MainSizeData.SIZE_10,
                     horizontal: MainSizeData.SIZE_20),
                 decoration: BoxDecoration(
@@ -91,11 +88,11 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: MainSizeData.SIZE_10,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                   horizontal: MainSizeData.SIZE_25,
                   vertical: MainSizeData.SIZE_5),
               child: TitleContent(
@@ -110,9 +107,9 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                   final List<StepConsultation> step = parseSteps(snapshot.data);
                   return Container(
                     width: double.infinity,
-                    margin:
-                        EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_20),
-                    padding: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_20),
+                    padding: const EdgeInsets.symmetric(
                         vertical: MainSizeData.SIZE_10,
                         horizontal: MainSizeData.SIZE_20),
                     decoration: BoxDecoration(
@@ -120,7 +117,7 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18)),
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: step.length,
                       itemBuilder: ((context, index) {
                         return TimelineTile(
@@ -135,16 +132,16 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                                   children: [
                                     Text(
                                       step[index].title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: "Roboto",
                                           fontSize: MainSizeData.fontSize16,
                                           fontWeight: FontWeight.bold,
                                           color: MainColorData.green_dop),
                                     ),
-                                    SizedBox(height: MainSizeData.SIZE_6),
+                                    const SizedBox(height: MainSizeData.SIZE_6),
                                     Text(
                                       step[index].description,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: MainSizeData.fontSize14,
                                           fontWeight: FontWeight.w400,
                                           color: MainColorData.green_dop),
@@ -152,7 +149,7 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 2,
                               ),
                             ],
@@ -188,10 +185,34 @@ class MainMenuKonsultasiPage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),
+            const SizedBox(height: MainSizeData.SIZE_10),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(MainConstantRoute.mainListPraktisi);
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: MainColorData.green_dop3,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_18,
+                        vertical: MainSizeData.SIZE_8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(MainSizeData.SIZE_12))),
+                child: const Text(
+                  'Mulai Konsultasi',
+                  style: TextStyle(
+                      fontSize: MainSizeData.SIZE_12,
+                      fontWeight: FontWeight.w600,
+                      color: MainColorData.white),
+                ),
+              ),
+            ),
+            const SizedBox(height: MainSizeData.SIZE_30),
           ],
         ),
       ),
@@ -212,7 +233,7 @@ class TitleContent extends StatelessWidget {
     return Text(
       title,
       style: titleStyle ??
-          TextStyle(
+          const TextStyle(
               fontFamily: 'Roboto',
               fontSize: MainSizeData.SIZE_20,
               fontWeight: FontWeight.bold,
@@ -231,7 +252,7 @@ class DescriptionContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       description,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: MainSizeData.SIZE_14,
           fontWeight: FontWeight.normal,
           color: MainColorData.green_dop),

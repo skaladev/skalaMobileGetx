@@ -10,13 +10,15 @@ class MainConstantRoute {
   static const String mainNotifikasi = '/notifikasi';
   static const String mainEditProfile = '/editProfile';
   static const String mainAddKonsultasi = '/addKonsultasi';
-  static const String mainListPraktisi =  '/listPraktisi';
+  static const String mainListPraktisi = '/listPraktisi';
   static const String mainKonsultasiPraktisiBio = '/konsultasiPraktisiBio';
   static const String mainKonsultasiPraktisiForm = '/konsultasiPraktisiForm';
   static const String mainKla = '/kla';
   static const String mainMenuKonsultasi = '/menuKonsultasi';
-  static const String mainKonsultasiPraktisiDetail = '/konsultasiPraktisiDetail';
+  static const String mainKonsultasiPraktisiDetail =
+      '/konsultasiPraktisiDetail';
   static const String mainCreateConsultation = '/createConsultatiton';
-  static const String mainKesehatanMental ='/kesehatanMental';
+  static const String mainKesehatanMental = '/kesehatanMental';
   static const String mainRiwayatKonsultasi = '/riwayatKonsultasi';
+  static const String mainAduan = '/mainAduan';
 }

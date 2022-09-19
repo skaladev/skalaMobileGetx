@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
+import 'package:skala_mobile/main_bindings/main_aduan_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
 import 'package:skala_mobile/main_bindings/main_kategori_konsultasi.dart';
@@ -32,6 +33,7 @@ import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsu
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_form_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_riwayat_konsultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/aduan_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/categories/main_kesehatan_mental_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
@@ -206,6 +208,12 @@ class MainRouteHelper {
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainRiwayatKonsultasiBinding())
+            binding: MainRiwayatKonsultasiBinding()),
+        GetPage(
+            name: MainConstantRoute.mainAduan,
+            page: () => const MainAduanPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainAduanBinding()),
       ];
 }

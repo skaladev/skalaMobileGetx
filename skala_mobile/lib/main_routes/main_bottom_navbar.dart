@@ -18,21 +18,21 @@ class MainBottomNavbar extends StatefulWidget {
 }
 
 class _MainBottomNavbarState extends State<MainBottomNavbar> {
-  int _currentIndex = Get.arguments ? ['index'] ?? 0;
+  int _currentIndex = Get.arguments?['index'] ?? 0;
   final _prefs = Prefs();
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _items = [
+    final List<Widget> items = [
       MainHomePage(),
       // MainKegiatanLainPage(),
-      MainKonsultasiPraktisiPage(),
-      if (_prefs.roleId != 6) MainKonsultasiPage(),
+      const MainKonsultasiPraktisiPage(),
+      if (_prefs.roleId != 6) const MainKonsultasiPage(),
       MainProfilePage(),
     ];
 
     return Scaffold(
-      body: _items[_currentIndex],
+      body: items[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
@@ -47,7 +47,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
           selectedItemColor: MainColorData.green_dop,
           unselectedItemColor: MainColorData.black,
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
                 color: MainColorData.grey,
@@ -58,7 +58,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
               ),
               label: 'Home',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.work_outline_outlined,
                 color: MainColorData.grey,
@@ -70,7 +70,7 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
               label: 'Konsultasi',
             ),
             if (_prefs.roleId != 6)
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(
                   Icons.message_outlined,
                   color: MainColorData.grey,
@@ -79,9 +79,9 @@ class _MainBottomNavbarState extends State<MainBottomNavbar> {
                   Icons.message,
                   color: MainColorData.green_dop,
                 ),
-                label: 'Aduan',
+                label: 'Lapor',
               ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
                 color: MainColorData.grey,

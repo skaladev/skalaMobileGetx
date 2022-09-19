@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
-
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
@@ -11,6 +10,7 @@ import 'package:skala_mobile/main_bindings/main_konsultasi_menu_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_bio_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_detail_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
+import 'package:skala_mobile/main_bindings/main_lapor_binding.dart';
 import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
@@ -35,6 +35,7 @@ import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/categories/main_kesehatan_mental_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/lapor_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/ProfilePage/main_edit_profile_page.dart';
 import 'package:skala_mobile/main_routes/Pages/RegisterPage/main_register_page.dart';
@@ -138,7 +139,7 @@ class MainRouteHelper {
             name: MainConstantRoute.mainAddKonsultasi,
             page: () => bloc.BlocProvider(
                   create: (context) => KonsultasiCubit(),
-                  child: MainAddKonsultasiPage(),
+                  child: const MainAddKonsultasiPage(),
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
@@ -181,7 +182,7 @@ class MainRouteHelper {
             name: MainConstantRoute.mainKonsultasiPraktisiDetail,
             page: () => bloc.BlocProvider(
                   create: (context) => ConsultationCubit(),
-                  child: MainKonsultasiPraktisiDetailPage(),
+                  child: const MainKonsultasiPraktisiDetailPage(),
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
@@ -206,6 +207,12 @@ class MainRouteHelper {
                 ),
             alignment: Alignment.center,
             transition: Transition.fadeIn,
-            binding: MainRiwayatKonsultasiBinding())
+            binding: MainRiwayatKonsultasiBinding()),
+        GetPage(
+            name: MainConstantRoute.mainLapor,
+            page: () => const LaporPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainLaporBinding()),
       ];
 }

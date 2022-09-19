@@ -1,18 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/route_manager.dart';
-import 'package:hive/hive.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_helpers/main_article.dart';
 import 'package:skala_mobile/main_prefs/prefs.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
-import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_custom_card_widget.dart';
-import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
 
 class MainHomePage extends StatelessWidget {
   final _prefs = Prefs();
@@ -27,7 +22,7 @@ class MainHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             HeaderWithSearchBox(size: size),
-            SizedBox(height: MainSizeData.SIZE_16),
+            const SizedBox(height: MainSizeData.SIZE_16),
             SizedBox(
                 height: MainSizeData.SIZE_170,
                 width: double.infinity,
@@ -35,8 +30,9 @@ class MainHomePage extends StatelessWidget {
                   options: CarouselOptions(
                     height: MainSizeData.SIZE_170,
                     autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 4),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayInterval: const Duration(seconds: 4),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: true,
                     aspectRatio: 3.0,
@@ -46,7 +42,7 @@ class MainHomePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: AssetImage('assets/images/slider_1.png'),
                             fit: BoxFit.cover),
                       ),
@@ -55,7 +51,7 @@ class MainHomePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: AssetImage('assets/images/slider_2.png'),
                             fit: BoxFit.cover),
                       ),
@@ -64,47 +60,47 @@ class MainHomePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(MainSizeData.SIZE_20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: AssetImage('assets/images/slider_3.png'),
                             fit: BoxFit.cover),
                       ),
                     ),
                   ],
                 )),
-            SizedBox(height: MainSizeData.SIZE_20),
+            const SizedBox(height: MainSizeData.SIZE_20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 itemMenuHome(
                   title: "Tentang KLA",
                   icon: "assets/icons/ic_horse.svg",
-                  onPressed: (){
-                      Get.toNamed(MainConstantRoute.mainKla);
+                  onPressed: () {
+                    Get.toNamed(MainConstantRoute.mainKla);
                   },
                 ),
                 itemMenuHome(
                   title: "Konsultasi",
                   icon: "assets/icons/ic_checklist.svg",
-                  onPressed: (){
+                  onPressed: () {
                     Get.toNamed(MainConstantRoute.mainMenuKonsultasi);
                   },
                 ),
-                if(_prefs.roleId  !=6)
-                itemMenuHome(
-                  title: "Aduan",
-                  icon: "assets/icons/ic_coding.svg",
-                  onPressed: (){},
-                ),
-                
+                if (_prefs.roleId != 6)
+                  itemMenuHome(
+                    title: "Lapor",
+                    icon: "assets/icons/ic_coding.svg",
+                    onPressed: () {
+                      Get.toNamed(MainConstantRoute.mainLapor);
+                    },
+                  ),
               ],
             ),
             // CustomCard(onPressed: () {
             //   // Navigator.push(context,
             //   //     MaterialPageRoute(builder: (context) => KlasterPage()));
             // }),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_12),
               child: Text(
                 'Berita',
                 style: TextStyle(
@@ -122,7 +118,7 @@ class MainHomePage extends StatelessWidget {
                   return SizedBox(
                     height: MainSizeData.SIZE_500,
                     child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: articles.length,
                       itemBuilder: (context, index) {
                         return _buildArticleItem(context, articles[index]);
@@ -130,7 +126,7 @@ class MainHomePage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),
@@ -146,7 +142,6 @@ class itemMenuHome extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onPressed,
-
     Key? key,
   }) : super(key: key);
 
@@ -156,14 +151,14 @@ class itemMenuHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:(){
+      onTap: () {
         onPressed();
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_18),
-        child: Column( 
+        child: Column(
           children: [
-            Container(
+            SizedBox(
               width: MainSizeData.SIZE_50,
               height: MainSizeData.SIZE_50,
               child: SvgPicture.asset(
@@ -171,14 +166,13 @@ class itemMenuHome extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: MainSizeData.SIZE_5),
+            const SizedBox(height: MainSizeData.SIZE_5),
             Text(
               title,
-              style: TextStyle(
-                fontSize: MainSizeData.SIZE_12,
-                fontWeight: FontWeight.bold,
-                color: MainColorData.green_dop
-              ),
+              style: const TextStyle(
+                  fontSize: MainSizeData.SIZE_12,
+                  fontWeight: FontWeight.bold,
+                  color: MainColorData.green_dop),
             )
           ],
         ),
@@ -198,13 +192,13 @@ class HeaderWithSearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: MainSizeData.SIZE_4),
+      margin: const EdgeInsets.only(bottom: MainSizeData.SIZE_4),
       height: size.height * 0.3,
       child: Stack(
         children: <Widget>[
           Container(
             height: size.height * 0.3 - 27,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: MainColorData.green_dop,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(36),
@@ -223,7 +217,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                       child: Container(
                         height: MainSizeData.SIZE_60,
                         width: MainSizeData.SIZE_60,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image:
                                 AssetImage('assets/images/logo_skala_home.png'),
@@ -255,7 +249,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             left: MainSizeData.SIZE_30,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+              children: const [
                 Text(
                   'Selamat Datang,',
                   style: TextStyle(
@@ -281,7 +275,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                   horizontal: MainSizeData.SIZE_18,
                   vertical: MainSizeData.SIZE_30),
               height: MainSizeData.SIZE_54,
@@ -290,7 +284,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                       blurRadius: 5,
                       color: MainColorData.green_dop.withOpacity(0.5))
                 ],
@@ -369,7 +363,7 @@ Widget _buildArticleItem(BuildContext context, Article article) {
                                   child: Text(
                                     (article.title),
                                   )),
-                              SizedBox(height: MainSizeData.SIZE_4),
+                              const SizedBox(height: MainSizeData.SIZE_4),
                               Text(article.author),
                             ])))
               ]),

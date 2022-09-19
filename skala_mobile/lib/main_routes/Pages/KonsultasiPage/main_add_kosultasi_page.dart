@@ -21,7 +21,7 @@ import 'package:skala_mobile/main_widgets/main_custom_text_area_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
 
 class MainAddKonsultasiPage extends StatefulWidget {
-  MainAddKonsultasiPage({Key? key}) : super(key: key);
+  const MainAddKonsultasiPage({Key? key}) : super(key: key);
 
   @override
   State<MainAddKonsultasiPage> createState() => _MainAddKonsultasiPageState();
@@ -36,7 +36,7 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
   String? _imagePath;
   Uint8List? _image;
 
-  void _fetch(){
+  void _fetch() {
     context.read<KonsultasiCubit>().getList();
   }
 
@@ -67,7 +67,7 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
       },
       child: Scaffold(
         appBar: const MainCustomAppBarTitle(
-          title: "Konsultasi",
+          title: "Lapor",
           titleStyle: TextStyle(
             color: MainColorData.black,
             fontSize: MainSizeData.SIZE_16,
@@ -160,8 +160,8 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
                       size: MainSizeData.SIZE_20,
                     ),
                     onPressed: () async {
-                      final ImagePicker _picker = ImagePicker();
-                      final XFile? image = await _picker.pickImage(
+                      final ImagePicker picker = ImagePicker();
+                      final XFile? image = await picker.pickImage(
                           source: ImageSource.gallery,
                           maxHeight: 480,
                           maxWidth: 640,
@@ -179,7 +179,7 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
                       vertical: MainSizeData.SIZE_24,
                       horizontal: MainSizeData.SIZE_14,
                     ),
-                    onPressed: () async{
+                    onPressed: () async {
                       if (_formKey.currentState?.validate() == true) {
                         if (selectedCategory?.isEmpty ?? true) {
                           EasyLoading.showToast('Kategori belum dipilih');

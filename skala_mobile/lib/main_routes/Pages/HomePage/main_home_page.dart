@@ -78,24 +78,25 @@ class MainHomePage extends StatelessWidget {
                 itemMenuHome(
                   title: "Tentang KLA",
                   icon: "assets/icons/ic_horse.svg",
-                  onPressed: (){
-                      Get.toNamed(MainConstantRoute.mainKla);
+                  onPressed: () {
+                    Get.toNamed(MainConstantRoute.mainKla);
                   },
                 ),
                 itemMenuHome(
                   title: "Konsultasi",
                   icon: "assets/icons/ic_checklist.svg",
-                  onPressed: (){
+                  onPressed: () {
                     Get.toNamed(MainConstantRoute.mainMenuKonsultasi);
                   },
                 ),
-                if(_prefs.roleId  !=6)
-                itemMenuHome(
-                  title: "Aduan",
-                  icon: "assets/icons/ic_coding.svg",
-                  onPressed: (){},
-                ),
-                
+                if (_prefs.roleId != 6)
+                  itemMenuHome(
+                    title: "Aduan",
+                    icon: "assets/icons/ic_coding.svg",
+                    onPressed: () {
+                      Get.toNamed(MainConstantRoute.mainAduan);
+                    },
+                  ),
               ],
             ),
             // CustomCard(onPressed: () {
@@ -146,7 +147,6 @@ class itemMenuHome extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onPressed,
-
     Key? key,
   }) : super(key: key);
 
@@ -156,12 +156,12 @@ class itemMenuHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:(){
+      onTap: () {
         onPressed();
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_18),
-        child: Column( 
+        child: Column(
           children: [
             Container(
               width: MainSizeData.SIZE_50,
@@ -175,10 +175,9 @@ class itemMenuHome extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: MainSizeData.SIZE_12,
-                fontWeight: FontWeight.bold,
-                color: MainColorData.green_dop
-              ),
+                  fontSize: MainSizeData.SIZE_12,
+                  fontWeight: FontWeight.bold,
+                  color: MainColorData.green_dop),
             )
           ],
         ),

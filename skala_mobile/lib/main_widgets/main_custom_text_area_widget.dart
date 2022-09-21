@@ -10,6 +10,7 @@ class TextArea extends StatelessWidget {
     this.margin,
     this.controller,
     this.errorMessage,
+    this.borderColor,
     Key? key,
   }) : super(key: key);
   final String? label;
@@ -17,6 +18,7 @@ class TextArea extends StatelessWidget {
   final TextEditingController? controller;
   final EdgeInsets? margin;
   final String? errorMessage;
+  final Color? borderColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,16 +55,16 @@ class TextArea extends StatelessWidget {
                   color: MainColorData.grey,
                   fontWeight: FontWeight.w400),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.green_dop,
+                  color: borderColor ?? MainColorData.green_dop,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.green_dop,
+                  color: borderColor ?? MainColorData.green_dop,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
@@ -74,16 +76,16 @@ class TextArea extends StatelessWidget {
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.grey,
+                  color: borderColor ?? MainColorData.grey,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
               disabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.grey,
+                  color: borderColor ?? MainColorData.grey,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),

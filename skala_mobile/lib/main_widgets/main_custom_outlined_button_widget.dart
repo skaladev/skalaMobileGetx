@@ -10,6 +10,8 @@ class CustomOutlinedButton extends StatelessWidget {
     this.textStyle,
     this.onPressed,
     this.margin,
+    this.borderColor,
+    this.textColor,
   }) : super(key: key);
 
   final Icon? icon;
@@ -18,6 +20,8 @@ class CustomOutlinedButton extends StatelessWidget {
   final double? borderWidth;
   final Function()? onPressed;
   final EdgeInsets? margin;
+  final Color? borderColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class CustomOutlinedButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(
-            color: MainColorData.green_dop,
+            color: borderColor ?? MainColorData.green_dop,
             width: borderWidth ?? 2,
           ),
           shape: const StadiumBorder(),
@@ -38,8 +42,8 @@ class CustomOutlinedButton extends StatelessWidget {
             ? Text(
                 text.toUpperCase(),
                 style: textStyle ??
-                    const TextStyle(
-                      color: MainColorData.green_dop,
+                    TextStyle(
+                      color: textColor ?? MainColorData.green_dop,
                       fontWeight: FontWeight.w700,
                     ),
               )
@@ -50,8 +54,8 @@ class CustomOutlinedButton extends StatelessWidget {
                   Text(
                     text.toUpperCase(),
                     style: textStyle ??
-                        const TextStyle(
-                          color: MainColorData.green_dop,
+                        TextStyle(
+                          color: textColor ?? MainColorData.green_dop,
                           fontWeight: FontWeight.w700,
                         ),
                   ),

@@ -21,4 +21,5 @@ class MainConstantRoute {
   static const String mainKesehatanMental = '/kesehatanMental';
   static const String mainRiwayatKonsultasi = '/riwayatKonsultasi';
   static const String mainAduan = '/mainAduan';
+  static const String mainRiwayatAduan = "/riwayatAduan";
 }

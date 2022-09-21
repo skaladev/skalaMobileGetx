@@ -36,7 +36,7 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
   String? _imagePath;
   Uint8List? _image;
 
-  void _fetch(){
+  void _fetch() {
     context.read<KonsultasiCubit>().getList();
   }
 
@@ -179,7 +179,7 @@ class _MainAddKonsultasiPageState extends State<MainAddKonsultasiPage> {
                       vertical: MainSizeData.SIZE_24,
                       horizontal: MainSizeData.SIZE_14,
                     ),
-                    onPressed: () async{
+                    onPressed: () async {
                       if (_formKey.currentState?.validate() == true) {
                         if (selectedCategory?.isEmpty ?? true) {
                           EasyLoading.showToast('Kategori belum dipilih');

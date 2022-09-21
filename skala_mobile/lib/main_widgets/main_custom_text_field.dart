@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
       this.maxLength,
       this.maxLines,
       this.keyboardType,
+      this.colorBorder,
       Key? key})
       : super(key: key);
 
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final TextInputType? keyboardType;
+  final Color? colorBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +69,16 @@ class CustomTextField extends StatelessWidget {
                   color: MainColorData.grey,
                   fontWeight: FontWeight.w400),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.green_dop,
+                  color: colorBorder ?? MainColorData.green_dop,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.green_dop,
+                  color: colorBorder ?? MainColorData.green_dop,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
@@ -88,9 +90,9 @@ class CustomTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   width: 1,
-                  color: MainColorData.grey,
+                  color: colorBorder ?? MainColorData.grey,
                 ),
                 borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
               ),

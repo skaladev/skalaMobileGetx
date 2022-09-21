@@ -15,6 +15,7 @@ import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding
 import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
+import 'package:skala_mobile/main_bindings/main_riwayat_aduan_binding.dart';
 import 'package:skala_mobile/main_bindings/main_riwayat_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_splash_binding.dart';
 import 'package:skala_mobile/main_bindings/main_welcome_binding.dart';
@@ -27,6 +28,7 @@ import 'package:skala_mobile/main_bloc/ref/ref_cubit.dart';
 import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_routes/Pages/HomePage/widgets/main_article_detail.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_add_kosultasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/KonsultasiPage/main_riwayat_aduan_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_list_praktisi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_bio.dart';
 import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_konsultasi_praktisi_detail_page.dart';
@@ -215,5 +217,14 @@ class MainRouteHelper {
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainAduanBinding()),
+        GetPage(
+            name: MainConstantRoute.mainRiwayatAduan,
+            page: () => bloc.BlocProvider(
+                  create: (context) => KonsultasiCubit(),
+                  child: const RiwayatAduanPage(),
+                ),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainRiwayatAduanBinding()),
       ];
 }

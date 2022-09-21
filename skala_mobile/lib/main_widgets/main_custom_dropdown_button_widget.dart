@@ -33,6 +33,7 @@ class CustomDropdownButton2 extends StatelessWidget {
   final EdgeInsets? margin;
   final String Function(String)? validator;
   final List<DropdownMenuItem<String>>? customBuilder;
+  final Color? borderColor;
 
   const CustomDropdownButton2({
     required this.hint,
@@ -66,7 +67,7 @@ class CustomDropdownButton2 extends StatelessWidget {
     this.label,
     this.margin,
     this.customBuilder,
-
+    this.borderColor,
     Key? key,
   }) : super(key: key);
 
@@ -102,24 +103,24 @@ class CustomDropdownButton2 extends StatelessWidget {
                 ),
               ),
               value: value,
-              items: customBuilder?? dropdownItems
-                  ?.map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Container(
-                          alignment: valueAlignment,
-                          child: Text(
-                            item,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: const TextStyle(
-                              fontSize: MainSizeData.SIZE_14,
-                              color: MainColorData.black,
-                              fontWeight: FontWeight.w400
+              items: customBuilder ??
+                  dropdownItems
+                      ?.map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Container(
+                              alignment: valueAlignment,
+                              child: Text(
+                                item,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    fontSize: MainSizeData.SIZE_14,
+                                    color: MainColorData.black,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
-                          ),
-                        ),
-                      ))
-                  .toList(),
+                          ))
+                      .toList(),
               onChanged: onChanged,
               selectedItemBuilder: selectedItemBuilder,
               icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
@@ -128,20 +129,23 @@ class CustomDropdownButton2 extends StatelessWidget {
               iconDisabledColor: iconDisabledColor ?? MainColorData.grey75,
               buttonHeight: buttonHeight ?? MainSizeData.SIZE_60,
               buttonWidth: buttonWidth ?? MainSizeData.SIZE_345,
-              buttonPadding:
-                  buttonPadding ?? const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_16,vertical: MainSizeData.SIZE_10),
+              buttonPadding: buttonPadding ??
+                  const EdgeInsets.symmetric(
+                      horizontal: MainSizeData.SIZE_16,
+                      vertical: MainSizeData.SIZE_10),
               buttonDecoration: buttonDecoration ??
                   BoxDecoration(
                     borderRadius: BorderRadius.circular(MainSizeData.SIZE_24),
                     border: Border.all(
-                      color: MainColorData.grey,
+                      color: borderColor ?? MainColorData.grey,
                     ),
                   ),
               buttonElevation: buttonElevation,
               itemHeight: itemHeight ?? MainSizeData.SIZE_40,
-              itemPadding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
+              itemPadding:
+                  itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
               //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
-              dropdownMaxHeight: dropdownHeight ??MainSizeData.SIZE_200,
+              dropdownMaxHeight: dropdownHeight ?? MainSizeData.SIZE_200,
               dropdownWidth: dropdownWidth ?? MainSizeData.SIZE_345,
               dropdownPadding: dropdownPadding,
               dropdownDecoration: dropdownDecoration ??
@@ -149,12 +153,14 @@ class CustomDropdownButton2 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(MainSizeData.SIZE_14),
                   ),
               dropdownElevation: dropdownElevation ?? 8,
-              scrollbarRadius: scrollbarRadius ?? const Radius.circular(MainSizeData.SIZE_40),
+              scrollbarRadius: scrollbarRadius ??
+                  const Radius.circular(MainSizeData.SIZE_40),
               scrollbarThickness: scrollbarThickness,
               scrollbarAlwaysShow: scrollbarAlwaysShow,
               //Null or Offset(0, 0) will open just under the button. You can edit as you want.
               offset: offset,
-              dropdownOverButton: false, //Default is false to show menu below button
+              dropdownOverButton:
+                  false, //Default is false to show menu below button
             ),
           ],
         ),

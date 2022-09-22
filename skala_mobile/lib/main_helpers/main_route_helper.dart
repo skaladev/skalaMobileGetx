@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 import 'package:get/route_manager.dart';
 import 'package:skala_mobile/main_bindings/main_add_konsultasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_aduan_binding.dart';
+import 'package:skala_mobile/main_bindings/main_aspirasi_binding.dart';
 import 'package:skala_mobile/main_bindings/main_buttom_navigation_binding.dart';
 import 'package:skala_mobile/main_bindings/main_edit_profile_binding.dart';
+import 'package:skala_mobile/main_bindings/main_informasi_aduan_binding.dart';
 import 'package:skala_mobile/main_bindings/main_kategori_konsultasi.dart';
 import 'package:skala_mobile/main_bindings/main_kla_binding.dart';
 import 'package:skala_mobile/main_bindings/main_konsultasi_menu_binding.dart';
@@ -14,6 +16,7 @@ import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_detail_bindi
 import 'package:skala_mobile/main_bindings/main_konsultasi_praktisi_form_binding.dart';
 import 'package:skala_mobile/main_bindings/main_list_praktisi.dart';
 import 'package:skala_mobile/main_bindings/main_login_binding.dart';
+import 'package:skala_mobile/main_bindings/main_pengaduan_binding.dart';
 import 'package:skala_mobile/main_bindings/main_register_binding.dart';
 import 'package:skala_mobile/main_bindings/main_riwayat_aduan_binding.dart';
 import 'package:skala_mobile/main_bindings/main_riwayat_konsultasi_binding.dart';
@@ -37,6 +40,9 @@ import 'package:skala_mobile/main_routes/Pages/KonsultasiPraktisiPage/main_riway
 import 'package:skala_mobile/main_routes/Pages/LoginPage/main_login_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/aduan_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/categories/main_kesehatan_mental_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/categoriesAduan/aspirasi_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/categoriesAduan/information_page.dart';
+import 'package:skala_mobile/main_routes/Pages/MenuPage/categoriesAduan/pengaduan_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/kla_page.dart';
 import 'package:skala_mobile/main_routes/Pages/MenuPage/konsultasi_page.dart';
 import 'package:skala_mobile/main_routes/Pages/NotifikasiPage/main_notifikasi_page.dart';
@@ -226,5 +232,23 @@ class MainRouteHelper {
             alignment: Alignment.center,
             transition: Transition.fadeIn,
             binding: MainRiwayatAduanBinding()),
+        GetPage(
+            name: MainConstantRoute.mainInformasiAduan,
+            page: () => const InformationPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainInfomasiAduanBinding()),
+        GetPage(
+            name: MainConstantRoute.mainAspirasi,
+            page: () => const MainMenuAspirasiPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainMenuAspirasiBinding()),
+        GetPage(
+            name: MainConstantRoute.mainPengaduan,
+            page: () => const MainMenuPengaduanPage(),
+            alignment: Alignment.center,
+            transition: Transition.fadeIn,
+            binding: MainMenuPengaduanBinding()),
       ];
 }

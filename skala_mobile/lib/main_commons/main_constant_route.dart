@@ -22,4 +22,7 @@ class MainConstantRoute {
   static const String mainRiwayatKonsultasi = '/riwayatKonsultasi';
   static const String mainAduan = '/mainAduan';
   static const String mainRiwayatAduan = "/riwayatAduan";
+  static const String mainInformasiAduan = "/informasiAduan";
+  static const String mainPengaduan = "/menuPengaduan";
+  static const String mainAspirasi = "/menuAspirasi";
 }

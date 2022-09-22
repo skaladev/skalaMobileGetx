@@ -37,4 +37,10 @@ class MainConstantData {
   static const String pengobatan3 = "Pengobatan lain meliputi";
   static const String informasiAduan =
       "Aduan merupakan bagian dari fitur yang terdapat pada Aplikasi Skala. Aduan merupakan bentuk layanan yang terintegrasi ke bagian Humas yang dikelola oleh admin Skala. Seluruh elemen masyarakat dapat menyampaikan pengaduan segala jenis permasalahan yang berkaitan dengan pengembangan dan penerapan Kota Layak Anak Surakarta.";
+  static const String kategoriPermintaanInformasi =
+      "Permintaan Informasi adalah kegiatan permintaan detail informasi yang bersifat umum dan berkaitan dengan pelayanan publik kepada pengelola pengaduan pelayanan publik dalam hal ini SKALA.";
+  static const String kategoriPengaduan =
+      "Pengaduan adalah penyampaian keluhan yang disampaikan kepada pengelola pengaduan pelayanan publik pada instansi permerintah atas pelayanan pelaksanaan yang tidak sesuai dengan Standar Pelayanan, atau pengabaian kewajiban dan atau pelanggaran larangan oleh pengelola pengaduan layanan publik dalam hal ini Skala";
+  static const String kategoriAspirasi =
+      "Aspirasi merupakan penyampaian saran maupun masukan terkait pelayanan publik yang dapat meningkatkan kualitas pengelolaan pelayanan publik dalam hal ini SKALA ";
 }

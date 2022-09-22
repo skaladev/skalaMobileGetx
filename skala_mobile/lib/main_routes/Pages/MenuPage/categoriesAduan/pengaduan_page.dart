@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:skala_mobile/main_commons/main_color_data.dart';
 import 'package:skala_mobile/main_commons/main_constant_data.dart';
-import 'package:skala_mobile/main_commons/main_constant_route.dart';
 import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 
-class MainAduanPage extends StatelessWidget {
-  const MainAduanPage({super.key});
+class MainMenuPengaduanPage extends StatelessWidget {
+  const MainMenuPengaduanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MainColorData.greybg,
       appBar: const MainCustomAppBarTitle(
-        title: "Aduan",
+        title: "Pengaduan",
         titleStyle: TextStyle(
-          color: Color.fromARGB(255, 154, 99, 99),
+          color: Color.fromARGB(255, 218, 73, 29),
           fontSize: MainSizeData.SIZE_16,
           fontWeight: FontWeight.bold,
         ),
@@ -32,11 +29,10 @@ class MainAduanPage extends StatelessWidget {
               alignment: Alignment.center,
               height: MainSizeData.SIZE_200,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    MainSizeData.SIZE_20,
-                  ),
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/aduan.png'))),
+                borderRadius: BorderRadius.circular(MainSizeData.SIZE_20),
+                image: DecorationImage(
+                    image: AssetImage('assets/images/talk.png')),
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -57,7 +53,7 @@ class MainAduanPage extends StatelessWidget {
                   color: MainColorData.white,
                   borderRadius: BorderRadius.circular(18)),
               child: const DescriptionContent(
-                description: MainConstantData.informasiAduan,
+                description: MainConstantData.kategoriPengaduan,
               ),
             ),
             Padding(
@@ -65,34 +61,9 @@ class MainAduanPage extends StatelessWidget {
                   horizontal: MainSizeData.SIZE_25,
                   vertical: MainSizeData.SIZE_12),
               child: TitleContent(
-                title: "Layanan yang tersedia ?",
+                title:
+                    "Perhatikan hal-hal berikut sebelum melakukan permintaan informasi :",
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                itemMenuHome(
-                  title: "Informasi",
-                  icon: "assets/images/info.png",
-                  onPressed: () {
-                    Get.toNamed(MainConstantRoute.mainInformasiAduan);
-                  },
-                ),
-                itemMenuHome(
-                  title: "Pengaduan",
-                  icon: "assets/images/talk.png",
-                  onPressed: () {
-                    Get.toNamed(MainConstantRoute.mainPengaduan);
-                  },
-                ),
-                itemMenuHome(
-                  title: "Aspirasi",
-                  icon: "assets/images/lamp.png",
-                  onPressed: () {
-                    Get.toNamed(MainConstantRoute.mainAspirasi);
-                  },
-                ),
-              ],
             ),
             Padding(
               padding:
@@ -101,53 +72,30 @@ class MainAduanPage extends StatelessWidget {
                 children: [
                   CheckList(
                     content:
-                        "Anda dapat mengirimkan aduan melalui aplikasi SKALA, dan berbagai kanal yang dimiliki oleh Pemeritah Kota Surakarta.",
+                        "Laporan Anda relevan dengan kinerja pemerintah dalam hal ini Pemerintah Surakarta .",
                   ),
                   SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
                   CheckList(
-                    content:
-                        "Humas Skala selaku bagian yang menangani aduan diberikan paling lambat 5 hari untuk melakukan koordinasi internal dan perumusan tindak lanjut dari pengaduan yang diberikan.",
-                  ),
+                      content:
+                          "Menggunakan Bahasa Indonesia yang baik dan benar"),
                   SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
                   CheckList(
                     content:
-                        "Apabila sudah ada rumusan tidak lanjut, maka Humas akan memberikan balasan informasi kepada anda.",
-                  )
+                        "Bukan merupakan ujaran kebencian,SARA dan caci maki",
+                  ),
+                  CheckList(
+                      content:
+                          "Bukan merupakan laporan yang sudah disampaikan dan masih dalam proses penanganan"),
                 ],
               ),
             ),
-            SizedBox(
-              height: MainSizeData.SIZE_20,
-            )
           ],
         ),
       ),
-    );
-  }
-}
-
-class TitleContent extends StatelessWidget {
-  const TitleContent({
-    required this.title,
-    this.titleStyle,
-    Key? key,
-  }) : super(key: key);
-  final String title;
-  final TextStyle? titleStyle;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: titleStyle ??
-          const TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: MainSizeData.SIZE_20,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 154, 99, 99)),
     );
   }
 }
@@ -170,6 +118,28 @@ class DescriptionContent extends StatelessWidget {
   }
 }
 
+class TitleContent extends StatelessWidget {
+  const TitleContent({
+    required this.title,
+    this.titleStyle,
+    Key? key,
+  }) : super(key: key);
+  final String title;
+  final TextStyle? titleStyle;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: titleStyle ??
+          const TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: MainSizeData.SIZE_20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 218, 73, 29)),
+    );
+  }
+}
+
 class CheckList extends StatelessWidget {
   const CheckList({
     required this.content,
@@ -184,7 +154,7 @@ class CheckList extends StatelessWidget {
       children: [
         Icon(
           Icons.check_circle,
-          color: Color.fromARGB(255, 248, 132, 130),
+          color: Color.fromARGB(255, 218, 73, 29),
           size: MainSizeData.SIZE_18,
         ),
         SizedBox(
@@ -202,49 +172,6 @@ class CheckList extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class itemMenuHome extends StatelessWidget {
-  const itemMenuHome({
-    required this.title,
-    required this.icon,
-    required this.onPressed,
-    Key? key,
-  }) : super(key: key);
-
-  final String title;
-  final String icon;
-  final Function onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onPressed();
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: MainSizeData.SIZE_18),
-        child: Column(
-          children: [
-            Container(
-                width: MainSizeData.SIZE_50,
-                height: MainSizeData.SIZE_50,
-                child: Image.asset(
-                  icon,
-                  fit: BoxFit.cover,
-                )),
-            SizedBox(height: MainSizeData.SIZE_5),
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: MainSizeData.SIZE_12,
-                  fontWeight: FontWeight.bold,
-                  color: MainColorData.green_dop),
-            )
-          ],
-        ),
-      ),
     );
   }
 }

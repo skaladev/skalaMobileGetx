@@ -126,7 +126,8 @@ class _MainKonsultasiPraktisiPageState
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Get.toNamed(MainConstantRoute.mainRiwayatKonsultasi);
+                                    Get.toNamed(MainConstantRoute
+                                        .mainRiwayatKonsultasi);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: MainColorData.green_dop3,
@@ -151,13 +152,49 @@ class _MainKonsultasiPraktisiPageState
                       ),
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(MainConstantRoute.mainMenuKonsultasi);
+                    },
+                    child: Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: MainSizeData.SIZE_14),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: MainSizeData.SIZE_10,
+                            horizontal: MainSizeData.SIZE_20),
+                        decoration: BoxDecoration(
+                            color: MainColorData.white,
+                            borderRadius: BorderRadius.circular(18)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.announcement_outlined,
+                              color: MainColorData.grey,
+                            ),
+                            SizedBox(
+                              width: MainSizeData.SIZE_10,
+                            ),
+                            Flexible(
+                              child: Text(
+                                "Perhatikan cara menyampaikan konsultasi yang baik dan benar.",
+                                style: TextStyle(
+                                  fontSize: MainSizeData.SIZE_12,
+                                  fontWeight: FontWeight.bold,
+                                  color: MainColorData.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
                   const SizedBox(
                     height: MainSizeData.SIZE_10,
                   ),
                   Container(
                     width: double.infinity,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: MainSizeData.SIZE_10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_10),
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 20,
@@ -219,7 +256,7 @@ class _MainKonsultasiPraktisiPageState
                     ),
                   ),
                   const SizedBox(
-                    height: MainSizeData.SIZE_20,
+                    height: MainSizeData.SIZE_10,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(
@@ -250,7 +287,8 @@ class _MainKonsultasiPraktisiPageState
                                 : SizedBox(
                                     height: MainSizeData.SIZE_600,
                                     child: ListView.builder(
-                                      physics: const NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       itemCount: state.data?.data?.length,
                                       itemBuilder: (context, index) {
                                         return _buildConsultantList(

@@ -154,6 +154,42 @@ class _MainKonsultasiPageState extends State<MainKonsultasiPage> {
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(MainConstantRoute.mainAduan);
+                },
+                child: Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: MainSizeData.SIZE_14),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: MainSizeData.SIZE_10,
+                        horizontal: MainSizeData.SIZE_20),
+                    decoration: BoxDecoration(
+                        color: MainColorData.white,
+                        borderRadius: BorderRadius.circular(18)),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.announcement_outlined,
+                          color: MainColorData.grey,
+                        ),
+                        SizedBox(
+                          width: MainSizeData.SIZE_10,
+                        ),
+                        Flexible(
+                          child: Text(
+                            "Perhatikan cara menyampaikan pengaduan yang baik dan benar.",
+                            style: TextStyle(
+                              fontSize: MainSizeData.SIZE_12,
+                              fontWeight: FontWeight.bold,
+                              color: MainColorData.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
               Form(
                 key: _formKey,
                 child: SingleChildScrollView(

@@ -90,16 +90,19 @@ class MainConsultationCard extends StatelessWidget {
                               onPressed: () => onDelete!())
                       ],
                     ),
-                    if(toUser != null)
-                    Text(
-                      "Kepada : ${toUser!.toString()}",
-                       style: const TextStyle(
-                        color: MainColorData.black,
-                        fontSize: MainSizeData.SIZE_12,
-                        fontWeight: FontWeight.w700,
+                    if (toUser != null)
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(bottom: MainSizeData.SIZE_10),
+                        child: Text(
+                          "Kepada : ${toUser!.toString()}",
+                          style: const TextStyle(
+                            color: MainColorData.black,
+                            fontSize: MainSizeData.SIZE_12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ),
-                    ),
-                   SizedBox(height: MainSizeData.SIZE_10,),
                     Text(
                       title!.toUpperCase(),
                       style: const TextStyle(

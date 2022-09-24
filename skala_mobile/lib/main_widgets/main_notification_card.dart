@@ -15,13 +15,12 @@ class MainNotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(
-          horizontal: MainSizeData.SIZE_20, vertical: MainSizeData.SIZE_10),
+          horizontal: MainSizeData.SIZE_20, vertical: MainSizeData.SIZE_6),
       elevation: 0,
       color: MainColorData.white,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(MainSizeData.SIZE_8),
-          side: const BorderSide(
-              color: MainColorData.green_dop, width: MainSizeData.SIZE_2)),
+          borderRadius: BorderRadius.circular(MainSizeData.SIZE_16),
+          side: const BorderSide(color: MainColorData.green_dop)),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: MainSizeData.SIZE_10, vertical: MainSizeData.SIZE_10),

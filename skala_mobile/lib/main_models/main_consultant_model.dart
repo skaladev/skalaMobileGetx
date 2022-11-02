@@ -55,7 +55,7 @@ class Data {
   final String? consultantCategory;
   final int? workExperienceTimes;
   final String? skNumber;
-  final bool? isActive;
+  final int? isActive;
   final dynamic imagePath;
   final String? description;
   final String? specialities;

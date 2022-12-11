@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final mainLoginModel = mainLoginModelFromJson(jsonString);
+
 import 'dart:convert';
 
 MainLoginModel mainLoginModelFromJson(String str) => MainLoginModel.fromJson(json.decode(str));
@@ -6,8 +10,8 @@ String mainLoginModelToJson(MainLoginModel data) => json.encode(data.toJson());
 
 class MainLoginModel {
     MainLoginModel({
-        required this.message,
-        required this.data,
+      required this.message,
+      required this.data,
     });
 
     String message;
@@ -26,20 +30,24 @@ class MainLoginModel {
 
 class Data {
     Data({
-        required this.message,
-        required this.token,
+       required this.message,
+       required this.otp,
+       required this.token,
     });
 
     String message;
+    int otp;
     String token;
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         message: json["message"],
+        otp: json["otp"],
         token: json["token"],
     );
 
     Map<String, dynamic> toJson() => {
         "message": message,
+        "otp": otp,
         "token": token,
     };
 }

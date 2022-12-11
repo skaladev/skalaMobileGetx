@@ -10,6 +10,7 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_controllers/main_login_controller.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
 import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
+import 'package:skala_mobile/main_models/main_consultant_model.dart';
 import 'package:skala_mobile/main_widgets/main_already_have_an_account_check.dart';
 import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field.dart';
@@ -26,11 +27,12 @@ class LoginPage extends StatelessWidget {
       listenWhen: (previous, current) => current is AuthLogin,
       listener: (context, state) {
         if (state is AuthLogin) {
+          
           blocHelperListenner(
             load: state.load,
             message: state.message,
             onSuccess: () {
-              Get.toNamed(MainConstantRoute.verifyOtp);
+              Get.toNamed(MainConstantRoute.verifyOtp, arguments: state.data?.data.otp);
               Get.snackbar('Login', 'Verifikasi Otp Telah dikirimkan');
             },
           );

@@ -11,16 +11,33 @@ import 'package:skala_mobile/main_commons/main_size_data.dart';
 import 'package:skala_mobile/main_commons/main_text_data.dart';
 import 'package:skala_mobile/main_helpers/main_bloc_helper.dart';
 import 'package:skala_mobile/main_helpers/main_validator_helper.dart';
+import 'package:skala_mobile/main_models/main_login_model.dart';
 import 'package:skala_mobile/main_widgets/main_custom_appbar_title_widget.dart';
 import 'package:skala_mobile/main_widgets/main_custom_rounded_button.dart';
 import 'package:skala_mobile/main_widgets/main_custom_text_field_otp_widget.dart';
 
-class MainVerifyOtpPage extends StatelessWidget {
+class MainVerifyOtpPage extends StatefulWidget {
   MainVerifyOtpPage({Key? key}) : super(key: key);
 
+  @override
+  State<MainVerifyOtpPage> createState() => _MainVerifyOtpPageState();
+}
+
+class _MainVerifyOtpPageState extends State<MainVerifyOtpPage> {
   final _formKey = GlobalKey<FormState>();
+
   final _codeController = TextEditingController();
+
   final _mainValidatorHelper = MainValidatorHelper();
+
+  int item = Get.arguments;
+
+  @override
+  void initState (){
+    _codeController.text = item.toString();
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
